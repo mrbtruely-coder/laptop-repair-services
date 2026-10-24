@@ -408,37 +408,53 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     const generatedTicket = 'TF-' + Math.floor(100000 + Math.random() * 900000);
     setTicketId(generatedTicket);
 
-    try {
-      // Send confirmation email via Node.js backend
-      const response = await fetch('/api/book-service', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          service: formData.service,
-          subcategory: formData.subcategory,
-          address: formData.address,
-          city: formData.city || 'Hyderabad',
-          ticketId: generatedTicket,
-          discountAmount,
-          payableAmount: netDiagnosticDue,
-          contactMethod: formData.contactMethod,
-          slotDate: formData.slotDate,
-          slotTime: formData.slotTime,
-          description: formData.description,
-          paymentMethod: formData.paymentMethod,
-        }),
-      });
+    const liveBackendEndpoint = 'https://laptop-repair-services-backend.onrender.com/api/book-service';
+    const bookingPayload = {
+      fullName: formData.fullName,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service,
+      subcategory: formData.subcategory,
+      address: formData.address,
+      city: formData.city || 'Hyderabad',
+      ticketId: generatedTicket,
+      discountAmount,
+      payableAmount: netDiagnosticDue,
+      contactMethod: formData.contactMethod,
+      slotDate: formData.slotDate,
+      slotTime: formData.slotTime,
+      description: formData.description,
+      paymentMethod: formData.paymentMethod,
+    };
 
-      const resData = await response.json();
-      if (resData.success) {
+    try {
+      // Send confirmation email via Node.js backend (live Render API with fallback)
+      let response;
+      try {
+        response = await fetch(liveBackendEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingPayload),
+        });
+      } catch (directErr) {
+        console.warn('Direct live backend fetch error, trying proxy /api:', directErr);
+        response = await fetch('/api/book-service', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bookingPayload),
+        });
+      }
+
+      if (response && response.ok) {
+        const resData = await response.json();
+        console.log('✅ Booking dispatch response:', resData);
         setEmailSentTo(formData.email);
       } else {
-        console.warn('Backend email response:', resData);
+        console.warn('Backend response not OK:', response?.status);
         setEmailSentTo(formData.email);
       }
     } catch (err) {
