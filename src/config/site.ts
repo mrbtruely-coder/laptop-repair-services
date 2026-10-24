@@ -34,10 +34,10 @@ export const siteConfig = {
   legalName: "TechFix Computer & IT Solutions",
   brandSubtitle: "Computer, Laptop, Networking & CCTV Specialists",
   domain: "https://techfixservices.in",
-  phoneDisplay: "+91 97013 08392",
-  phoneRaw: "+919701308392",
-  whatsappDisplay: "+91 97013 08392",
-  whatsappRaw: "919701308392",
+  phoneDisplay: "+91 95156 61677",
+  phoneRaw: "+919515661677",
+  whatsappDisplay: "+91 95156 61677",
+  whatsappRaw: "919515661677",
   supportEmail: "support@techfixservices.in",
   workingHours: "Monday – Sunday: 8:30 AM to 8:30 PM",
   warrantyHighlight: "Up to 90 Days Service Warranty on hardware replacements",
@@ -350,7 +350,7 @@ export const citiesData: Record<string, CityInfo> = {
       "Pogathota (1.5 km)", "Stonehousepet (2 km)", "Balaji Nagar (2.5 km)", "Vedayapalem (3 km)",
       "Harmathpet (2 km)", "Ramamurthy Nagar (3.5 km)", "Nellore Rural (5 km)", "Kovur (6 km)"
     ],
-    helpline: "+91 97013 08392",
+    helpline: "+91 95156 61677",
     email: "nellore@doorstepservice.in",
     serviceHighlights: [
       "Doorstep technician dispatch in Nellore within 90 minutes",

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { MobileActionBar } from './MobileActionBar';
+import { FloatingActionWidget } from '../common/FloatingActionWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
       <Footer />
       <MobileActionBar />
+      <FloatingActionWidget />
     </div>
   );
 };
