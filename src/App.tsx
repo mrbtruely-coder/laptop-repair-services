@@ -7,6 +7,7 @@ import { AllServicesPage } from './pages/AllServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { AllLocationsPage } from './pages/AllLocationsPage';
 import { LocationDetailPage } from './pages/LocationDetailPage';
+import { SubLocationPage } from './pages/SubLocationPage';
 import { CityServicePage } from './pages/CityServicePage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
@@ -34,8 +35,10 @@ export const App: React.FC = () => {
             {/* Locations / Service Center Routes */}
             <Route path="/service-center" element={<AllLocationsPage />} />
             <Route path="/service-center/:citySlug" element={<LocationDetailPage />} />
+            <Route path="/service-center/:citySlug/:localitySlug" element={<SubLocationPage />} />
             <Route path="/locations" element={<AllLocationsPage />} />
             <Route path="/locations/:citySlug" element={<LocationDetailPage />} />
+            <Route path="/locations/:citySlug/:localitySlug" element={<SubLocationPage />} />
 
             {/* Genuine Localized City + Service Landing Pages */}
             <Route path="/:citySlug/:serviceSlug" element={<CityServicePage />} />

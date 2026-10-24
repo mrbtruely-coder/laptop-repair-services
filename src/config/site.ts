@@ -29,6 +29,21 @@ export interface CityInfo {
   serviceHighlights: string[];
 }
 
+export interface LocalityInfo {
+  name: string;
+  slug: string;
+  distance: string;
+  fullName: string;
+}
+
+export function parseLocality(locStr: string): LocalityInfo {
+  const match = locStr.match(/^(.*?)(?:\s*\((.*?)\))?$/);
+  const name = match ? match[1].trim() : locStr.trim();
+  const distance = match && match[2] ? match[2].trim() : '';
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return { name, slug, distance, fullName: locStr };
+}
+
 export const siteConfig = {
   brandName: "TECHFIX",
   legalName: "TechFix Computer & IT Solutions",

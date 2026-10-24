@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { EnquiryForm } from '../components/forms/EnquiryForm';
-import { citiesData, servicesData, siteConfig } from '../config/site';
+import { citiesData, servicesData, siteConfig, parseLocality } from '../config/site';
 import {
   MapPin,
   Phone,
@@ -225,15 +225,25 @@ export const LocationDetailPage: React.FC = () => {
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                  {city.localities.map((loc, idx) => (
-                    <div
-                      key={idx}
-                      className="p-2.5 rounded-xl bg-[#12231A]/80 border border-[#E2B98E]/15 text-xs text-[#FAF6F0]/90 flex items-center gap-2 hover:border-[#E2B98E]/50 transition-colors shadow-sm"
-                    >
-                      <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
-                      <span className="truncate font-medium">{loc}</span>
-                    </div>
-                  ))}
+                  {city.localities.map((locStr, idx) => {
+                    const loc = parseLocality(locStr);
+                    return (
+                      <Link
+                        key={idx}
+                        to={`/service-center/${city.slug}/${loc.slug}`}
+                        className="p-2.5 rounded-xl bg-[#12231A]/80 border border-[#E2B98E]/15 text-xs text-[#FAF6F0]/90 flex items-center justify-between hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E] transition-all shadow-sm group"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                          <span className="truncate font-medium">{loc.name}</span>
+                          {loc.distance && (
+                            <span className="text-[10px] text-[#FAF6F0]/50 shrink-0">({loc.distance})</span>
+                          )}
+                        </div>
+                        <ArrowRight className="w-3 h-3 text-[#E2B98E]/50 group-hover:text-[#E2B98E] group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
+                      </Link>
+                    );
+                  })}
                 </div>
 
                 <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">

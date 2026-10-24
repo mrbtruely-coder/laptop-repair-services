@@ -18,7 +18,8 @@ import {
   MapPin,
   Sparkles,
   Wrench,
-  Check
+  Check,
+  Calendar
 } from 'lucide-react';
 
 export const ServiceDetailPage: React.FC = () => {
@@ -174,6 +175,16 @@ export const ServiceDetailPage: React.FC = () => {
                   <MessageSquare className="w-4 h-4" />
                   <span>WhatsApp Slot Booking</span>
                 </a>
+
+                {/* Book Service Button */}
+                <Link
+                  to="/contact"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 group"
+                >
+                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <span>Book Service Now</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
             </div>
 

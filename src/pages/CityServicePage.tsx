@@ -1,10 +1,10 @@
 import React from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { EnquiryForm } from '../components/forms/EnquiryForm';
 import { FAQAccordion } from '../components/sections/FAQAccordion';
-import { citiesData, servicesData, siteConfig } from '../config/site';
+import { citiesData, servicesData, siteConfig, parseLocality } from '../config/site';
 import {
   MapPin,
   Phone,
@@ -18,7 +18,8 @@ import {
   AlertCircle,
   Sparkles,
   Clock,
-  Wrench
+  Wrench,
+  ArrowRight
 } from 'lucide-react';
 
 export const CityServicePage: React.FC = () => {
@@ -347,40 +348,66 @@ export const CityServicePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Localities Served (Within 25 km Radius) */}
-          <div className="p-6 sm:p-8 rounded-3xl nature-panel border border-[#E2B98E]/25 shadow-xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-              <h3 className="text-lg sm:text-xl font-bold text-[#FAF6F0]">
-                Doorstep {service.shortTitle} Coverage Across {city.name} Localities (25 km Radius)
-              </h3>
-              <span className="text-xs text-[#7AA27D] font-semibold bg-[#7AA27D]/15 px-3 py-1 rounded-full border border-[#7AA27D]/30 w-fit">
-                Hub: {city.serviceHub}
-              </span>
-            </div>
-            <p className="text-xs text-[#D2DCD2] mb-5 leading-relaxed">
-              Our mobile engineers are dispatched from our hub at <strong className="text-[#E2B98E] font-medium">{city.address}</strong> to all neighbourhoods strictly within a 25 km radius:
-            </p>
-            <div className="flex flex-wrap gap-2.5">
-              {city.localities.map((loc, idx) => (
-                <span
-                  key={idx}
-                  className="text-xs px-3.5 py-1.5 rounded-full bg-[#12231A] border border-[#E2B98E]/20 text-[#FAF6F0]/90 flex items-center gap-1.5 shadow-sm hover:border-[#E2B98E]/50 transition-colors"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
-                  <span>{loc}</span>
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* SIDE BY SIDE: Localities Served & Lead Booking Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Left Column: Localities Served */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/25 shadow-xl space-y-4">
+                <div className="flex flex-col gap-2">
+                  <span className="text-xs text-[#7AA27D] font-semibold bg-[#7AA27D]/15 px-3 py-1 rounded-full border border-[#7AA27D]/30 w-fit">
+                    Hub: {city.serviceHub}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#FAF6F0]">
+                    Doorstep {service.shortTitle} Coverage Across {city.name} Localities (25 km Radius)
+                  </h3>
+                </div>
+                <p className="text-xs text-[#D2DCD2] leading-relaxed">
+                  Our mobile engineers are dispatched from our hub at <strong className="text-[#E2B98E] font-medium">{city.address}</strong> to all neighbourhoods strictly within a 25 km radius:
+                </p>
 
-          {/* Lead Booking Form Preloaded with City & Service */}
-          <div>
-            <EnquiryForm
-              initialCity={city.id}
-              initialService={service.id}
-              title={`Request ${service.shortTitle} in ${city.name}`}
-              subtitle={`Tell us your ${city.name} address, preferred service slot date and time. Choose your discount offer and our coordinator will confirm dispatch.`}
-            />
+                {/* Localities as Clickable Links */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                  {city.localities.map((locStr, idx) => {
+                    const loc = parseLocality(locStr);
+                    return (
+                      <Link
+                        key={idx}
+                        to={`/service-center/${city.slug}/${loc.slug}`}
+                        className="p-2.5 rounded-xl bg-[#12231A] border border-[#E2B98E]/20 text-xs text-[#FAF6F0]/90 flex items-center justify-between shadow-sm hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E] transition-all group"
+                      >
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                          <span className="truncate font-medium">{loc.name}</span>
+                          {loc.distance && (
+                            <span className="text-[10px] text-[#FAF6F0]/50 shrink-0">({loc.distance})</span>
+                          )}
+                        </div>
+                        <ArrowRight className="w-3 h-3 text-[#E2B98E]/50 group-hover:text-[#E2B98E] group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
+                  <span>Need doorstep {service.shortTitle.toLowerCase()} in {city.name}?</span>
+                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
+                    <span>Call {siteConfig.phoneDisplay} for instant route dispatch →</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Lead Booking Form */}
+            <div className="lg:col-span-7">
+              <EnquiryForm
+                initialCity={city.id}
+                initialService={service.id}
+                title={`Request ${service.shortTitle} in ${city.name}`}
+                subtitle={`Tell us your ${city.name} address, preferred service slot date and time. Choose your discount offer and our coordinator will confirm dispatch.`}
+              />
+            </div>
+
           </div>
 
         </div>

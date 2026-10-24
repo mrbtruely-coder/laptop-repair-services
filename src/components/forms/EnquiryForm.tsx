@@ -410,7 +410,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
            CELEBRATION & BOOKING SUCCESS WITH 3D EMBLEM & BALLOONS
            ======================================================== */
         <div className="text-center py-4 sm:py-6 space-y-6 animate-celebrate-pop relative z-10">
-          
+
           {/* Confetti Rain Stream */}
           <div className="absolute inset-x-0 -top-6 h-64 overflow-hidden pointer-events-none z-0">
             {Array.from({ length: 24 }).map((_, i) => (
@@ -644,25 +644,22 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                               setErrors((prev) => ({ ...prev, service: undefined }));
                             }
                           }}
-                          className={`p-3 rounded-2xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all group cursor-pointer ${
-                            isSelected
+                          className={`p-3 rounded-2xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all group cursor-pointer ${isSelected
                               ? 'bg-[#6E4331]/35 border-2 border-[#E2B98E] shadow-lg shadow-black/40 ring-1 ring-[#E2B98E]/50'
                               : 'bg-[#14281E]/70 border border-[#E2B98E]/15 hover:border-[#E2B98E]/40 hover:bg-[#183023]'
-                          }`}
+                            }`}
                         >
                           <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${
-                              isSelected
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected
                                 ? 'bg-[#E2B98E] text-[#24160E] shadow-md'
                                 : 'bg-[#12231A] text-[#E2B98E] border border-[#E2B98E]/20'
-                            }`}
+                              }`}
                           >
                             <IconComponent className="w-5 h-5" />
                           </div>
                           <span
-                            className={`text-[11px] font-bold tracking-tight ${
-                              isSelected ? 'text-[#FAF6F0]' : 'text-[#FAF6F0]/80'
-                            }`}
+                            className={`text-[11px] font-bold tracking-tight ${isSelected ? 'text-[#FAF6F0]' : 'text-[#FAF6F0]/80'
+                              }`}
                           >
                             {tile.label}
                           </span>
@@ -698,11 +695,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                           placeholder="Your Name"
-                          className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${
-                            errors.fullName
+                          className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.fullName
                               ? 'border-rose-500/80 focus:ring-rose-500'
                               : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
-                          } focus:outline-none focus:ring-2 transition-all`}
+                            } focus:outline-none focus:ring-2 transition-all`}
                         />
                       </div>
                       {errors.fullName && (
@@ -728,11 +724,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
                           placeholder="10-Digit Mobile Number"
-                          className={`w-full bg-[#12231A] pl-12 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${
-                            errors.phone
+                          className={`w-full bg-[#12231A] pl-12 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.phone
                               ? 'border-rose-500/80 focus:ring-rose-500'
                               : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
-                          } focus:outline-none focus:ring-2 transition-all`}
+                            } focus:outline-none focus:ring-2 transition-all`}
                         />
                       </div>
                       {errors.phone && (
@@ -758,11 +753,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. customer@gmail.com"
-                        className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${
-                          errors.email
+                        className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.email
                             ? 'border-rose-500/80 focus:ring-rose-500'
                             : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
-                        } focus:outline-none focus:ring-2 transition-all`}
+                          } focus:outline-none focus:ring-2 transition-all`}
                       />
                     </div>
                     {errors.email && (
@@ -854,9 +848,8 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       placeholder="Door / Flat No., Landmark, or Street details..."
-                      className={`w-full bg-[#12231A] border ${
-                        errors.address ? 'border-rose-500/80' : 'border-[#E2B98E]/20 focus:border-[#E2B98E]'
-                      } rounded-xl px-3.5 py-2 text-xs text-[#FAF6F0] placeholder-[#FAF6F0]/30 focus:outline-none focus:ring-2 focus:ring-[#E2B98E]/20 transition-all`}
+                      className={`w-full bg-[#12231A] border ${errors.address ? 'border-rose-500/80' : 'border-[#E2B98E]/20 focus:border-[#E2B98E]'
+                        } rounded-xl px-3.5 py-2 text-xs text-[#FAF6F0] placeholder-[#FAF6F0]/30 focus:outline-none focus:ring-2 focus:ring-[#E2B98E]/20 transition-all`}
                     />
                     {errors.address && (
                       <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
@@ -904,7 +897,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   onClick={handleProceedToStep2}
                   className="w-full mt-3 inline-flex items-center justify-center gap-2 sand-btn-3d font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-full transition-all group cursor-pointer shadow-xl text-[#24160E]"
                 >
-                  <span>Proceed to Offers & Checkout (Step 2)</span>
+                  <span>Proceed to Book Service</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -915,7 +908,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 =================================================== */}
             {currentStep === 2 && (
               <div className="space-y-4 animate-in fade-in duration-200">
-                
+
                 {/* Step 1 Quick Summary Preview */}
                 <div className="p-4 rounded-2xl bg-[#14281E]/80 border border-[#E2B98E]/25 flex items-center justify-between gap-3 shadow-md">
                   <div className="space-y-0.5 text-xs text-[#FAF6F0]/85">
@@ -962,11 +955,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                             });
                             setShowCustomOfferInput(false);
                           }}
-                          className={`p-3 rounded-2xl cursor-pointer border transition-all flex items-start justify-between gap-2.5 ${
-                            isSelected
+                          className={`p-3 rounded-2xl cursor-pointer border transition-all flex items-start justify-between gap-2.5 ${isSelected
                               ? 'bg-[#6E4331]/40 border-[#E2B98E] shadow-md shadow-[#E2B98E]/10'
                               : 'bg-[#12231A]/80 border-[#E2B98E]/15 hover:border-[#E2B98E]/40'
-                          }`}
+                            }`}
                         >
                           <div className="space-y-0.5">
                             <div className="flex items-center gap-2">
@@ -978,9 +970,8 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                             <p className="text-[10px] text-[#FAF6F0]/70 leading-tight">{offer.desc}</p>
                           </div>
 
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                            isSelected ? 'bg-[#E2B98E] text-[#24160E]' : 'border border-[#E2B98E]/30 text-transparent'
-                          }`}>
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isSelected ? 'bg-[#E2B98E] text-[#24160E]' : 'border border-[#E2B98E]/30 text-transparent'
+                            }`}>
                             <Check className="w-3 h-3 stroke-[3]" />
                           </div>
                         </div>
@@ -1088,18 +1079,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <label
                         onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_cod' })}
-                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${
-                          formData.paymentMethod === 'doorstep_cod'
+                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_cod'
                             ? 'bg-[#6E4331]/40 border-[#E2B98E] text-[#FAF6F0]'
                             : 'bg-[#12231A]/60 border-[#E2B98E]/15 text-[#FAF6F0]/70 hover:border-[#E2B98E]/40'
-                        }`}
+                          }`}
                       >
                         <input
                           type="radio"
                           name="paymentMethod"
                           value="doorstep_cod"
                           checked={formData.paymentMethod === 'doorstep_cod'}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="accent-[#E2B98E]"
                         />
                         <div className="text-left">
@@ -1110,18 +1100,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
 
                       <label
                         onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_upi' })}
-                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${
-                          formData.paymentMethod === 'doorstep_upi'
+                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_upi'
                             ? 'bg-[#6E4331]/40 border-[#E2B98E] text-[#FAF6F0]'
                             : 'bg-[#12231A]/60 border-[#E2B98E]/15 text-[#FAF6F0]/70 hover:border-[#E2B98E]/40'
-                        }`}
+                          }`}
                       >
                         <input
                           type="radio"
                           name="paymentMethod"
                           value="doorstep_upi"
                           checked={formData.paymentMethod === 'doorstep_upi'}
-                          onChange={() => {}}
+                          onChange={() => { }}
                           className="accent-[#E2B98E]"
                         />
                         <div className="text-left">

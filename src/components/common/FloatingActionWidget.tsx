@@ -7,7 +7,7 @@ export const FloatingActionWidget: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 250) {
+      if (window.scrollY > 200) {
         setShowScrollTop(true);
       } else {
         setShowScrollTop(false);
@@ -32,27 +32,10 @@ export const FloatingActionWidget: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-24 right-4 sm:bottom-8 sm:right-6 z-[9999] flex flex-col items-end gap-3 pointer-events-auto select-none"
+      className="fixed bottom-24 right-4 sm:bottom-8 sm:right-6 z-[9999] flex flex-col items-end gap-3.5 pointer-events-auto select-none"
       aria-label="Floating Contact & Navigation Actions"
     >
-      {/* 1. SCROLL TO TOP (UP ARROW) BUTTON */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          type="button"
-          aria-label="Scroll to top of page"
-          title="Scroll to Top"
-          className="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#183024]/90 text-[#FAF6F0] border border-[#E2B98E]/30 hover:border-[#E2B98E] shadow-xl hover:shadow-[#E2B98E]/20 backdrop-blur-md transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-in fade-in zoom-in-75"
-        >
-          {/* Tooltip on hover */}
-          <span className="absolute right-14 px-3 py-1.5 rounded-lg bg-[#0F1E16] text-[#FAF6F0] text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-md border border-[#E2B98E]/20">
-            Back to Top
-          </span>
-          <ArrowUp className="w-5 h-5 text-[#E2B98E] group-hover:-translate-y-0.5 transition-transform duration-200" />
-        </button>
-      )}
-
-      {/* 2. CALL BUTTON */}
+      {/* 1. CALL BUTTON (TOP) */}
       <a
         href={`tel:${siteConfig.phoneRaw}`}
         aria-label={`Call us at ${siteConfig.phoneDisplay}`}
@@ -63,13 +46,13 @@ export const FloatingActionWidget: React.FC = () => {
           Call: {siteConfig.phoneDisplay}
         </span>
 
-        {/* Circular Button */}
-        <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#1D4ED8] text-white flex items-center justify-center shadow-lg shadow-blue-600/35 hover:shadow-blue-500/50 border border-blue-400/40 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer">
+        {/* Circular Blue Call Button */}
+        <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#1D4ED8] text-white flex items-center justify-center shadow-lg shadow-blue-500/50 border border-blue-400/40 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer">
           <Phone className="w-5 h-5 sm:w-6 sm:h-6 fill-current animate-[wiggle_1.5s_ease-in-out_infinite]" />
         </div>
       </a>
 
-      {/* 3. WHATSAPP CHAT BUTTON */}
+      {/* 2. WHATSAPP CHAT BUTTON (MIDDLE) */}
       <a
         href={whatsappUrl}
         target="_blank"
@@ -82,8 +65,8 @@ export const FloatingActionWidget: React.FC = () => {
           WhatsApp Chat
         </span>
 
-        {/* Circular WhatsApp Button */}
-        <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white flex items-center justify-center shadow-xl shadow-emerald-600/40 hover:shadow-emerald-500/60 border border-emerald-300/40 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer">
+        {/* Circular Green WhatsApp Button */}
+        <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white flex items-center justify-center shadow-xl shadow-emerald-500/50 border border-emerald-300/40 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer">
           <svg
             className="w-7 h-7 sm:w-8 sm:h-8 fill-current"
             viewBox="0 0 24 24"
@@ -93,6 +76,23 @@ export const FloatingActionWidget: React.FC = () => {
           </svg>
         </div>
       </a>
+
+      {/* 3. SCROLL TO TOP (UP ARROW) BUTTON (BOTTOM) */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          type="button"
+          aria-label="Scroll to top of page"
+          title="Scroll to Top"
+          className="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#141C24] text-[#FAF6F0] border border-white/20 hover:border-[#E2B98E] shadow-xl hover:shadow-black/50 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-in fade-in zoom-in-75"
+        >
+          {/* Tooltip on hover */}
+          <span className="absolute right-14 px-3 py-1.5 rounded-lg bg-[#0F1E16] text-[#FAF6F0] text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-md border border-[#E2B98E]/20">
+            Back to Top
+          </span>
+          <ArrowUp className="w-5 h-5 text-slate-200 group-hover:text-[#E2B98E] group-hover:-translate-y-0.5 transition-all duration-200" />
+        </button>
+      )}
     </div>
   );
 };
