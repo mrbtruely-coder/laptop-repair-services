@@ -45,8 +45,8 @@ export function parseLocality(locStr: string): LocalityInfo {
 }
 
 export const siteConfig = {
-  brandName: "Doorstep Laptop Repair Services",
-  legalName: "Doorstep Laptop Repair Services",
+  brandName: "Laptop Repairs & Services",
+  legalName: "Laptop Repairs & Services",
   brandSubtitle: "Computer, Laptop, Networking & CCTV Specialists",
   domain: "https://laptoprepairsservices.com",
   phoneDisplay: "+91 95156 61677",

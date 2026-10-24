@@ -101,13 +101,24 @@ export const Navbar: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center group">
-              <div className="bg-white/95 hover:bg-white px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-md border border-[#E2B98E]/30 flex items-center transition-all group-hover:scale-102 group-hover:shadow-lg">
+            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
+              <div className="bg-white p-1 sm:p-1.5 rounded-xl shadow-md border border-[#E2B98E]/30 flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg">
                 <img
                   src="/logo.png"
-                  alt="Doorstep Laptop Repair Services"
-                  className="h-7 sm:h-9 md:h-10 w-auto object-contain"
+                  alt="Laptop Repairs & Services"
+                  className="h-9 sm:h-11 w-9 sm:w-11 object-contain rounded-lg"
                 />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-base sm:text-lg font-extrabold tracking-tight text-[#FAF6F0] flex items-center gap-1.5 leading-tight">
+                  Laptop Repairs
+                  <span className="text-[#24160E] text-[10px] px-1.5 py-0.5 rounded-full bg-[#E2B98E] font-bold">
+                    DOORSTEP
+                  </span>
+                </span>
+                <span className="text-[10px] uppercase tracking-wider text-[#9BBF9C] font-semibold">
+                  & Services
+                </span>
               </div>
             </Link>
 

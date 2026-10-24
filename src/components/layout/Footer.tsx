@@ -48,13 +48,24 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="inline-block group">
-              <div className="bg-white/95 hover:bg-white px-3.5 py-2 rounded-2xl shadow-md border border-[#E2B98E]/30 inline-flex items-center transition-all group-hover:scale-102 group-hover:shadow-lg">
+            <Link to="/" className="inline-flex items-center gap-3.5 group">
+              <div className="bg-white p-2 rounded-2xl shadow-md border border-[#E2B98E]/30 flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg">
                 <img
                   src="/logo.png"
-                  alt="Doorstep Laptop Repair Services"
-                  className="h-9 sm:h-11 md:h-12 w-auto object-contain"
+                  alt="Laptop Repairs & Services"
+                  className="h-12 sm:h-14 w-12 sm:w-14 object-contain rounded-xl"
                 />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg sm:text-xl font-extrabold text-[#FAF6F0] tracking-tight flex items-center gap-2">
+                  Laptop Repairs
+                  <span className="text-[#24160E] text-[10px] px-2 py-0.5 rounded-full bg-[#E2B98E] font-bold">
+                    DOORSTEP
+                  </span>
+                </span>
+                <span className="text-xs uppercase tracking-wider text-[#9BBF9C] font-semibold">
+                  & Services
+                </span>
               </div>
             </Link>
 
