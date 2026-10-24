@@ -208,76 +208,78 @@ export const LocationDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Localities Breakdown */}
-          <div className="p-6 sm:p-8 rounded-3xl nature-panel border border-[#E2B98E]/20">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold mb-3 shadow-inner">
-              Verified 25 km Coverage Radius
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0] mb-2">
-              Key Localities Served in {city.name} (Within 25 km Radius)
-            </h3>
-            <p className="text-xs text-[#FAF6F0]/75 mb-6 leading-relaxed">
-              Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong>25 km radius</strong> of our service center ({city.address}) for doorstep inspections, repairs, and pickup:
-            </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {city.localities.map((loc, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-2xl bg-[#12231A]/80 border border-[#E2B98E]/15 text-xs text-[#FAF6F0]/90 flex items-center gap-2 hover:border-[#E2B98E]/50 transition-colors shadow-sm"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
-                  <span className="truncate font-medium">{loc}</span>
+          {/* Side by Side: Key Localities Coverage & Booking Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Left Column: Key Localities Breakdown & Service Hub Details */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/20 space-y-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
+                  Verified 25 km Coverage Radius
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
+                  Key Localities Served in {city.name} (Within 25 km Radius)
+                </h3>
+                <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
+                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-[#E2B98E]">25 km radius</strong> of our service center ({city.address}) for doorstep inspections, repairs, and pickup:
+                </p>
 
-            <div className="mt-6 pt-4 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span>Need service at a doorstep within or near 25 km of {city.name} hub?</span>
-              <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
-                <span>Call for instant 25 km route dispatch →</span>
-              </a>
-            </div>
-          </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                  {city.localities.map((loc, idx) => (
+                    <div
+                      key={idx}
+                      className="p-2.5 rounded-xl bg-[#12231A]/80 border border-[#E2B98E]/15 text-xs text-[#FAF6F0]/90 flex items-center gap-2 hover:border-[#E2B98E]/50 transition-colors shadow-sm"
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                      <span className="truncate font-medium">{loc}</span>
+                    </div>
+                  ))}
+                </div>
 
-          {/* Verified City Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-[#0F1A30]/50 border border-white/5 space-y-3">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                <span>Regional Service Commitments</span>
-              </h3>
-              <ul className="space-y-2 text-xs text-slate-300">
-                {city.serviceHighlights.map((hl, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                    <span>{hl}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
+                  <span>Need service at a doorstep within or near 25 km of {city.name} hub?</span>
+                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
+                    <span>Call for instant 25 km route dispatch →</span>
+                  </a>
+                </div>
+              </div>
 
-            <div className="p-6 rounded-2xl bg-[#0F1A30]/50 border border-white/5 space-y-3">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Clock className="w-5 h-5 text-cyan-400" />
-                <span>Operating Timings & Facilities</span>
-              </h3>
-              <div className="space-y-2 text-xs text-slate-300">
-                <p>• <strong>Working Hours:</strong> {siteConfig.workingHours}</p>
-                <p>• <strong>Service Center Address:</strong> {city.address}</p>
-                <p>• <strong>Helpline:</strong> {city.helpline}</p>
-                <p>• <strong>Email Support:</strong> {city.email}</p>
+              {/* Regional Service Commitments & Operating Timings */}
+              <div className="p-5 rounded-2xl nature-panel border border-[#E2B98E]/15 space-y-3">
+                <h4 className="text-sm font-bold text-[#FAF6F0] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#7AA27D]" />
+                  <span>{city.name} Service Commitments</span>
+                </h4>
+                <ul className="space-y-2 text-xs text-[#FAF6F0]/80">
+                  {city.serviceHighlights.map((hl, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 mt-0.5" />
+                      <span>{hl}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-2 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 space-y-1.5">
+                  <p className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                    <span><strong>Working Hours:</strong> {siteConfig.workingHours}</span>
+                  </p>
+                  <p className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                    <span><strong>Service Hub:</strong> {city.serviceHub}</span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Booking Form Pre-filled with City */}
-          <div>
-            <EnquiryForm
-              initialCity={city.id}
-              title={`Book an IT Repair in ${city.name}`}
-              subtitle={`Select your required service below. Our ${city.name} support dispatcher will get in touch promptly.`}
-            />
+            {/* Right Column: Booking Form */}
+            <div className="lg:col-span-7">
+              <EnquiryForm
+                initialCity={city.id}
+                title={`Book an IT Repair in ${city.name}`}
+                subtitle={`Select your required service below. Our ${city.name} support dispatcher will get in touch promptly.`}
+              />
+            </div>
+
           </div>
 
         </div>
