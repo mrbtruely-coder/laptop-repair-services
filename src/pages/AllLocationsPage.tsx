@@ -9,8 +9,8 @@ export const AllLocationsPage: React.FC = () => {
   return (
     <>
       <SEO
-        title="Service Hubs & Doorstep Repair Locations | Bengaluru, Vizag, Chennai, Chanda Nagar"
-        description="Find certified doorstep repair centers and on-site technician dispatch across Bengaluru (HSR Layout), Visakhapatnam (Dwaraka Nagar), Chennai (MG Road), and Chanda Nagar (Trunk Road). Rapid response."
+        title="Service Hubs & Doorstep Repair Locations | Bengaluru, Vizag, Chennai, Hyderabad"
+        description="Find certified doorstep repair centers and on-site technician dispatch across Bengaluru, Visakhapatnam (Vizag), Chennai, and Hyderabad. Rapid response."
         canonicalPath="/locations"
         keywords={[
           'computer repair locations',
@@ -18,7 +18,7 @@ export const AllLocationsPage: React.FC = () => {
           'doorstep repair Bengaluru',
           'computer service Vizag',
           'laptop repair Chennai',
-          'doorstep service Chanda Nagar'
+          'doorstep service Hyderabad'
         ]}
         breadcrumbs={[
           { name: 'Locations', url: '/locations' }
@@ -37,7 +37,7 @@ export const AllLocationsPage: React.FC = () => {
             Our Service Hubs in India
           </h1>
           <p className="text-slate-700 text-sm sm:text-base mt-4 leading-relaxed font-normal">
-            We provide verified on-site field technicians and diagnostic labs across Bengaluru, Visakhapatnam (Vizag), Chennai, and Chanda Nagar. Select your city to view coverage localities and direct helpline numbers.
+            We provide verified on-site field technicians and diagnostic labs across Bengaluru, Visakhapatnam (Vizag), Chennai, and Hyderabad. Select your city to view coverage localities and direct helpline numbers.
           </p>
         </div>
       </section>

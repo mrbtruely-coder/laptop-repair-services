@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Linking, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LayoutGrid, Cpu, PhoneCall, MessageCircle, Zap } from 'lucide-react';
+import { LayoutGrid, Cpu, PhoneCall, Zap } from 'lucide-react';
 import { siteConfig } from '../../config/site';
 
 export const MobileActionBar: React.FC = () => {
@@ -10,15 +10,6 @@ export const MobileActionBar: React.FC = () => {
 
   const handleCall = () => {
     Linking.openURL(`tel:${siteConfig.phoneRaw}`);
-  };
-
-  const handleWhatsApp = () => {
-    const url = `https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent('Hello Door Step Service, I want to book a repair service.')}`;
-    if (Platform.OS === 'web') {
-      window.open(url, '_blank');
-    } else {
-      Linking.openURL(url);
-    }
   };
 
   const isHome = location.pathname === '/';
@@ -73,21 +64,7 @@ export const MobileActionBar: React.FC = () => {
             </Text>
           </TouchableOpacity>
 
-          {/* 4. WhatsApp Tab (Tech Green) */}
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={handleWhatsApp}
-            style={styles.navTab}
-          >
-            <View style={[styles.iconCircle, styles.whatsappIconCircle]}>
-              <MessageCircle size={18} color="#FFFFFF" />
-            </View>
-            <Text style={[styles.navText, styles.whatsappNavText]}>
-              WhatsApp
-            </Text>
-          </TouchableOpacity>
-
-          {/* 5. Book Tab (Tech Green) */}
+          {/* 4. Book Tab (Tech Green) */}
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => navigate('/contact')}
@@ -172,13 +149,6 @@ const styles = StyleSheet.create({
       boxShadow: '0 3px 10px rgba(6, 34, 58, 0.3)',
     } as any),
   },
-  whatsappIconCircle: {
-    backgroundColor: '#22C55E',
-    borderColor: '#22C55E',
-    ...({
-      boxShadow: '0 3px 10px rgba(34, 197, 94, 0.35)',
-    } as any),
-  },
   bookIconCircle: {
     backgroundColor: 'rgba(34, 197, 94, 0.12)',
     borderColor: '#22C55E',
@@ -199,10 +169,6 @@ const styles = StyleSheet.create({
   },
   callNavText: {
     color: '#06223A',
-    fontWeight: '700',
-  },
-  whatsappNavText: {
-    color: '#16A34A',
     fontWeight: '700',
   },
 });

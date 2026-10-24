@@ -11,7 +11,10 @@ import { SubLocationPage } from './pages/SubLocationPage';
 import { CityServicePage } from './pages/CityServicePage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { BookServicePage } from './pages/BookServicePage';
 import { FAQPage } from './pages/FAQPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => {
@@ -24,9 +27,12 @@ export const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/book-service" element={<ContactPage />} />
-            <Route path="/book" element={<ContactPage />} />
+            <Route path="/book-service" element={<BookServicePage />} />
+            <Route path="/book" element={<BookServicePage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
             {/* Services Routes */}
             <Route path="/services" element={<AllServicesPage />} />

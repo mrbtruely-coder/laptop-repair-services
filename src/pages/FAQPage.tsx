@@ -19,7 +19,7 @@ export const FAQPage: React.FC = () => {
     <>
       <SEO
         title="Frequently Asked Questions (FAQs) | Laptop, Computer & CCTV Repair"
-        description="Clear answers on repair costs, doorstep dispatch timelines, OEM screen warranties, and CCTV setups across Bengaluru, Vizag, Chennai, and Chanda Nagar."
+        description="Clear answers on repair costs, doorstep dispatch timelines, OEM screen warranties, and CCTV setups across Bengaluru, Vizag, Chennai, and Hyderabad."
         canonicalPath="/faq"
         keywords={[
           'laptop repair FAQ',
@@ -48,7 +48,7 @@ export const FAQPage: React.FC = () => {
             Frequently Asked Questions
           </h1>
           <p className="text-slate-800 text-sm sm:text-base mt-4 leading-relaxed font-normal">
-            Everything you need to know about our service warranty, on-site technician dispatches, component-level repairs, and diagnostic procedures across Bengaluru, Vizag, Chennai, and Chanda Nagar.
+            Everything you need to know about our service warranty, on-site technician dispatches, component-level repairs, and diagnostic procedures across Bengaluru, Vizag, Chennai, and Hyderabad.
           </p>
         </div>
       </section>

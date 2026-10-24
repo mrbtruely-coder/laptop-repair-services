@@ -57,11 +57,13 @@ export const LocationDetailPage: React.FC = () => {
   };
 
   const cityTitles: Record<string, string> = {
-    bengaluru: 'Computer & Laptop Repair Services in Bengaluru | HSR Layout Hub & Doorstep Service',
-    vizag: 'Computer & Laptop Repair in Vizag (Visakhapatnam) | Dwaraka Nagar Hub',
-    'chanda-nagar': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
-    'Chanda Nagar': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
-    'nellore': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
+    bengaluru: 'Computer & Laptop Repair Services in Bengaluru | Doorstep Service',
+    vizag: 'Computer & Laptop Repair in Vizag (Visakhapatnam) | Doorstep Service',
+    chennai: 'Computer & Laptop Repair Services in Chennai | Doorstep Service',
+    hyderabad: 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
+    'chanda-nagar': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
+    'Chanda Nagar': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
+    'nellore': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
   };
 
   const pageTitle = isSubLocality
@@ -105,7 +107,7 @@ export const LocationDetailPage: React.FC = () => {
     },
     {
       question: `How fast can a technician reach my doorstep in ${locationDisplayName}?`,
-      answer: `Our service hub is located at ${city.address}. For ${locationDisplayName}${currentLocality?.distance ? ` (${currentLocality.distance})` : ''}, technician arrival is typically within 45 to 90 minutes of booking confirmation.`
+      answer: `We provide certified doorstep technician dispatch across ${city.name}. For ${locationDisplayName}${currentLocality?.distance ? ` (${currentLocality.distance})` : ''}, technician arrival is typically within 45 to 90 minutes of booking confirmation.`
     },
     {
       question: `Do you provide a service warranty on repairs in ${locationDisplayName}?`,
@@ -179,7 +181,7 @@ export const LocationDetailPage: React.FC = () => {
                   <span>
                     {isSubLocality
                       ? `Hub Distance: ${currentLocality?.distance || 'Within 25 km'}`
-                      : city.address}
+                      : city.name}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
@@ -331,7 +333,7 @@ export const LocationDetailPage: React.FC = () => {
                 </h3>
 
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-black">25 km radius</strong> of our service center ({city.address}):
+                  Our mobile technician units operate throughout the following neighbourhoods across {city.name} strictly within a <strong className="text-black">25 km radius</strong>:
                 </p>
 
                 {/* Localities Grid with Clickable Links */}
@@ -402,7 +404,7 @@ export const LocationDetailPage: React.FC = () => {
                   </p>
                   <p className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
-                    <span><strong>Operating Service Hub:</strong> {city.serviceHub}</span>
+                    <span><strong>Operating Service Hub:</strong> {city.name} Hub</span>
                   </p>
                 </div>
               </div>

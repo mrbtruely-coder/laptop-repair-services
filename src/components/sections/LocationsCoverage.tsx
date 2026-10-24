@@ -16,7 +16,7 @@ export const LocationsCoverage: React.FC = () => {
             Serving Major Metropolitan & Regional Hubs
           </h2>
           <p className="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed">
-            We provide verified technician dispatches, door-to-door pickup & drop, and certified diagnostic facilities across Bengaluru, Vizag, Chennai, and Chanda Nagar.
+            We provide verified technician dispatches, door-to-door pickup & drop, and certified diagnostic facilities across Bengaluru, Vizag, Chennai, and Hyderabad.
           </p>
         </div>
 
@@ -48,11 +48,11 @@ export const LocationsCoverage: React.FC = () => {
                   {city.description}
                 </p>
 
-                {/* Service Center Location Address */}
+                {/* Service Coverage Area */}
                 <div className="mt-3.5 p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-2.5 shadow-sm">
                   <MapPin className="w-4 h-4 text-[#22C55E] flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] font-bold text-[#06223A] uppercase tracking-wider block">Service Center Address:</span>
+                    <span className="text-[10px] font-bold text-[#06223A] uppercase tracking-wider block">Service Coverage Area:</span>
                     <span className="text-xs text-black font-medium leading-snug block mt-0.5">{city.address}</span>
                   </div>
                 </div>

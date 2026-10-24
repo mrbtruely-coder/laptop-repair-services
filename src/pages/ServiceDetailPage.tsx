@@ -54,24 +54,24 @@ export const ServiceDetailPage: React.FC = () => {
 
   // SEO metadata tailor
   const seoTitles: Record<string, string> = {
-    'laptop-repair': 'Laptop Repair & Motherboard Servicing | Bengaluru, Vizag, Chennai, Chanda Nagar',
-    'computer-repair': 'Desktop & Computer Repair Services | Bengaluru, Vizag, Chennai, Chanda Nagar',
-    'networking': 'Structured IT Networking Services & Cabling | Bengaluru, Vizag, Chennai, Chanda Nagar',
-    'cctv-repair-installation': 'CCTV Camera Installation & DVR Repair | Bengaluru, Vizag, Chennai, Chanda Nagar',
+    'laptop-repair': 'Laptop Repair & Motherboard Servicing | Bengaluru, Vizag, Chennai, Hyderabad',
+    'computer-repair': 'Desktop & Computer Repair Services | Bengaluru, Vizag, Chennai, Hyderabad',
+    'networking': 'Structured IT Networking Services & Cabling | Bengaluru, Vizag, Chennai, Hyderabad',
+    'cctv-repair-installation': 'CCTV Camera Installation & DVR Repair | Bengaluru, Vizag, Chennai, Hyderabad',
   };
 
   const seoDescriptions: Record<string, string> = {
-    'laptop-repair': 'Expert laptop repair, chip-level motherboard diagnostics, OEM screen replacement, and battery servicing across Bengaluru, Vizag, Chennai & Chanda Nagar. Rapid doorstep inspection & 90-day warranty.',
-    'computer-repair': 'Professional desktop computer repair, SMPS replacement, BSOD troubleshooting, and performance upgrades across Bengaluru, Vizag, Chennai & Chanda Nagar. Fast doorstep dispatch.',
-    'networking': 'Enterprise CAT6 cabling, Wi-Fi 6 mesh setups, server rack installation, and router configuration for offices and residences across Bengaluru, Vizag, Chennai & Chanda Nagar.',
-    'cctv-repair-installation': 'HD and IP CCTV installation, DVR hard drive recovery, mobile live streaming setup, and camera repair across Bengaluru, Vizag, Chennai & Chanda Nagar. Get a free quotation.',
+    'laptop-repair': 'Expert laptop repair, chip-level motherboard diagnostics, OEM screen replacement, and battery servicing across Bengaluru, Vizag, Chennai & Hyderabad. Rapid doorstep inspection & 90-day warranty.',
+    'computer-repair': 'Professional desktop computer repair, SMPS replacement, BSOD troubleshooting, and performance upgrades across Bengaluru, Vizag, Chennai & Hyderabad. Fast doorstep dispatch.',
+    'networking': 'Enterprise CAT6 cabling, Wi-Fi 6 mesh setups, server rack installation, and router configuration for offices and residences across Bengaluru, Vizag, Chennai & Hyderabad.',
+    'cctv-repair-installation': 'HD and IP CCTV installation, DVR hard drive recovery, mobile live streaming setup, and camera repair across Bengaluru, Vizag, Chennai & Hyderabad. Get a free quotation.',
   };
 
   const serviceKeywords: Record<string, string[]> = {
-    'laptop-repair': ['laptop repair Bengaluru', 'laptop service Vizag', 'laptop screen replacement Chennai', 'doorstep laptop repair Chanda Nagar', 'motherboard chip repair', 'MacBook repair', 'Dell HP Lenovo repair'],
-    'computer-repair': ['computer repair Bengaluru', 'desktop repair Vizag', 'PC troubleshooting Chennai', 'SMPS replacement Chanda Nagar', 'custom gaming PC repair', 'BSOD error fix'],
-    'networking': ['structured cabling Bengaluru', 'office networking Chennai', 'Wi-Fi 6 setup Vizag', 'CAT6 LAN cabling Chanda Nagar', 'server rack installation', 'router firewall configuration'],
-    'cctv-repair-installation': ['CCTV installation Bengaluru', 'security camera repair Vizag', 'DVR repair Chennai', 'IP camera setup Chanda Nagar', 'CCTV AMC', 'night vision surveillance camera'],
+    'laptop-repair': ['laptop repair Bengaluru', 'laptop service Vizag', 'laptop screen replacement Chennai', 'doorstep laptop repair Hyderabad', 'motherboard chip repair', 'MacBook repair', 'Dell HP Lenovo repair'],
+    'computer-repair': ['computer repair Bengaluru', 'desktop repair Vizag', 'PC troubleshooting Chennai', 'SMPS replacement Hyderabad', 'custom gaming PC repair', 'BSOD error fix'],
+    'networking': ['structured cabling Bengaluru', 'office networking Chennai', 'Wi-Fi 6 setup Vizag', 'CAT6 LAN cabling Hyderabad', 'server rack installation', 'router firewall configuration'],
+    'cctv-repair-installation': ['CCTV installation Bengaluru', 'security camera repair Vizag', 'DVR repair Chennai', 'IP camera setup Hyderabad', 'CCTV AMC', 'night vision surveillance camera'],
   };
 
   return (
@@ -145,7 +145,7 @@ export const ServiceDetailPage: React.FC = () => {
                 </h3>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                Connect directly with our local coordinator in Bengaluru, Vizag, Chennai, or Chanda Nagar for instant slot scheduling.
+                Connect directly with our local coordinator in Bengaluru, Vizag, Chennai, or Hyderabad for instant slot scheduling.
               </p>
 
               <div className="space-y-2.5 pt-1">
@@ -169,7 +169,7 @@ export const ServiceDetailPage: React.FC = () => {
 
                 {/* Book Service Button */}
                 <Link
-                  to="/contact"
+                  to="/book-service"
                   className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-black border border-slate-300 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-xs group"
                 >
                   <Calendar className="w-4 h-4 text-[#16A34A]" />
@@ -285,7 +285,7 @@ export const ServiceDetailPage: React.FC = () => {
                   Local Service Hub Availability
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-black">
-                  Available Across Bengaluru, Vizag, Chennai & Chanda Nagar
+                  Available Across Bengaluru, Vizag, Chennai & Hyderabad
                 </h3>
               </div>
               <span className="text-xs text-[#16A34A] font-semibold bg-[#22C55E]/15 px-3 py-1 rounded-full border border-[#22C55E]/30">

@@ -60,7 +60,7 @@ export const SubLocationPage: React.FC = () => {
     },
     {
       question: `How fast can a technician arrive at my home or office in ${localityName}?`,
-      answer: `Because our service center is situated at ${city.address} (${localityDistance}), our technician typically arrives within 45 to 90 minutes of your booking confirmation.`
+      answer: `With our dedicated doorstep service units across ${city.name} (${localityDistance}), our technician typically arrives within 45 to 90 minutes of your booking confirmation.`
     },
     {
       question: `What computer and CCTV services are supported in ${localityName}?`,
@@ -276,7 +276,7 @@ export const SubLocationPage: React.FC = () => {
                 <div className="space-y-2.5 pt-2 text-xs text-slate-700 border-t border-slate-100">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-[#16A34A] flex-shrink-0 mt-0.5" />
-                    <span><strong>Operating Service Hub:</strong> {city.address}</span>
+                    <span><strong>Operating Service Hub:</strong> {city.name} Hub</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-[#16A34A] flex-shrink-0" />

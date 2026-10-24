@@ -268,11 +268,11 @@ const baseCitiesData: Record<string, CityInfo> = {
     name: "Bengaluru",
     state: "Karnataka",
     popularName: "Bangalore",
-    address: "27th Main Rd, opp. KLM Fashion Mall, Sector 2, HSR Layout, Bengaluru, Karnataka 560102",
+    address: "Bengaluru, Karnataka",
     coverageRadius: "25 km",
     description: "Serving India's Silicon Valley with rapid doorstep computer diagnostics, laptop motherboard servicing, structured IT networking, and IP surveillance for tech professionals and corporate enterprises within a 25 km service radius.",
-    leadTime: "Same-Day Doorstep Service across 25 km radius of HSR Layout",
-    serviceHub: "27th Main Rd, opp. KLM Fashion Mall, Sector 2, HSR Layout, Bengaluru, Karnataka 560102",
+    leadTime: "Same-Day Doorstep Service across Bengaluru",
+    serviceHub: "Bengaluru Hub",
     localities: [
       "HSR Layout (0 km)", "BTM Layout (3 km)", "Koramangala (4 km)", "Bellandur (4 km)",
       "Sarjapur Road (5 km)", "Jayanagar (6 km)", "JP Nagar (7 km)", "Electronic City (8 km)",
@@ -284,7 +284,7 @@ const baseCitiesData: Record<string, CityInfo> = {
     helpline: "+91 98450 12345",
     email: "bengaluru@techfixservices.in",
     serviceHighlights: [
-      "Walk-in lab & service center: 27th Main Rd, opp. KLM Fashion Mall, HSR Layout Sector 2",
+      "Doorstep service & certified IT repair lab across Bengaluru",
       "Dedicated tech corridor on-site engineers with mobile diagnostic toolkits within 25 km",
       "Specialized in MacBook & high-performance developer laptop servicing",
       "High-speed office mesh Wi-Fi & CAT6 cabling for startups and co-working hubs",
@@ -297,11 +297,11 @@ const baseCitiesData: Record<string, CityInfo> = {
     name: "Visakhapatnam (Vizag)",
     state: "Andhra Pradesh",
     popularName: "Vizag",
-    address: "50-81-57/1, Virat Computers and mobiles, Seethammapeta Main Rd, Ganesh Nagar, Seetamma Peta, Dwaraka Nagar, Visakhapatnam, Andhra Pradesh 530016",
+    address: "Visakhapatnam, Andhra Pradesh",
     coverageRadius: "25 km",
     description: "Delivering trusted laptop chip-level repair, desktop troubleshooting, industrial networking, and CCTV security installations across Visakhapatnam within a 25 km service radius.",
-    leadTime: "Fast On-Site & Lab Response across 25 km radius of Seethammapeta",
-    serviceHub: "50-81-57/1, Virat Computers and mobiles, Seethammapeta Main Rd, Ganesh Nagar, Seetamma Peta, Dwaraka Nagar, Visakhapatnam, Andhra Pradesh 530016",
+    leadTime: "Fast On-Site & Doorstep Service across Visakhapatnam (Vizag)",
+    serviceHub: "Visakhapatnam (Vizag) Hub",
     localities: [
       "Seethammapeta (0 km)", "Dwaraka Nagar (1 km)", "Seethammadhara (1.5 km)", "Asilmetta (1 km)",
       "Akkayyapalem (1 km)", "CBM Compound (1.5 km)", "Siripuram (2.5 km)", "MVP Colony (3.5 km)",
@@ -313,7 +313,7 @@ const baseCitiesData: Record<string, CityInfo> = {
     helpline: "+91 98450 12345",
     email: "vizag@techfixservices.in",
     serviceHighlights: [
-      "Service center: 50-81-57/1, Virat Computers and mobiles, Seethammapeta Main Rd, Dwaraka Nagar",
+      "Doorstep service & certified IT repair center across Visakhapatnam (Vizag)",
       "Rapid dispatch across 25 km radius including Dwaraka Nagar, MVP Colony, Gajuwaka, and Madhurawada",
       "Specialized motherboard repair for laptops damaged by coastal humidity",
       "Complete warehouse, store, and home CCTV camera installations",
@@ -326,11 +326,11 @@ const baseCitiesData: Record<string, CityInfo> = {
     name: "Chennai",
     state: "Tamil Nadu",
     popularName: "Chennai",
-    address: "MG Road, Chennai, Tamil Nadu",
+    address: "Chennai, Tamil Nadu",
     coverageRadius: "25 km",
     description: "Reliable computer and laptop servicing, IT cabling, and comprehensive CCTV maintenance throughout Chennai within a 25 km service radius.",
-    leadTime: "Quick On-Site Dispatch across 25 km radius of MG Road",
-    serviceHub: "MG Road, Chennai, Tamil Nadu",
+    leadTime: "Quick Doorstep Dispatch across Chennai",
+    serviceHub: "Chennai Hub",
     localities: [
       "MG Road (0 km)", "Adyar (2 km)", "Besant Nagar (2.5 km)", "Thiruvanmiyur (3 km)",
       "Kotturpuram (3 km)", "Mylapore (4 km)", "Alwarpet (4.5 km)", "T. Nagar (5 km)",
@@ -342,49 +342,55 @@ const baseCitiesData: Record<string, CityInfo> = {
     helpline: "+91 98450 12345",
     email: "chennai@techfixservices.in",
     serviceHighlights: [
-      "Service desk & walk-in facility: MG Road, Chennai",
+      "Doorstep service & certified IT repair facility across Chennai",
       "Direct technician coverage within 25 km along OMR tech corridors and central Chennai",
       "Anti-corrosive thermal cleaning for coastal laptop reliability",
       "Business network rack setup and CAT6 structured cabling",
       "Residential apartment community CCTV upgrade and DVR hard drive restoration"
     ]
   },
-  "chanda-nagar": {
-    id: "chanda-nagar",
-    slug: "chanda-nagar",
-    name: "Chanda Nagar",
-    state: "Andhra Pradesh",
-    popularName: "Chanda Nagar",
-    address: "Trunk Road, Near VRC Centre, Chanda Nagar, Andhra Pradesh 524001",
-    coverageRadius: "20 km",
-    description: "Doorstep computer and laptop repair, certified chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch within 90 minutes in Chanda Nagar.",
-    leadTime: "Doorstep Dispatch in Chanda Nagar within 90 minutes",
-    serviceHub: "Trunk Road, Near VRC Centre, Chanda Nagar, Andhra Pradesh",
+  "hyderabad": {
+    id: "hyderabad",
+    slug: "hyderabad",
+    name: "Hyderabad",
+    state: "Telangana",
+    popularName: "Hyderabad",
+    address: "Hyderabad, Telangana",
+    coverageRadius: "25 km",
+    description: "Doorstep computer and laptop repair, certified chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch within 90 minutes across Hyderabad.",
+    leadTime: "Doorstep Dispatch in Hyderabad within 90 minutes",
+    serviceHub: "Hyderabad Hub",
     localities: [
-      "Trunk Road (0 km)", "VRC Centre (0.5 km)", "Dargamitta (1.5 km)", "Magunta Layout (2 km)",
-      "Pogathota (1.5 km)", "Stonehousepet (2 km)", "Balaji Nagar (2.5 km)", "Vedayapalem (3 km)",
-      "Harmathpet (2 km)", "Ramamurthy Nagar (3.5 km)", "Chanda Nagar Rural (5 km)", "Kovur (6 km)"
+      "Chanda Nagar (0 km)", "Madhapur (8 km)", "Hitec City (7 km)", "Gachibowli (9 km)",
+      "Kondapur (6 km)", "Miyapur (3 km)", "Kukatpally (7 km)", "Ameerpet (14 km)",
+      "Banjara Hills (16 km)", "Jubilee Hills (14 km)", "Secunderabad (20 km)", "Dilsukhnagar (24 km)"
     ],
     helpline: "+91 95156 61677",
-    email: "chandanagar@doorstepservice.in",
+    email: "hyderabad@doorstepservice.in",
     serviceHighlights: [
-      "Doorstep technician dispatch in Chanda Nagar within 90 minutes",
+      "Doorstep technician dispatch in Hyderabad within 90 minutes",
       "No booking fee — Free registration & inspection",
-      "Verified local Chanda Nagar certified engineers",
+      "Verified local Hyderabad certified engineers",
       "Computer, Laptop, Networking, and CCTV surveillance repair"
     ]
   }
 };
 
-// Transparent Proxy that allows lookup by alias (e.g. 'nellore' or 'Chanda Nagar')
+// Transparent Proxy that allows lookup by alias (e.g. 'hyderabad', 'chanda-nagar', 'chandanagar', 'nellore')
 // while keeping Object.values(citiesData) containing strictly the 4 unique cities.
 export const citiesData: Record<string, CityInfo> = new Proxy(baseCitiesData, {
   get(target, prop: string | symbol) {
     if (typeof prop === 'string') {
       if (prop in target) return target[prop];
       const normalized = prop.toLowerCase().replace(/\s+/g, '-');
-      if (normalized === 'nellore' || normalized === 'chanda-nagar' || normalized === 'chandanagar') {
-        return target['chanda-nagar'];
+      if (
+        normalized === 'hyderabad' ||
+        normalized === 'chanda-nagar' ||
+        normalized === 'chandanagar' ||
+        normalized === 'chendanagar' ||
+        normalized === 'nellore'
+      ) {
+        return target['hyderabad'];
       }
     }
     return Reflect.get(target, prop);

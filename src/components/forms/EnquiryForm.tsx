@@ -27,7 +27,59 @@ import {
   Video,
   Mail,
 } from 'lucide-react';
-import { siteConfig } from '../../config/site';
+import { siteConfig, citiesData } from '../../config/site';
+
+export interface SubcategoryOption {
+  id: string;
+  name: string;
+  desc?: string;
+}
+
+export const SERVICE_SUBCATEGORIES: Record<string, SubcategoryOption[]> = {
+  'laptop-repair': [
+    { id: 'screen-replacement', name: 'Screen & Display Replacement', desc: 'Broken LCD, flicker, lines, black display' },
+    { id: 'motherboard-chip', name: 'Motherboard Chip-Level Repair', desc: 'No power, water spill, dead board, short circuit' },
+    { id: 'battery-charging', name: 'Battery Replacement & Charging', desc: 'Drains fast, not charging, port loose/broken' },
+    { id: 'keyboard-trackpad', name: 'Keyboard & Trackpad Fix', desc: 'Keys not typing, stuck keys, unresponsive touchpad' },
+    { id: 'ssd-ram-upgrade', name: 'SSD & RAM Speed Upgrade', desc: 'Slow speed, lagging, storage full, NVMe upgrade' },
+    { id: 'os-boot-bsod', name: 'OS Boot / Blue Screen (BSOD)', desc: 'Windows crash, boot loop, virus cleaning, format' },
+    { id: 'hinges-body-fabrication', name: 'Hinges & Body Fabrication', desc: 'Broken hinges, cracked casing, loose display flap' },
+    { id: 'overheating-thermal', name: 'Overheating & Thermal Servicing', desc: 'Loud fan noise, auto power off, thermal paste' },
+    { id: 'hard-drive-recovery', name: 'Hard Drive & Data Recovery', desc: 'Clicking HDD, lost files, unreadable partition' },
+    { id: 'general-laptop-diagnostics', name: 'General Diagnostic Inspection', desc: 'Complete hardware & software checkup' },
+  ],
+  'computer-repair': [
+    { id: 'no-power-display', name: 'No Power / No Display (POST Fix)', desc: 'PC turns on but monitor blank, beep codes' },
+    { id: 'bsod-crashing', name: 'Blue Screen & Sudden Crashing', desc: 'Frequent restart, system freezing, memory dump' },
+    { id: 'smps-power-supply', name: 'SMPS Power Supply Replacement', desc: 'Burnt smell, sudden power shutdown, voltage trip' },
+    { id: 'cpu-gpu-overheating', name: 'CPU / GPU Overheating & Fan Noise', desc: 'Liquid cooler pump failure, thermal paste, cleaning' },
+    { id: 'hardware-upgrade', name: 'Hardware Upgrade (SSD / RAM / GPU)', desc: 'Gaming graphics card, RAM expansion, SSD install' },
+    { id: 'os-drivers-setup', name: 'Windows OS, BIOS & Driver Setup', desc: 'Clean installation, license activation, software fix' },
+    { id: 'hard-drive-recovery', name: 'Hard Drive Recovery & Storage Fix', desc: 'Clicking HDD, inaccessible partition, data rescue' },
+    { id: 'custom-gaming-rig', name: 'Custom Gaming Rig Tuning', desc: 'Cable re-routing, benchmark stability, assembly' },
+    { id: 'general-pc-diagnostics', name: 'General Desktop Diagnostics', desc: 'Doorstep engineer diagnostic inspection' },
+  ],
+  'networking': [
+    { id: 'wifi-mesh-deadzones', name: 'Wi-Fi Dead Zones & Mesh Setup', desc: 'Weak signal, multi-floor coverage, Wi-Fi 6 mesh nodes' },
+    { id: 'cat6-structured-cabling', name: 'Structured CAT6 / LAN Cabling', desc: 'Office cabling, patch crimping, faceplates, wall jacks' },
+    { id: 'router-firewall-config', name: 'Router & Firewall Configuration', desc: 'Port forwarding, guest network, VPN, bandwidth limit' },
+    { id: 'server-rack-patch-panel', name: 'Server Rack & Patch Panel Dressing', desc: 'Clean cable dressing, punch-down, switch mounting' },
+    { id: 'intermittent-drops', name: 'Intermittent Internet Drops & High Ping', desc: 'Frequent disconnects, packet loss, ISP gateway fix' },
+    { id: 'multi-wan-dual-isp', name: 'Multi-WAN Dual ISP Failover', desc: 'Uninterrupted office internet with automatic line backup' },
+    { id: 'managed-switch-vlan', name: 'Managed Switch & VLAN Setup', desc: 'Department network isolation, QoS traffic policy' },
+    { id: 'general-network-survey', name: 'On-Site Network Survey & Audit', desc: 'Full-facility Wi-Fi & cabling assessment' },
+  ],
+  'cctv-repair-installation': [
+    { id: 'new-cctv-installation', name: 'New CCTV Installation (HD / IP)', desc: 'Full installation for home, apartment, shop or warehouse' },
+    { id: 'camera-offline-black-screen', name: 'Camera Offline / Black Screen Fix', desc: 'No video signal, loose BNC/RJ45, power channel issue' },
+    { id: 'dvr-nvr-hdd-repair', name: 'DVR / NVR Not Recording / HDD Fix', desc: 'Beeping unit, hard drive replacement, playback error' },
+    { id: 'mobile-app-live-view', name: 'Mobile App & Remote Live Viewing', desc: 'Sync cameras to smartphone / tablet via P2P cloud' },
+    { id: 'blurry-night-vision', name: 'Blurry Picture & Night Vision Repair', desc: 'Out of focus, IR night LEDs not working, lens clean' },
+    { id: 'wiring-smps-box', name: 'CCTV Wiring & SMPS Power Box Repair', desc: 'Short circuit, weather damaged wire, central power box' },
+    { id: 'cctv-amc-maintenance', name: 'CCTV Annual Maintenance (AMC)', desc: 'Quarterly camera alignment, lens wash, firmware update' },
+    { id: 'general-cctv-quote', name: 'On-Site CCTV Survey & Quote', desc: 'Camera positioning planning and custom quotation' },
+  ],
+};
 
 interface FormState {
   fullName: string;
@@ -35,6 +87,7 @@ interface FormState {
   email: string;
   city: string;
   service: string;
+  subcategory: string;
   serviceMode: string;
   contactMethod: 'phone' | 'whatsapp';
   slotDate: string;
@@ -53,6 +106,7 @@ interface FormErrors {
   email?: string;
   city?: string;
   service?: string;
+  subcategory?: string;
   slotDate?: string;
   slotTime?: string;
   address?: string;
@@ -62,6 +116,7 @@ interface FormErrors {
 interface EnquiryFormProps {
   initialCity?: string;
   initialService?: string;
+  initialSubcategory?: string;
   title?: string;
   subtitle?: string;
   className?: string;
@@ -74,21 +129,22 @@ export const SERVICE_TILES = [
   { id: 'cctv-repair-installation', label: 'CCTV REPAIR', icon: Video, desc: 'Camera, DVR & Security' },
 ];
 
-export const CHANDA_NAGAR_AREAS = [
-  'Trunk Road',
-  'VRC Centre',
-  'Dargamitta',
-  'Magunta Layout',
-  'Pogathota',
-  'Stonehousepet',
-  'Balaji Nagar',
-  'Vedayapalem',
-  'Harmathpet',
-  'Ramamurthy Nagar',
-  'Chanda Nagar Rural',
-  'Kovur',
+export const HYDERABAD_AREAS = [
+  'Chanda Nagar',
+  'Madhapur',
+  'Hitec City',
+  'Gachibowli',
+  'Kondapur',
+  'Miyapur',
+  'Kukatpally',
+  'Ameerpet',
+  'Banjara Hills',
+  'Jubilee Hills',
+  'Secunderabad',
+  'Dilsukhnagar',
 ];
-export const NELLORE_AREAS = CHANDA_NAGAR_AREAS;
+export const CHANDA_NAGAR_AREAS = HYDERABAD_AREAS;
+export const NELLORE_AREAS = HYDERABAD_AREAS;
 export const APPLIANCE_TILES = SERVICE_TILES;
 
 const AVAILABLE_OFFERS = [
@@ -134,13 +190,30 @@ const CONFETTI_COLORS = [
 ];
 
 export const EnquiryForm: React.FC<EnquiryFormProps> = ({
-  initialCity = 'Chanda Nagar',
+  initialCity = 'hyderabad',
   initialService = 'laptop-repair',
+  initialSubcategory,
   title = "Request Service",
   subtitle = "Select your device or service, enter details, and book your technician.",
   className = "",
 }) => {
   const getTodayDateString = () => new Date().toISOString().split('T')[0];
+
+  const normalizeInitialCity = (c?: string) => {
+    if (!c) return 'hyderabad';
+    const lower = c.toLowerCase().trim();
+    if (lower.includes('bengaluru') || lower.includes('bangalore')) return 'bengaluru';
+    if (lower.includes('vizag') || lower.includes('visakhapatnam')) return 'vizag';
+    if (lower.includes('chennai')) return 'chennai';
+    return 'hyderabad';
+  };
+
+  const defaultCity = normalizeInitialCity(initialCity);
+  const defaultService = initialService || 'laptop-repair';
+  const defaultSubcategory =
+    initialSubcategory ||
+    SERVICE_SUBCATEGORIES[defaultService]?.[0]?.name ||
+    'Screen & Display Replacement';
 
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
 
@@ -148,8 +221,9 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     fullName: '',
     phone: '',
     email: '',
-    city: initialCity || 'Chanda Nagar',
-    service: initialService || 'laptop-repair',
+    city: defaultCity,
+    service: defaultService,
+    subcategory: defaultSubcategory,
     serviceMode: 'doorstep',
     contactMethod: 'phone',
     slotDate: getTodayDateString(),
@@ -170,6 +244,11 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
   const [locationStatus, setLocationStatus] = useState<string>('');
   const [showCustomOfferInput, setShowCustomOfferInput] = useState(false);
+
+  // Dynamic city & localities data
+  const normalizedCityKey = (formData.city || 'hyderabad').toLowerCase();
+  const currentCityData = citiesData[normalizedCityKey] || citiesData['hyderabad'];
+  const availableAreas = currentCityData?.localities || HYDERABAD_AREAS;
 
   // Pricing breakdown calculations for Checkout
   const BASE_DIAGNOSTIC_FEE = 499;
@@ -276,6 +355,11 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       newErrors.service = 'Please select the required service';
     }
 
+    if (!formData.subcategory) {
+      const defaultSub = SERVICE_SUBCATEGORIES[formData.service]?.[0]?.name || 'General Diagnostic Inspection';
+      formData.subcategory = defaultSub;
+    }
+
     if (!formData.slotDate) {
       formData.slotDate = getTodayDateString();
     }
@@ -285,13 +369,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     }
 
     if (formData.serviceMode === 'doorstep' && (!formData.address || formData.address.trim().length < 2)) {
-      newErrors.address = 'Please select or enter your area / locality in Chanda Nagar';
+      const cityName = currentCityData?.name || formData.city || 'your city';
+      newErrors.address = `Please select or enter your area / locality in ${cityName}`;
     }
 
     if (!formData.description || formData.description.trim().length < 2) {
       setFormData((prev) => ({
         ...prev,
-        description: 'Doorstep diagnostic inspection and device repair dispatch',
+        description: formData.subcategory || 'Doorstep diagnostic inspection and device repair dispatch',
       }));
     }
 
@@ -335,8 +420,9 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
           phone: formData.phone,
           email: formData.email,
           service: formData.service,
+          subcategory: formData.subcategory,
           address: formData.address,
-          city: formData.city || 'Chanda Nagar',
+          city: formData.city || 'Hyderabad',
           ticketId: generatedTicket,
           discountAmount,
           payableAmount: netDiagnosticDue,
@@ -386,13 +472,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       `• Mobile: ${formData.phone}\n` +
       `• City: ${formData.city.toUpperCase()}\n` +
       `• Service: ${formData.service}\n` +
+      `• Specific Issue: ${formData.subcategory || 'General Servicing'}\n` +
       `• Delivery Mode: ${formData.serviceMode}\n` +
       `• Scheduled Date: ${formData.slotDate}\n` +
       `• Time Slot: ${formData.slotTime}\n` +
       (formData.address ? `• Doorstep Address: ${formData.address}\n` : '') +
       offerText +
       `• Estimated Doorstep Due: ₹${netDiagnosticDue} (Pay after service)\n` +
-      `• Device Issue: ${formData.description}\n\n` +
+      `• Problem Summary: ${formData.description}\n\n` +
       `Please confirm technician dispatch for my slot!`
     );
     return `https://wa.me/${siteConfig.whatsappRaw}?text=${text}`;
@@ -484,6 +571,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
 
             {/* Itemized details */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+              <p className="flex items-center gap-1.5 sm:col-span-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
+                <span><strong>Service & Issue:</strong> {SERVICE_TILES.find(t => t.id === formData.service)?.label} — <span className="font-bold text-black">{formData.subcategory}</span></span>
+              </p>
               <p className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                 <span><strong>Date:</strong> {formData.slotDate}</span>
@@ -494,7 +585,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
               </p>
               <p className="flex items-center gap-1.5 sm:col-span-2 truncate">
                 <MapPin className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
-                <span className="truncate"><strong>Location:</strong> {formData.address || `${formData.city.toUpperCase()} Center`}</span>
+                <span className="truncate"><strong>Location:</strong> {formData.address || `${(currentCityData?.name || formData.city).toUpperCase()} Center`}</span>
               </p>
             </div>
 
@@ -567,8 +658,9 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   fullName: '',
                   phone: '',
                   email: '',
-                  city: initialCity || 'Chanda Nagar',
-                  service: initialService || 'laptop-repair',
+                  city: defaultCity,
+                  service: defaultService,
+                  subcategory: defaultSubcategory,
                   serviceMode: 'doorstep',
                   contactMethod: 'phone',
                   slotDate: getTodayDateString(),
@@ -638,9 +730,16 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           key={tile.id}
                           type="button"
                           onClick={() => {
-                            setFormData((prev) => ({ ...prev, service: tile.id }));
-                            if (errors.service) {
-                              setErrors((prev) => ({ ...prev, service: undefined }));
+                            const newService = tile.id;
+                            const newSubcategory = SERVICE_SUBCATEGORIES[newService]?.[0]?.name || '';
+                            setFormData((prev) => ({
+                              ...prev,
+                              service: newService,
+                              subcategory: newSubcategory,
+                              description: `${tile.label} - ${newSubcategory}`,
+                            }));
+                            if (errors.service || errors.subcategory) {
+                              setErrors((prev) => ({ ...prev, service: undefined, subcategory: undefined }));
                             }
                           }}
                           className={`p-3 rounded-2xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all group cursor-pointer ${isSelected
@@ -676,7 +775,73 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   )}
                 </div>
 
-                {/* 2. Customer Name & Mobile */}
+                {/* 2. SELECT REPAIR / ISSUE SUBCATEGORY */}
+                <div className="space-y-2 pt-1 animate-in fade-in duration-200">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-[11px] font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-[#16A34A]" />
+                      <span>2. SELECT SPECIFIC ISSUE / REPAIR</span> <span className="text-rose-500">*</span>
+                    </label>
+                    <span className="text-[10px] text-[#16A34A] font-bold bg-[#22C55E]/15 px-2.5 py-0.5 rounded-full border border-[#22C55E]/30">
+                      {SERVICE_TILES.find(t => t.id === formData.service)?.label}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {(SERVICE_SUBCATEGORIES[formData.service] || []).map((sub) => {
+                      const isSelected = formData.subcategory === sub.name;
+                      return (
+                        <button
+                          key={sub.id}
+                          type="button"
+                          onClick={() => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              subcategory: sub.name,
+                              description: sub.desc ? `${sub.name} (${sub.desc})` : sub.name,
+                            }));
+                            if (errors.subcategory) {
+                              setErrors((prev) => ({ ...prev, subcategory: undefined }));
+                            }
+                          }}
+                          className={`p-3 rounded-2xl border text-left flex items-start gap-2.5 transition-all cursor-pointer group ${
+                            isSelected
+                              ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] shadow-sm'
+                              : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                          }`}
+                        >
+                          <div
+                            className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                              isSelected
+                                ? 'border-[#22C55E] bg-[#22C55E] text-white shadow-xs'
+                                : 'border-slate-300 bg-white group-hover:border-slate-400'
+                            }`}
+                          >
+                            {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className={`text-xs font-bold leading-tight ${isSelected ? 'text-black' : 'text-slate-800'}`}>
+                              {sub.name}
+                            </div>
+                            {sub.desc && (
+                              <div className="text-[10px] text-slate-500 leading-tight mt-1 truncate">
+                                {sub.desc}
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {errors.subcategory && (
+                    <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                      {errors.subcategory}
+                    </p>
+                  )}
+                </div>
+
+                {/* 3. Customer Name & Mobile */}
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -766,12 +931,12 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   </div>
                 </div>
 
-                {/* 3. Location / Area in Chanda Nagar */}
+                {/* 4. Location / Area */}
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <label className="text-[11px] font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-[#16A34A]" />
-                      <span>SELECT LOCATION IN {formData.city ? formData.city.toUpperCase() : 'CHANDA NAGAR'}</span>
+                      <span>4. SELECT LOCATION IN {currentCityData?.name ? currentCityData.name.toUpperCase() : 'YOUR CITY'}</span>
                       <span className="text-rose-500">*</span>
                     </label>
 
@@ -798,22 +963,24 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] text-slate-500 font-semibold mb-1">Select Area / Locality</label>
+                      <label className="block text-[10px] text-slate-500 font-semibold mb-1">
+                        Select Area / Locality ({currentCityData?.name || 'City'})
+                      </label>
                       <select
                         onChange={(e) => {
                           const area = e.target.value;
                           if (area) {
                             setFormData((prev) => ({
                               ...prev,
-                              address: prev.address ? `${area}, ${prev.address}` : `${area}, ${formData.city || 'Chanda Nagar'}`,
+                              address: prev.address ? `${area}, ${prev.address}` : `${area}, ${currentCityData?.name || 'Local City Hub'}`,
                             }));
                           }
                         }}
                         defaultValue=""
                         className="w-full bg-white border border-slate-300 focus:border-[#22C55E] rounded-xl px-3.5 py-2.5 text-xs text-black focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 transition-all font-medium"
                       >
-                        <option value="" disabled>-- Select Area in Chanda Nagar --</option>
-                        {CHANDA_NAGAR_AREAS.map((area) => (
+                        <option value="" disabled>-- Select Area in {currentCityData?.name || 'City'} --</option>
+                        {availableAreas.map((area) => (
                           <option key={area} value={area}>
                             {area}
                           </option>
@@ -826,14 +993,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                       <select
                         id="city"
                         name="city"
-                        value={formData.city}
+                        value={normalizedCityKey}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                         className="w-full bg-white border border-slate-300 focus:border-[#22C55E] rounded-xl px-3.5 py-2.5 text-xs text-black focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 transition-all font-medium"
                       >
-                        <option value="Chanda Nagar">Chanda Nagar (Doorstep Dispatch Hub)</option>
-                        <option value="bengaluru">Bengaluru (HSR Layout Center)</option>
-                        <option value="vizag">Visakhapatnam (Seethammapeta Center)</option>
-                        <option value="chennai">Chennai (MG Road Center)</option>
+                        <option value="bengaluru">Bengaluru</option>
+                        <option value="vizag">Visakhapatnam (Vizag)</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="hyderabad">Hyderabad</option>
                       </select>
                     </div>
                   </div>
@@ -907,13 +1074,18 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
 
                 {/* Step 1 Quick Summary Preview */}
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3 shadow-xs">
-                  <div className="space-y-0.5 text-xs text-slate-700">
+                  <div className="space-y-1 text-xs text-slate-700">
                     <div className="flex items-center gap-2">
                       <span className="font-extrabold text-black">{formData.fullName}</span>
                       <span className="text-[10px] text-[#16A34A] font-mono font-bold">+91 {formData.phone}</span>
                     </div>
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#22C55E]/15 text-[#16A34A] text-[10px] font-bold border border-[#22C55E]/30">
+                      <span>{SERVICE_TILES.find(t => t.id === formData.service)?.label}</span>
+                      <span>•</span>
+                      <span>{formData.subcategory}</span>
+                    </div>
                     <p className="text-[11px] text-slate-600">
-                      📅 {formData.slotDate} • ⏰ {formData.slotTime.split('(')[0].trim()} • 📍 {formData.city.toUpperCase()}
+                      📅 {formData.slotDate} • ⏰ {formData.slotTime.split('(')[0].trim()} • 📍 {(currentCityData?.name || formData.city).toUpperCase()}
                     </p>
                   </div>
 

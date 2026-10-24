@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-2 text-[#22C55E]">
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
               <span className="font-semibold text-[#FFFFFF]/90">Verified Service Coverage:</span>
-              <span className="text-[#22C55E] font-medium">Bengaluru • Vizag • Chennai • Chanda Nagar</span>
+              <span className="text-[#22C55E] font-medium">Bengaluru • Vizag • Chennai • Hyderabad</span>
             </div>
             <div className="flex items-center gap-1.5 text-[#FFFFFF]/75">
               <Clock className="w-3.5 h-3.5 text-[#22C55E]" />
@@ -216,7 +216,7 @@ export const Navbar: React.FC = () => {
 
                 {activeDropdown === 'locations' && (
                   <div
-                    className="absolute top-full left-0 w-80 mt-1 py-2 bg-white border border-slate-200 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150 z-50"
+                    className="absolute top-full left-0 w-64 mt-1 py-2 bg-white border border-slate-200 rounded-2xl shadow-xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150 z-50"
                   >
                     <div className="px-3.5 py-2 text-[11px] font-bold text-black uppercase tracking-wider border-b border-slate-100">
                       Service Hubs & Cities
@@ -226,19 +226,14 @@ export const Navbar: React.FC = () => {
                         key={city.id}
                         to={`/service-center/${city.slug}`}
                         onClick={() => setActiveDropdown(null)}
-                        className="flex items-start gap-3 px-3.5 py-2.5 hover:bg-slate-50 transition-colors rounded-xl mx-1.5 group"
+                        className="flex items-center gap-3 px-3.5 py-2.5 hover:bg-slate-50 transition-colors rounded-xl mx-1.5 group"
                       >
-                        <div className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-[#22C55E] group-hover:border-[#22C55E]/50 transition-colors mt-0.5">
+                        <div className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-[#22C55E] group-hover:border-[#22C55E]/50 transition-colors">
                           <MapPin className="w-4 h-4 text-[#22C55E]" />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-black group-hover:text-[#16A34A] transition-colors">
-                            {city.name}
-                          </p>
-                          <p className="text-xs text-slate-500 truncate mt-0.5">
-                            {city.state} • {city.serviceHub}
-                          </p>
-                        </div>
+                        <span className="text-sm font-bold text-black group-hover:text-[#16A34A] transition-colors">
+                          {city.name}
+                        </span>
                       </Link>
                     ))}
                     <div className="p-2 border-t border-slate-100 mt-1">
@@ -247,7 +242,7 @@ export const Navbar: React.FC = () => {
                         onClick={() => setActiveDropdown(null)}
                         className="flex items-center justify-between text-xs font-semibold text-[#16A34A] hover:text-[#06223A] px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-colors"
                       >
-                        <span>All City Hubs & Coverage Areas</span>
+                        <span>All City Hubs & Coverage</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
@@ -255,11 +250,11 @@ export const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* Book Service - matching user screenshot */}
+              {/* Book Service */}
               <Link
-                to="/contact"
+                to="/book-service"
                 onMouseEnter={() => setActiveDropdown(null)}
-                className={`px-3 py-2 text-sm rounded-xl transition-all ${location.pathname === '/contact' || location.pathname === '/book-service'
+                className={`px-3 py-2 text-sm rounded-xl transition-all ${location.pathname === '/book-service'
                     ? 'text-black font-extrabold bg-[#22C55E]/20 border border-[#22C55E]/40 shadow-sm'
                     : 'text-slate-800 font-semibold hover:text-black hover:bg-slate-100'
                   }`}
@@ -279,14 +274,14 @@ export const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                to="/about"
+                to="/contact"
                 onMouseEnter={() => setActiveDropdown(null)}
-                className={`px-3 py-2 text-sm rounded-xl transition-all ${location.pathname === '/about'
+                className={`px-3 py-2 text-sm rounded-xl transition-all ${location.pathname === '/contact'
                     ? 'text-black font-extrabold bg-[#22C55E]/20 border border-[#22C55E]/40 shadow-sm'
                     : 'text-slate-800 font-semibold hover:text-black hover:bg-slate-100'
                   }`}
               >
-                About Us
+                Contact Us
               </Link>
             </nav>
 
@@ -303,7 +298,7 @@ export const Navbar: React.FC = () => {
               </a>
 
               <Link
-                to="/contact"
+                to="/book-service"
                 className="sand-btn-3d inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold transition-all shadow-md"
               >
                 <span>Book a Repair</span>
@@ -379,22 +374,25 @@ export const Navbar: React.FC = () => {
 
               <div className="border-t border-slate-100 my-2 pt-2">
                 <Link
-                  to="/about"
+                  to="/book-service"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
                 >
-                  About Us
+                  Book Service
                 </Link>
                 <Link
                   to="/faq"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
                 >
                   Frequently Asked Questions
                 </Link>
                 <Link
                   to="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
                 >
-                  Contact & Book Repair
+                  Contact Us
                 </Link>
               </div>
             </div>

@@ -80,7 +80,7 @@ export const HowItWorks: React.FC = () => {
 
         <div className="mt-10 text-center">
           <Link
-            to="/contact"
+            to="/book-service"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-[#22C55E] hover:bg-[#16A34A] text-white px-7 py-3.5 rounded-full transition-all shadow-sm"
           >
             <span>Book Your Service</span>

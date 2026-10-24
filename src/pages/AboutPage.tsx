@@ -10,7 +10,7 @@ export const AboutPage: React.FC = () => {
     <>
       <SEO
         title="About Us | Certified Computer, Laptop & IT Repair Specialists"
-        description="Learn about our certified engineering ethos, component-level motherboard diagnostic labs, genuine spare parts policy, and doorstep operations across Bengaluru, Vizag, Chennai, and Chanda Nagar."
+        description="Learn about our certified engineering ethos, component-level motherboard diagnostic labs, genuine spare parts policy, and doorstep operations across Bengaluru, Vizag, Chennai, and Hyderabad."
         canonicalPath="/about"
         keywords={[
           'about TechFix computer repair',
@@ -37,7 +37,7 @@ export const AboutPage: React.FC = () => {
             Reliable IT Hardware & Infrastructure Specialists
           </h1>
           <p className="text-slate-800 text-sm sm:text-base mt-4 leading-relaxed font-normal">
-            {siteConfig.brandName} was built to provide honest, component-level repairs without hidden fees or unnecessary full-motherboard replacements. We serve homes and enterprises across Bengaluru, Visakhapatnam, Chennai, and Chanda Nagar.
+            {siteConfig.brandName} was built to provide honest, component-level repairs without hidden fees or unnecessary full-motherboard replacements. We serve homes and enterprises across Bengaluru, Visakhapatnam, Chennai, and Hyderabad.
           </p>
         </div>
       </section>
@@ -68,7 +68,7 @@ export const AboutPage: React.FC = () => {
                 </div>
                 <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
                   <span className="text-2xl font-bold text-[#06223A] font-mono block">4 Hubs</span>
-                  <span className="text-xs text-black font-medium">Bengaluru • Vizag • Chennai • Chanda Nagar</span>
+                  <span className="text-xs text-black font-medium">Bengaluru • Vizag • Chennai • Hyderabad</span>
                 </div>
               </div>
             </div>

@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
                 <span>Local Service Coverage in India</span>
               </h4>
               <p className="text-xs text-slate-600 mt-1">
-                Verified on-site technician dispatch & diagnostic facilities across Bengaluru, Vizag, Chennai, and Chanda Nagar.
+                Verified on-site technician dispatch & diagnostic facilities across Bengaluru, Vizag, Chennai, and Hyderabad.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
       {/* Main footer columns */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
-          
+
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="inline-flex items-center gap-3.5 group">
@@ -99,9 +99,12 @@ export const Footer: React.FC = () => {
 
           {/* Core Services */}
           <div>
-            <h5 className="text-xs font-bold text-black uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
-              Our Services
-            </h5>
+            <div className="mb-4">
+              <h5 className="text-xs font-bold text-black uppercase tracking-wider block">
+                Our Services
+              </h5>
+              <div className="w-7 h-0.5 bg-[#16A34A] mt-1.5 rounded-full"></div>
+            </div>
             <ul className="space-y-2.5 text-xs">
               {Object.values(servicesData).map((srv) => (
                 <li key={srv.id}>
@@ -122,38 +125,47 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Popular City Pages */}
+          {/* Service Locations */}
           <div>
-            <h5 className="text-xs font-bold text-black uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
-              City Landing Pages
-            </h5>
+            <div className="mb-4">
+              <h5 className="text-xs font-bold text-black uppercase tracking-wider block">
+                Service Locations
+              </h5>
+              <div className="w-7 h-0.5 bg-[#16A34A] mt-1.5 rounded-full"></div>
+            </div>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <Link to="/service-center/bengaluru/laptop-repair" className="hover:text-[#16A34A] transition-colors flex items-center gap-1.5 group text-slate-700 font-medium">
-                  <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
-                  <span>Bengaluru Laptop Repair</span>
+                <Link to="/service-center/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  HSR Layout &amp; Koramangala (Bengaluru)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/vizag/computer-repair" className="hover:text-[#16A34A] transition-colors flex items-center gap-1.5 group text-slate-700 font-medium">
-                  <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
-                  <span>Vizag Computer Repair</span>
+                <Link to="/service-center/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  Indiranagar &amp; Whitefield (Bengaluru)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/chennai/cctv-repair-installation" className="hover:text-[#16A34A] transition-colors flex items-center gap-1.5 group text-slate-700 font-medium">
-                  <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
-                  <span>Chennai CCTV Services</span>
+                <Link to="/service-center/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  Madhapur &amp; Hitec City (Hyderabad)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/bengaluru/networking" className="hover:text-[#16A34A] transition-colors flex items-center gap-1.5 group text-slate-700 font-medium">
-                  <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-[#16A34A] transition-colors" />
-                  <span>Bengaluru Office Networking</span>
+                <Link to="/service-center/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  Chanda Nagar &amp; Gachibowli (Hyderabad)
                 </Link>
               </li>
               <li>
-                <Link to="/locations" className="text-[#16A34A] hover:underline font-bold pt-1 block">
+                <Link to="/service-center/vizag" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  Dwaraka Nagar &amp; MVP Colony (Vizag)
+                </Link>
+              </li>
+              <li>
+                <Link to="/service-center/chennai" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                  Adyar &amp; T. Nagar (Chennai)
+                </Link>
+              </li>
+              <li className="pt-1">
+                <Link to="/locations" className="text-[#16A34A] hover:underline font-bold block">
                   All Locations Directory →
                 </Link>
               </li>
@@ -162,9 +174,12 @@ export const Footer: React.FC = () => {
 
           {/* Direct Contact */}
           <div>
-            <h5 className="text-xs font-bold text-black uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">
-              Service Helpline
-            </h5>
+            <div className="mb-4">
+              <h5 className="text-xs font-bold text-black uppercase tracking-wider block">
+                Service Helpline
+              </h5>
+              <div className="w-7 h-0.5 bg-[#16A34A] mt-1.5 rounded-full"></div>
+            </div>
             <ul className="space-y-3 text-xs">
               <li>
                 <a
@@ -214,20 +229,17 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Verification & Transparency Disclaimer */}
-        <div className="mt-12 pt-6 border-t border-slate-200 text-[11px] text-slate-600 leading-relaxed bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <p>
-            <strong className="text-black font-bold">Service Policy & Disclaimer:</strong> {siteConfig.brandName} operates for computer, laptop, networking, and CCTV diagnostics across Bengaluru, Visakhapatnam, Chennai, and Chanda Nagar. All diagnostic estimates are quoted before work begins. Brand names (Dell, HP, Lenovo, Apple, Asus, Acer, Cisco, Hikvision, Dahua, etc.) are used solely for descriptive compatibility identification.
-          </p>
-        </div>
+
 
         {/* Copyright and Bottom Links */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-4">
+        <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-4">
           <p>© {new Date().getFullYear()} {siteConfig.legalName}. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link to="/about" className="hover:text-black transition-colors font-medium">About</Link>
             <Link to="/faq" className="hover:text-black transition-colors font-medium">FAQs</Link>
             <Link to="/contact" className="hover:text-black transition-colors font-medium">Contact</Link>
+            <Link to="/terms" className="hover:text-black transition-colors font-medium">Terms &amp; Conditions</Link>
+            <Link to="/privacy-policy" className="hover:text-black transition-colors font-medium">Privacy Policy</Link>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Value Proposition */}
             <p className="text-base sm:text-lg text-slate-800 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Professional computer and laptop repair, enterprise networking support, and certified CCTV solutions for homes and businesses. Transparent diagnosis, genuine parts, and verified technician dispatch across Bengaluru, Visakhapatnam, Chennai, and Chanda Nagar.
+              Professional computer and laptop repair, enterprise networking support, and certified CCTV solutions for homes and businesses. Transparent diagnosis, genuine parts, and verified technician dispatch across Bengaluru, Visakhapatnam, Chennai, and Hyderabad.
             </p>
 
             {/* Verified highlights bullets */}
@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-3">
               <Link
-                to="/contact"
+                to="/book-service"
                 className="sand-btn-3d w-full sm:w-auto inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-2xl text-sm group transition-transform active:scale-95 shadow-md"
               >
                 <span>Book a Repair</span>
@@ -93,8 +93,8 @@ export const HeroSection: React.FC = () => {
                   Chennai
                 </Link>
                 <span>•</span>
-                <Link to="/service-center/chanda-nagar" className="text-black hover:text-[#16A34A] underline decoration-slate-300 hover:decoration-[#22C55E]">
-                  Chanda Nagar
+                <Link to="/service-center/hyderabad" className="text-black hover:text-[#16A34A] underline decoration-slate-300 hover:decoration-[#22C55E]">
+                  Hyderabad
                 </Link>
               </div>
             </div>

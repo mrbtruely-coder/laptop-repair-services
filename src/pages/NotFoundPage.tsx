@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC = () => {
     <>
       <SEO
         title="Page Not Found (404)"
-        description="The requested page could not be found. Explore our computer, laptop, networking, and CCTV repair services across Bengaluru, Vizag, Chennai, and Chanda Nagar."
+        description="The requested page could not be found. Explore our computer, laptop, networking, and CCTV repair services across Bengaluru, Vizag, Chennai, and Hyderabad."
         noIndex={true}
       />
 

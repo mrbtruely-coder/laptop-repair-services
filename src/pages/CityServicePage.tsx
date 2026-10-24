@@ -128,37 +128,45 @@ export const CityServicePage: React.FC = () => {
           desc: 'Professional CCTV installation, camera troubleshooting, DVR recording recovery, and mobile streaming setup across Chennai apartments, villas, and corporate offices.',
           keywords: ['CCTV installation Chennai', 'security camera service OMR Chennai', 'DVR repair Velachery', 'IP camera setup Chennai', 'CCTV maintenance AMC Chennai']
         };
+      case 'hyderabad-laptop-repair':
+      case 'Hyderabad-laptop-repair':
       case 'Chanda Nagar-laptop-repair':
       case 'chanda-nagar-laptop-repair':
       case 'nellore-laptop-repair':
         return {
-          title: 'Laptop Repair in Chanda Nagar (Trunk Road, VRC Centre) | 90-Min Doorstep Dispatch',
-          desc: 'Doorstep laptop repair in Chanda Nagar. Chip-level motherboard diagnostics, screen replacement, and battery servicing across Trunk Road, VRC Centre, Magunta Layout & Dargamitta. 90-min dispatch.',
-          keywords: ['laptop repair Chanda Nagar', 'laptop screen replacement Chanda Nagar', 'doorstep laptop service Trunk Road Chanda Nagar', 'chip level motherboard repair Chanda Nagar', 'laptop repair VRC Centre']
+          title: 'Laptop Repair in Hyderabad (Hitec City, Madhapur, Chanda Nagar) | 90-Min Doorstep Dispatch',
+          desc: 'Doorstep laptop repair in Hyderabad. Chip-level motherboard diagnostics, screen replacement, and battery servicing across Madhapur, Hitec City, Gachibowli, Chanda Nagar, and Kukatpally. 90-min dispatch.',
+          keywords: ['laptop repair Hyderabad', 'laptop screen replacement Hyderabad', 'doorstep laptop service Hitec City Hyderabad', 'chip level motherboard repair Hyderabad', 'laptop repair Chanda Nagar Hyderabad']
         };
+      case 'hyderabad-computer-repair':
+      case 'Hyderabad-computer-repair':
       case 'Chanda Nagar-computer-repair':
       case 'chanda-nagar-computer-repair':
       case 'nellore-computer-repair':
         return {
-          title: 'Computer & Desktop Repair in Chanda Nagar | Fast Hardware Diagnostics',
-          desc: 'Reliable desktop computer repair in Chanda Nagar. SMPS replacement, motherboard fixes, Windows OS recovery, and PC tuning across Trunk Road, Balaji Nagar & Magunta Layout.',
-          keywords: ['computer repair Chanda Nagar', 'desktop service Chanda Nagar', 'PC repair Trunk Road Chanda Nagar', 'SMPS power supply replacement Chanda Nagar']
+          title: 'Computer & Desktop Repair in Hyderabad | Fast Hardware Diagnostics',
+          desc: 'Reliable desktop computer repair in Hyderabad. SMPS replacement, motherboard fixes, Windows OS recovery, and PC tuning across Hitec City, Madhapur, Kondapur, and Chanda Nagar.',
+          keywords: ['computer repair Hyderabad', 'desktop service Hyderabad', 'PC repair Hitec City Hyderabad', 'SMPS power supply replacement Hyderabad']
         };
+      case 'hyderabad-networking':
+      case 'Hyderabad-networking':
       case 'Chanda Nagar-networking':
       case 'chanda-nagar-networking':
       case 'nellore-networking':
         return {
-          title: 'Networking & Wi-Fi Setup in Chanda Nagar | Home & Commercial IT Solutions',
-          desc: 'Structured CAT6 network cabling, high-speed Wi-Fi router setup, and LAN troubleshooting for businesses, retail stores, and residences across Chanda Nagar.',
-          keywords: ['networking setup Chanda Nagar', 'office Wi-Fi installation Chanda Nagar', 'CAT6 cabling Chanda Nagar', 'router configuration Chanda Nagar']
+          title: 'Networking & Wi-Fi Setup in Hyderabad | Home & Commercial IT Solutions',
+          desc: 'Structured CAT6 network cabling, high-speed Wi-Fi router setup, and LAN troubleshooting for businesses, retail stores, and residences across Hyderabad.',
+          keywords: ['networking setup Hyderabad', 'office Wi-Fi installation Hyderabad', 'CAT6 cabling Hyderabad', 'router configuration Hyderabad']
         };
+      case 'hyderabad-cctv-repair-installation':
+      case 'Hyderabad-cctv-repair-installation':
       case 'Chanda Nagar-cctv-repair-installation':
       case 'chanda-nagar-cctv-repair-installation':
       case 'nellore-cctv-repair-installation':
         return {
-          title: 'CCTV Installation & Repair in Chanda Nagar | Security Camera Setup & DVR Fix',
-          desc: 'Professional CCTV camera installation, DVR/NVR hard drive repair, and mobile live viewing setup across Chanda Nagar homes, shops, and warehouses.',
-          keywords: ['CCTV installation Chanda Nagar', 'security camera repair Chanda Nagar', 'DVR repair Chanda Nagar', 'IP camera setup Trunk Road Chanda Nagar']
+          title: 'CCTV Installation & Repair in Hyderabad | Security Camera Setup & DVR Fix',
+          desc: 'Professional CCTV camera installation, DVR/NVR hard drive repair, and mobile live viewing setup across Hyderabad homes, shops, and warehouses.',
+          keywords: ['CCTV installation Hyderabad', 'security camera repair Hyderabad', 'DVR repair Hyderabad', 'IP camera setup Hyderabad']
         };
       default:
         return {
@@ -174,9 +182,10 @@ export const CityServicePage: React.FC = () => {
   const localizedInsights: Record<string, string> = {
     bengaluru: 'Our Bengaluru dispatch network specifically caters to high-demand corporate professionals, startups, and remote software engineers. We stock genuine displays, RAM/SSD upgrades, and maintain specialized diagnostic rigs for fast turnaround across Outer Ring Road and tech corridors.',
     vizag: 'Operating in Visakhapatnam means our technicians pay special attention to coastal salt humidity corrosion on laptop motherboards and desktop SMPS units. We apply anti-corrosive chemical baths and conformal coating during servicing to maximize hardware longevity.',
-    'chanda-nagar': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
-    'Chanda Nagar': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
-    'nellore': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.'
+    hyderabad: 'Providing direct 90-minute doorstep service coverage across Hitec City, Madhapur, Gachibowli, Chanda Nagar, and Kondapur. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
+    'chanda-nagar': 'Providing direct 90-minute doorstep service coverage across Hitec City, Madhapur, Gachibowli, Chanda Nagar, and Kondapur. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
+    'Chanda Nagar': 'Providing direct 90-minute doorstep service coverage across Hitec City, Madhapur, Gachibowli, Chanda Nagar, and Kondapur. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
+    'nellore': 'Providing direct 90-minute doorstep service coverage across Hitec City, Madhapur, Gachibowli, Chanda Nagar, and Kondapur. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.'
   };
 
   const localizedFaqs = [
@@ -379,7 +388,7 @@ export const CityServicePage: React.FC = () => {
                   </h3>
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Our mobile engineers are dispatched from our hub at <strong className="text-black font-semibold">{city.address}</strong> to all neighbourhoods strictly within a 25 km radius:
+                  Our mobile engineers are dispatched across <strong className="text-black font-semibold">{city.name}</strong> to all neighbourhoods strictly within a 25 km radius:
                 </p>
 
                 {/* Localities as Clickable Links */}

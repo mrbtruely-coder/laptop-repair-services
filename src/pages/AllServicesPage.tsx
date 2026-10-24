@@ -36,7 +36,7 @@ export const AllServicesPage: React.FC = () => {
     <>
       <SEO
         title="Computer, Laptop, CCTV & Networking Repair Services"
-        description="Comprehensive chip-level laptop repairs, PC desktop troubleshooting, enterprise Cat6 cabling, Wi-Fi mesh setups, and IP camera installations across Bengaluru, Vizag, Chennai, and Chanda Nagar."
+        description="Comprehensive chip-level laptop repairs, PC desktop troubleshooting, enterprise Cat6 cabling, Wi-Fi mesh setups, and IP camera installations across Bengaluru, Vizag, Chennai, and Hyderabad."
         canonicalPath="/services"
         keywords={[
           'all computer repair services',
@@ -114,7 +114,7 @@ export const AllServicesPage: React.FC = () => {
                               Core Vertical #{idx + 1}
                             </span>
                             <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#22C55E]/15 text-[#16A34A] font-bold border border-[#22C55E]/30">
-                              Active in Bengaluru, Vizag, Chennai, Chanda Nagar
+                              Active in Bengaluru, Vizag, Chennai, Hyderabad
                             </span>
                           </div>
                           <h2 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight mt-0.5">
@@ -173,7 +173,7 @@ export const AllServicesPage: React.FC = () => {
                         </Link>
 
                         <Link
-                          to="/contact"
+                          to="/book-service"
                           className="w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-slate-100 text-[#06223A] text-xs font-bold py-2.5 px-4 rounded-xl border border-slate-300 transition-colors"
                         >
                           <span>Schedule This Service</span>
