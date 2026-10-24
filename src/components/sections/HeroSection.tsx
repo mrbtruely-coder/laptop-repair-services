@@ -81,15 +81,15 @@ export const HeroSection: React.FC = () => {
               <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
               <span className="font-medium text-[#FAF6F0]">Target Cities:</span>
               <div className="flex items-center gap-2">
-                <Link to="/locations/bengaluru" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
+                <Link to="/service-center/bengaluru" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
                   Bengaluru
                 </Link>
                 <span>•</span>
-                <Link to="/locations/vizag" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
+                <Link to="/service-center/vizag" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
                   Vizag
                 </Link>
                 <span>•</span>
-                <Link to="/locations/chennai" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
+                <Link to="/service-center/chennai" className="text-[#D2DCD2] hover:text-[#E2B98E] underline decoration-[#E2B98E]/40 hover:decoration-[#E2B98E]">
                   Chennai
                 </Link>
               </div>

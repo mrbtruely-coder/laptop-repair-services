@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
               {Object.values(citiesData).map((city) => (
                 <Link
                   key={city.id}
-                  to={`/locations/${city.slug}`}
+                  to={`/service-center/${city.slug}`}
                   className="px-3.5 py-1.5 rounded-full bg-[#12231A] hover:bg-[#203F30] border border-[#E2B98E]/15 hover:border-[#E2B98E]/40 text-xs text-[#FAF6F0]/85 hover:text-[#FAF6F0] transition-all flex items-center gap-1.5 shadow-sm"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E2B98E]" />

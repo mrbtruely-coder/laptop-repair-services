@@ -206,7 +206,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => setActiveDropdown(activeDropdown === 'locations' ? null : 'locations')}
                   onMouseEnter={() => setActiveDropdown('locations')}
                   className={`px-3 py-2 text-sm font-medium rounded-lg inline-flex items-center gap-1.5 transition-colors ${
-                    activeDropdown === 'locations' || location.pathname.startsWith('/locations')
+                    activeDropdown === 'locations' || location.pathname.startsWith('/service-center') || location.pathname.startsWith('/locations')
                       ? 'text-[#E2B98E] bg-[#E2B98E]/10 font-bold'
                       : 'text-[#FAF6F0]/80 hover:text-[#FAF6F0] hover:bg-[#FAF6F0]/5'
                   }`}
@@ -226,7 +226,7 @@ export const Navbar: React.FC = () => {
                     {Object.values(citiesData).map((city) => (
                       <Link
                         key={city.id}
-                        to={`/locations/${city.slug}`}
+                        to={`/service-center/${city.slug}`}
                         onClick={() => setActiveDropdown(null)}
                         className="flex items-start gap-3 px-3.5 py-2.5 hover:bg-[#203F30] transition-colors rounded-xl mx-1.5 group"
                       >
@@ -245,7 +245,7 @@ export const Navbar: React.FC = () => {
                     ))}
                     <div className="p-2 border-t border-[#E2B98E]/10 mt-1">
                       <Link
-                        to="/locations"
+                        to="/service-center"
                         onClick={() => setActiveDropdown(null)}
                         className="flex items-center justify-between text-xs font-semibold text-[#E2B98E] hover:text-[#FAF6F0] px-3 py-1.5 rounded-lg hover:bg-[#203F30] transition-colors"
                       >
@@ -373,7 +373,7 @@ export const Navbar: React.FC = () => {
                 {Object.values(citiesData).map((city) => (
                   <Link
                     key={city.id}
-                    to={`/locations/${city.slug}`}
+                    to={`/service-center/${city.slug}`}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#FAF6F0]/85 hover:bg-[#203F30]"
                   >
                     <MapPin className="w-4 h-4 text-[#E2B98E]" />

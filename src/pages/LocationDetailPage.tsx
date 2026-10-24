@@ -74,11 +74,11 @@ export const LocationDetailPage: React.FC = () => {
       <SEO
         title={cityTitles[city.id] || `Computer & Laptop Repair in ${city.name}`}
         description={cityDescriptions[city.id] || city.description}
-        canonicalPath={`/locations/${city.slug}`}
+        canonicalPath={`/service-center/${city.slug}`}
         keywords={cityKeywords[city.id] || [`laptop repair ${city.name}`, `computer service ${city.name}`]}
         breadcrumbs={[
-          { name: 'Locations', url: '/locations' },
-          { name: city.name, url: `/locations/${city.slug}` },
+          { name: 'Service Centers', url: '/service-center' },
+          { name: city.name, url: `/service-center/${city.slug}` },
         ]}
         city={city.name}
         state={city.state}
@@ -87,7 +87,7 @@ export const LocationDetailPage: React.FC = () => {
 
       <Breadcrumbs
         items={[
-          { label: 'Locations', path: '/locations' },
+          { label: 'Service Centers', path: '/service-center' },
           { label: city.name },
         ]}
       />

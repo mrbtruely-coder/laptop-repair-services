@@ -31,7 +31,9 @@ export const App: React.FC = () => {
             <Route path="/services" element={<AllServicesPage />} />
             <Route path="/services/:serviceSlug" element={<ServiceDetailPage />} />
 
-            {/* Locations Routes */}
+            {/* Locations / Service Center Routes */}
+            <Route path="/service-center" element={<AllLocationsPage />} />
+            <Route path="/service-center/:citySlug" element={<LocationDetailPage />} />
             <Route path="/locations" element={<AllLocationsPage />} />
             <Route path="/locations/:citySlug" element={<LocationDetailPage />} />
 
