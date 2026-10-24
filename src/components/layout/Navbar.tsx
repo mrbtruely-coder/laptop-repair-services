@@ -13,13 +13,16 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  ArrowRight
+  ArrowRight,
+  Zap
 } from 'lucide-react';
 import { siteConfig, servicesData, primaryCities } from '../../config/site';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileLocationsOpen, setIsMobileLocationsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<'services' | 'locations' | null>(null);
   const location = useLocation();
 
@@ -36,6 +39,8 @@ export const Navbar: React.FC = () => {
   // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsMobileServicesOpen(false);
+    setIsMobileLocationsOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
 
@@ -60,8 +65,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       {/* Top emergency announcement bar */}
-      <div className="bg-[#03101B] text-xs py-2 px-4 border-b border-[#22C55E]/15 text-[#FFFFFF]/80 hidden sm:block">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+      <div className="bg-[#03101B] text-xs py-2 px-4 border-b border-[#22C55E]/15 text-[#FFFFFF]/80">
+        <div className="max-w-[1400px] mx-auto hidden sm:flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 text-[#22C55E]">
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
@@ -89,6 +94,20 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
         </div>
+
+        {/* Mobile View Top Bar (Matching Reference Structure) */}
+        <div className="sm:hidden text-center space-y-0.5 py-0.5">
+          <div className="flex items-center justify-center gap-1.5 text-[11px] font-bold text-white tracking-wide uppercase">
+            <Zap className="w-3 h-3 text-[#22C55E] flex-shrink-0" />
+            <span className="truncate">Same-Day Doorstep Repair in Bengaluru, Hyderabad, Vizag &amp; Chennai</span>
+          </div>
+          <div className="text-[11px] font-semibold text-white/90">
+            CALL{' '}
+            <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#22C55E] font-extrabold hover:underline">
+              {siteConfig.phoneDisplay}
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Main sticky navigation header */}
@@ -101,25 +120,12 @@ export const Navbar: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
-              <div className="p-0.5 flex items-center justify-center transition-transform group-hover:scale-105">
-                <img
-                  src="/logo.png"
-                  alt="Laptop Repairs & Services"
-                  className="h-10 sm:h-12 w-10 sm:w-12 object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-base sm:text-lg font-extrabold tracking-tight text-[#06223A] flex items-center gap-1.5 leading-tight">
-                  Laptop Repairs
-                  <span className="text-white text-[10px] px-1.5 py-0.5 rounded-full bg-[#22C55E] font-bold">
-                    DOORSTEP
-                  </span>
-                </span>
-                <span className="text-[10px] uppercase tracking-wider text-[#16A34A] font-bold">
-                  & Services
-                </span>
-              </div>
+            <Link to="/" className="inline-flex items-center group py-0.5">
+              <img
+                src="/logo.png"
+                alt="Laptop Repairs & Services"
+                className="h-11 sm:h-13 md:h-14 lg:h-16 w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[260px] object-contain transition-transform group-hover:scale-105"
+              />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -306,114 +312,163 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Button */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <a
-                href={`tel:${siteConfig.phoneRaw}`}
-                className="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[#22C55E] shadow-sm"
-                aria-label="Call Helpline"
+            {/* Mobile Actions: Book Service Button + Menu Toggle Button (Matching Reference) */}
+            <div className="flex items-center gap-2.5 lg:hidden">
+              <Link
+                to="/book-service"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-3.5 py-2 rounded-xl bg-[#22C55E] hover:bg-[#16A34A] text-white font-extrabold text-xs shadow-sm transition-transform active:scale-95"
               >
-                <Phone className="w-4 h-4" />
-              </a>
+                Book Service
+              </Link>
+
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-xl bg-white border border-slate-200 text-[#06223A] hover:text-[#22C55E] focus:outline-none shadow-sm"
+                className="w-10 h-10 rounded-xl bg-white border border-slate-200 text-[#06223A] hover:text-[#22C55E] flex items-center justify-center focus:outline-none shadow-xs transition-colors cursor-pointer"
                 aria-label="Toggle navigation menu"
               >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMobileMenuOpen ? <X className="w-5 h-5 text-black" /> : <Menu className="w-5 h-5 text-black" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Slide-down Drawer */}
+        {/* Mobile Slide-down Drawer (Matching Reference Structure) */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-4 pb-6 space-y-4 animate-in slide-in-from-top-3 duration-200 shadow-2xl">
-            <div className="space-y-1">
-              <Link
-                to="/"
-                className="block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-[#06223A] hover:bg-slate-50"
-              >
-                Home
-              </Link>
-
-              {/* Mobile Services */}
-              <div className="px-3.5 pt-2 text-xs font-bold uppercase tracking-wider text-[#22C55E]">
-                Services
-              </div>
-              <div className="grid grid-cols-1 gap-1 pl-2">
-                {Object.values(servicesData).map((srv) => (
-                  <Link
-                    key={srv.id}
-                    to={`/services/${srv.slug}`}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#06223A]/85 hover:bg-slate-50"
-                  >
-                    {serviceIcons[srv.id]}
-                    <span>{srv.title}</span>
-                  </Link>
-                ))}
+          <div className="lg:hidden border-t border-slate-200 bg-white px-5 pt-3 pb-6 animate-in slide-in-from-top-2 duration-150 shadow-2xl">
+            <div className="divide-y divide-slate-100">
+              
+              {/* 1. Home */}
+              <div className="py-3">
+                <Link
+                  to="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block text-base font-extrabold transition-colors ${
+                    location.pathname === '/' ? 'text-[#16A34A]' : 'text-black hover:text-[#16A34A]'
+                  }`}
+                >
+                  Home
+                </Link>
               </div>
 
-              {/* Mobile Locations */}
-              <div className="px-3.5 pt-2 text-xs font-bold uppercase tracking-wider text-[#22C55E] mt-2">
-                Target Cities
-              </div>
-              <div className="grid grid-cols-1 gap-1 pl-2">
-                {primaryCities.map((city) => (
-                  <Link
-                    key={city.id}
-                    to={`/service-center/${city.slug}`}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-black font-medium hover:bg-slate-50"
-                  >
-                    <MapPin className="w-4 h-4 text-[#22C55E]" />
-                    <span>{city.name}</span>
-                  </Link>
-                ))}
+              {/* 2. Services (Expandable with Chevron) */}
+              <div className="py-3">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                  className="w-full flex items-center justify-between text-base font-extrabold text-black hover:text-[#16A34A] transition-colors cursor-pointer"
+                >
+                  <span>Services</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-slate-700 transition-transform duration-200 ${
+                      isMobileServicesOpen ? 'rotate-180 text-[#16A34A]' : ''
+                    }`}
+                  />
+                </button>
+
+                {isMobileServicesOpen && (
+                  <div className="mt-2.5 pl-3 space-y-2 border-l-2 border-[#22C55E]/40 ml-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+                    {Object.values(servicesData).map((srv) => (
+                      <Link
+                        key={srv.id}
+                        to={`/services/${srv.slug}`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-2.5 py-1.5 text-sm font-semibold text-slate-700 hover:text-black hover:text-[#16A34A] transition-colors"
+                      >
+                        {serviceIcons[srv.id]}
+                        <span>{srv.title}</span>
+                      </Link>
+                    ))}
+                    <Link
+                      to="/services"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block pt-1 text-xs font-bold text-[#16A34A] hover:underline"
+                    >
+                      View All Services →
+                    </Link>
+                  </div>
+                )}
               </div>
 
-              <div className="border-t border-slate-100 my-2 pt-2">
+              {/* 3. Locations (Expandable with Chevron) */}
+              <div className="py-3">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileLocationsOpen(!isMobileLocationsOpen)}
+                  className="w-full flex items-center justify-between text-base font-extrabold text-black hover:text-[#16A34A] transition-colors cursor-pointer"
+                >
+                  <span>Locations</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-slate-700 transition-transform duration-200 ${
+                      isMobileLocationsOpen ? 'rotate-180 text-[#16A34A]' : ''
+                    }`}
+                  />
+                </button>
+
+                {isMobileLocationsOpen && (
+                  <div className="mt-2.5 pl-3 space-y-2 border-l-2 border-[#22C55E]/40 ml-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+                    {primaryCities.map((city) => (
+                      <Link
+                        key={city.id}
+                        to={`/service-center/${city.slug}`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-2.5 py-1.5 text-sm font-semibold text-slate-700 hover:text-black hover:text-[#16A34A] transition-colors"
+                      >
+                        <MapPin className="w-4 h-4 text-[#22C55E]" />
+                        <span>{city.name}</span>
+                      </Link>
+                    ))}
+                    <Link
+                      to="/locations"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block pt-1 text-xs font-bold text-[#16A34A] hover:underline"
+                    >
+                      All Locations Directory →
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* 4. Book Service */}
+              <div className="py-3">
                 <Link
                   to="/book-service"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
+                  className={`block text-base font-extrabold transition-colors ${
+                    location.pathname === '/book-service' ? 'text-[#16A34A]' : 'text-black hover:text-[#16A34A]'
+                  }`}
                 >
                   Book Service
                 </Link>
+              </div>
+
+              {/* 5. FAQs */}
+              <div className="py-3">
                 <Link
                   to="/faq"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
+                  className={`block text-base font-extrabold transition-colors ${
+                    location.pathname === '/faq' ? 'text-[#16A34A]' : 'text-black hover:text-[#16A34A]'
+                  }`}
                 >
-                  Frequently Asked Questions
+                  FAQs
                 </Link>
+              </div>
+
+              {/* 6. Contact Us */}
+              <div className="py-3">
                 <Link
                   to="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3.5 py-2 rounded-xl text-sm font-medium text-[#06223A]/85 hover:bg-slate-50"
+                  className={`block text-base font-extrabold transition-colors ${
+                    location.pathname === '/contact' ? 'text-[#16A34A]' : 'text-black hover:text-[#16A34A]'
+                  }`}
                 >
                   Contact Us
                 </Link>
               </div>
-            </div>
 
-            <div className="pt-2 flex flex-col gap-2.5">
-              <a
-                href={`tel:${siteConfig.phoneRaw}`}
-                className="w-full py-3 px-4 rounded-full bg-[#06223A] text-white font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-md hover:bg-[#0A3356]"
-              >
-                <Phone className="w-4 h-4 text-[#22C55E]" />
-                <span>Call {siteConfig.phoneDisplay}</span>
-              </a>
-              <a
-                href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent('Hello Door Step Service, I need a repair quote.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-full bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-md"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Chat on WhatsApp</span>
-              </a>
             </div>
           </div>
         )}

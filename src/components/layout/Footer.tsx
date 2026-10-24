@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
                 <img
                   src="/logo.png"
                   alt="Laptop Repairs & Services"
-                  className="h-12 sm:h-14 w-12 sm:w-14 object-contain rounded-xl"
+                  className="h-14 sm:h-16 w-auto max-w-[180px] object-contain rounded-xl"
                 />
               </div>
               <div className="flex flex-col">
