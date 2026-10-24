@@ -57,26 +57,63 @@ export const LocationDetailPage: React.FC = () => {
   };
 
   const cityTitles: Record<string, string> = {
-    bengaluru: 'Computer & Laptop Repair Services in Bengaluru | Doorstep Service',
-    vizag: 'Computer & Laptop Repair in Vizag (Visakhapatnam) | Doorstep Service',
-    chennai: 'Computer & Laptop Repair Services in Chennai | Doorstep Service',
-    hyderabad: 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
-    'chanda-nagar': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
-    'Chanda Nagar': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
-    'nellore': 'Computer & Laptop Repair Services in Hyderabad | Doorstep Service',
+    bengaluru: 'Doorstep Laptop, Computer, Networking & CCTV Repair Services in Bengaluru | 90-Min Dispatch',
+    vizag: 'Laptop & Computer Repair in Vizag (Visakhapatnam) | CCTV Installation & Networking Services',
+    chennai: 'Doorstep Laptop & Computer Repair in Chennai | CCTV Camera & Networking Support',
+    hyderabad: 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
+    'chanda-nagar': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
+    'Chanda Nagar': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
+    'nellore': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
+  };
+
+  const cityDescriptions: Record<string, string> = {
+    bengaluru: 'Need quick computer or laptop repair in Bengaluru? Our certified technicians visit your doorstep across HSR Layout, Koramangala, Whitefield, and all Bengaluru areas. We fix laptop screens, motherboard issues, desktop problems, Wi-Fi networking, and CCTV cameras with genuine parts and a 90-day warranty.',
+    vizag: 'Get fast, reliable doorstep computer and laptop repair in Visakhapatnam (Vizag). Serving Dwaraka Nagar, MVP Colony, Gajuwaka, and all Vizag localities. Chip-level motherboard fixes, broken screen replacement, desktop repairs, CCTV camera setup, and home Wi-Fi networking with a 90-day warranty.',
+    chennai: 'Looking for professional computer or laptop repair in Chennai? Our expert technicians provide fast doorstep service across Adyar, OMR, Velachery, T Nagar, Anna Nagar, and all Chennai areas. We repair laptops, desktop PCs, CCTV surveillance systems, and office Wi-Fi networks with upfront pricing and a 90-day warranty.',
+    hyderabad: 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, Kondapur, Chanda Nagar, Kukatpally, and all Hyderabad localities. Expert chip-level motherboard repair, screen replacement, desktop troubleshooting, CCTV setup, and Wi-Fi cabling with a 90-day warranty.',
+    'chanda-nagar': 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, Kondapur, Chanda Nagar, Kukatpally, and all Hyderabad localities. Expert chip-level motherboard repair, screen replacement, desktop troubleshooting, CCTV setup, and Wi-Fi cabling with a 90-day warranty.',
   };
 
   const pageTitle = isSubLocality
-    ? `Computer, Laptop, Networking & CCTV Repair in ${fullDisplayName}`
-    : cityTitles[city.id] || `Computer & Laptop Repair in ${city.name}`;
+    ? `Laptop & Computer Repair in ${locationDisplayName}, ${city.name} | Doorstep Service & CCTV Setup`
+    : cityTitles[city.id] || `Computer, Laptop, Networking & CCTV Repair Services in ${city.name}`;
 
   const pageDescription = isSubLocality
-    ? `Certified doorstep computer, laptop, networking, and CCTV camera repair in ${fullDisplayName}. Fast technician dispatch (${currentLocality?.distance || 'within 45–90 mins'}), transparent diagnosis, and 90-day warranty.`
-    : city.description;
+    ? `Need fast doorstep computer or laptop repair in ${locationDisplayName}, ${city.name}? Our certified technicians reach within 45–90 mins with genuine parts, chip-level motherboard repair, screen replacement, Wi-Fi networking, and CCTV camera setup with 90-day warranty.`
+    : cityDescriptions[city.id] || city.description;
 
   const canonicalPath = isSubLocality
     ? `/service-center/${city.slug}/${currentLocality?.slug}`
     : `/service-center/${city.slug}`;
+
+  // Keywords tailored strictly by URL type:
+  // - Area based URLs: city + service + area keywords
+  // - City based URLs: city + service keywords
+  const pageKeywords = isSubLocality
+    ? [
+        `laptop repair ${locationDisplayName} ${city.name}`,
+        `computer repair ${locationDisplayName} ${city.name}`,
+        `desktop repair ${locationDisplayName} ${city.name}`,
+        `CCTV camera installation ${locationDisplayName} ${city.name}`,
+        `networking service ${locationDisplayName} ${city.name}`,
+        `doorstep laptop repair ${locationDisplayName}`,
+        `motherboard chip repair ${locationDisplayName} ${city.name}`,
+        `laptop screen replacement ${locationDisplayName}`,
+        `MacBook repair ${locationDisplayName} ${city.name}`,
+        `computer technician in ${locationDisplayName}`
+      ]
+    : [
+        `laptop repair ${city.name}`,
+        `computer repair ${city.name}`,
+        `doorstep laptop service ${city.name}`,
+        `desktop PC repair ${city.name}`,
+        `CCTV camera installation ${city.name}`,
+        `office networking CAT6 cabling ${city.name}`,
+        `laptop motherboard chip repair ${city.name}`,
+        `laptop screen replacement ${city.name}`,
+        `MacBook repair ${city.name}`,
+        `computer technician near me ${city.name}`
+      ];
 
   const breadcrumbsList = isSubLocality
     ? [
@@ -121,13 +158,7 @@ export const LocationDetailPage: React.FC = () => {
         title={pageTitle}
         description={pageDescription}
         canonicalPath={canonicalPath}
-        keywords={[
-          `laptop repair ${locationDisplayName}`,
-          `computer service ${locationDisplayName} ${city.name}`,
-          `CCTV installation ${locationDisplayName}`,
-          `wifi networking ${locationDisplayName}`,
-          `doorstep PC repair ${locationDisplayName}`
-        ]}
+        keywords={pageKeywords}
         breadcrumbs={breadcrumbsList}
         city={city.name}
         state={city.state}
@@ -167,8 +198,8 @@ export const LocationDetailPage: React.FC = () => {
 
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed max-w-3xl">
                 {isSubLocality
-                  ? `Need dependable on-site IT support in ${locationDisplayName}? Our mobile technician fleet operates directly from our ${city.popularName || city.name} hub (${currentLocality?.distance || 'within coverage radius'}) with OEM parts, upfront quotes, and 90-day warranty.`
-                  : city.description}
+                  ? `Need reliable on-site IT support in ${locationDisplayName}? Our mobile technician squad dispatches directly from our ${city.popularName || city.name} hub (${currentLocality?.distance || 'within coverage radius'}) with authentic OEM parts, zero hidden diagnostic fees, and a 90-day warranty.`
+                  : `Need fast, reliable doorstep computer, laptop, networking, or CCTV repair in ${city.name}? Our certified technicians reach your doorstep with genuine spare parts, transparent diagnosis, and a 90-day warranty.`}
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-700">

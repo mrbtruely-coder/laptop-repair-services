@@ -427,6 +427,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
           discountAmount,
           payableAmount: netDiagnosticDue,
           contactMethod: formData.contactMethod,
+          slotDate: formData.slotDate,
+          slotTime: formData.slotTime,
+          description: formData.description,
+          paymentMethod: formData.paymentMethod,
         }),
       });
 
