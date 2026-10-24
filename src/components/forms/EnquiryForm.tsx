@@ -74,9 +74,7 @@ export const SERVICE_TILES = [
   { id: 'cctv-repair-installation', label: 'CCTV REPAIR', icon: Video, desc: 'Camera, DVR & Security' },
 ];
 
-export const APPLIANCE_TILES = SERVICE_TILES;
-
-export const NELLORE_AREAS = [
+export const CHANDA_NAGAR_AREAS = [
   'Trunk Road',
   'VRC Centre',
   'Dargamitta',
@@ -87,9 +85,11 @@ export const NELLORE_AREAS = [
   'Vedayapalem',
   'Harmathpet',
   'Ramamurthy Nagar',
-  'Nellore Rural',
+  'Chanda Nagar Rural',
   'Kovur',
 ];
+export const NELLORE_AREAS = CHANDA_NAGAR_AREAS;
+export const APPLIANCE_TILES = SERVICE_TILES;
 
 const AVAILABLE_OFFERS = [
   {
@@ -123,18 +123,18 @@ const AVAILABLE_OFFERS = [
 ];
 
 const CONFETTI_COLORS = [
-  '#E2B98E',
-  '#7AA27D',
-  '#6E4331',
-  '#F59E0B',
-  '#EF4444',
-  '#10B981',
-  '#38BDF8',
-  '#EC4899',
+  '#22C55E',
+  '#16A34A',
+  '#06223A',
+  '#0A3356',
+  '#4ADE80',
+  '#000000',
+  '#15803D',
+  '#22C55E',
 ];
 
 export const EnquiryForm: React.FC<EnquiryFormProps> = ({
-  initialCity = 'nellore',
+  initialCity = 'Chanda Nagar',
   initialService = 'laptop-repair',
   title = "Request Service",
   subtitle = "Select your device or service, enter details, and book your technician.",
@@ -148,7 +148,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     fullName: '',
     phone: '',
     email: '',
-    city: initialCity || 'nellore',
+    city: initialCity || 'Chanda Nagar',
     service: initialService || 'laptop-repair',
     serviceMode: 'doorstep',
     contactMethod: 'phone',
@@ -285,7 +285,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     }
 
     if (formData.serviceMode === 'doorstep' && (!formData.address || formData.address.trim().length < 2)) {
-      newErrors.address = 'Please select or enter your area / locality in Nellore';
+      newErrors.address = 'Please select or enter your area / locality in Chanda Nagar';
     }
 
     if (!formData.description || formData.description.trim().length < 2) {
@@ -336,7 +336,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
           email: formData.email,
           service: formData.service,
           address: formData.address,
-          city: formData.city || 'Nellore',
+          city: formData.city || 'Chanda Nagar',
           ticketId: generatedTicket,
           discountAmount,
           payableAmount: netDiagnosticDue,
@@ -353,7 +353,6 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       }
     } catch (err) {
       console.error('Failed to communicate with Node.js backend:', err);
-      // Fallback: still show confirmation to user
       setEmailSentTo(formData.email);
     }
 
@@ -400,10 +399,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
   };
 
   return (
-    <div className={`nature-panel rounded-3xl p-6 sm:p-8 border border-[#E2B98E]/25 shadow-2xl relative overflow-hidden ${className}`}>
+    <div className={`bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl relative overflow-hidden ${className}`}>
       {/* Background glow accents */}
-      <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#7AA27D]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#E2B98E]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#22C55E]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#06223A]/5 rounded-full blur-3xl pointer-events-none" />
 
       {isSuccess ? (
         /* ========================================================
@@ -430,7 +429,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
             ))}
           </div>
 
-          {/* Floating Party Balloons & Birthday Badges */}
+          {/* Floating Party Balloons */}
           <div className="flex items-center justify-center gap-3 sm:gap-6 pt-2">
             <span className="text-3xl sm:text-4xl animate-balloon" style={{ animationDelay: '0s' }}>🎈</span>
             <span className="text-3xl sm:text-4xl animate-balloon" style={{ animationDelay: '0.4s' }}>🥳</span>
@@ -439,109 +438,109 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
             <span className="text-3xl sm:text-4xl animate-balloon" style={{ animationDelay: '1.6s' }}>🎁</span>
           </div>
 
-          {/* 3D Tactile Celebration Emblem */}
-          <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl icon-badge-sand text-[#24160E] flex items-center justify-center shadow-2xl relative group border-2 border-[#FAF6F0]/40">
-            <PartyPopper className="w-10 h-10 sm:w-12 sm:h-12 text-[#24160E] group-hover:scale-110 transition-transform" />
-            <div className="absolute -top-2 -right-2 px-2.5 py-0.5 rounded-full bg-[#7AA27D] text-[#FAF6F0] text-[10px] font-black tracking-wider shadow-md flex items-center gap-1">
-              <Sparkles className="w-3 h-3" />
+          {/* Celebration Emblem */}
+          <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl bg-[#22C55E] text-white flex items-center justify-center shadow-xl relative group border-2 border-white">
+            <PartyPopper className="w-10 h-10 sm:w-12 sm:h-12 text-white group-hover:scale-110 transition-transform" />
+            <div className="absolute -top-2 -right-2 px-2.5 py-0.5 rounded-full bg-[#06223A] text-white text-[10px] font-black tracking-wider shadow-md flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-[#22C55E]" />
               <span>CONFIRMED</span>
             </div>
           </div>
 
           {/* Main Success Announcement */}
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7AA27D]/25 border border-[#7AA27D]/40 text-[#7AA27D] text-xs font-bold shadow-md">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-bold shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Service Booked Successfully! Happy Diagnostics!</span>
+              <span>Service Booked Successfully!</span>
             </div>
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-[#FAF6F0] tracking-tight">
-              🎉 Woohoo! Your Appointment is Locked! 🥳
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-black tracking-tight">
+              Your Appointment is Locked!
             </h3>
-            <p className="text-xs sm:text-sm text-[#D2DCD2] max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
               Our service engineer has received your scheduled ticket. A coordinator will verify your slot via {formData.contactMethod === 'whatsapp' ? 'WhatsApp' : 'Phone Call'} shortly.
             </p>
           </div>
 
           {/* Digital Service Pass & Checkout Receipt */}
-          <div className="nature-card rounded-3xl p-5 sm:p-6 max-w-lg mx-auto text-left border border-[#E2B98E]/35 shadow-2xl space-y-3.5 relative overflow-hidden">
-            <div className="flex items-center justify-between border-b border-[#E2B98E]/15 pb-3">
+          <div className="bg-slate-50 rounded-3xl p-5 sm:p-6 max-w-lg mx-auto text-left border border-slate-200 shadow-md space-y-3.5 relative overflow-hidden">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#E2B98E] font-bold block">
+                <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold block">
                   Service Ticket Number
                 </span>
-                <span className="text-2xl font-mono font-extrabold text-[#FAF6F0] tracking-wider">
+                <span className="text-2xl font-mono font-extrabold text-black tracking-wider">
                   {ticketId}
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] uppercase tracking-wider text-[#7AA27D] font-bold block">
+                <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold block">
                   Payment Status
                 </span>
-                <span className="text-xs font-semibold text-[#FAF6F0] bg-[#7AA27D]/20 px-2.5 py-1 rounded-full border border-[#7AA27D]/30 inline-block">
+                <span className="text-xs font-semibold text-[#16A34A] bg-[#22C55E]/15 px-2.5 py-1 rounded-full border border-[#22C55E]/30 inline-block">
                   Pay After Service
                 </span>
               </div>
             </div>
 
             {/* Itemized details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#FAF6F0]/90">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
               <p className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                <Calendar className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                 <span><strong>Date:</strong> {formData.slotDate}</span>
               </p>
               <p className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                <Clock className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                 <span><strong>Slot:</strong> {formData.slotTime}</span>
               </p>
               <p className="flex items-center gap-1.5 sm:col-span-2 truncate">
-                <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                 <span className="truncate"><strong>Location:</strong> {formData.address || `${formData.city.toUpperCase()} Center`}</span>
               </p>
             </div>
 
             {/* Savings & Final Due */}
-            <div className="p-3.5 rounded-2xl bg-[#12231A]/80 border border-[#E2B98E]/20 space-y-2">
-              <div className="flex items-center justify-between text-xs text-[#FAF6F0]/80">
+            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-2">
+              <div className="flex items-center justify-between text-xs text-slate-700">
                 <span className="flex items-center gap-1">
-                  <Gift className="w-3.5 h-3.5 text-[#E2B98E]" />
-                  <span>Promo Applied: <strong className="text-[#E2B98E]">{formData.selectedOffer || 'FIRST150'}</strong></span>
+                  <Gift className="w-3.5 h-3.5 text-[#16A34A]" />
+                  <span>Promo Applied: <strong className="text-black">{formData.selectedOffer || 'FIRST150'}</strong></span>
                 </span>
-                <span className="text-[#7AA27D] font-bold">-₹{discountAmount} OFF</span>
+                <span className="text-[#16A34A] font-bold">-₹{discountAmount} OFF</span>
               </div>
-              <div className="flex items-center justify-between text-xs text-[#FAF6F0]/80">
+              <div className="flex items-center justify-between text-xs text-slate-700">
                 <span>Doorstep Convenience Visit:</span>
-                <span className="text-[#7AA27D] font-bold">FREE (Saved ₹199)</span>
+                <span className="text-[#16A34A] font-bold">FREE (Saved ₹199)</span>
               </div>
-              <div className="pt-2 border-t border-[#E2B98E]/15 flex items-center justify-between">
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#FAF6F0] block">Estimated Doorstep Payable:</span>
-                  <span className="text-[10px] text-[#FAF6F0]/60">Pay by Cash, UPI or Card on completion</span>
+                  <span className="text-xs font-bold text-black block">Estimated Doorstep Payable:</span>
+                  <span className="text-[10px] text-slate-500">Pay by Cash, UPI or Card on completion</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-xl font-mono font-extrabold text-[#E2B98E]">
+                  <span className="text-xl font-mono font-extrabold text-[#16A34A]">
                     {netDiagnosticDue === 0 ? '₹0 FREE' : `₹${netDiagnosticDue}`}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[11px] text-[#7AA27D] pt-1">
+            <div className="flex items-center gap-1.5 text-[11px] text-[#16A34A] pt-1">
               <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0" />
               <span>Includes Up to 90 Days Hardware Service Guarantee</span>
             </div>
 
             {/* Email confirmation status pill */}
             {(emailSentTo || formData.email) && (
-              <div className="p-3 rounded-2xl bg-[#14281E] border border-[#7AA27D]/40 flex items-center gap-2.5 text-xs text-[#FAF6F0]">
-                <div className="w-7 h-7 rounded-lg bg-[#7AA27D]/20 border border-[#7AA27D]/40 flex items-center justify-center flex-shrink-0 text-[#7AA27D]">
+              <div className="p-3 rounded-2xl bg-white border border-[#22C55E]/30 flex items-center gap-2.5 text-xs text-black">
+                <div className="w-7 h-7 rounded-lg bg-[#22C55E]/10 border border-[#22C55E]/30 flex items-center justify-center flex-shrink-0 text-[#16A34A]">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-[10px] uppercase tracking-wider text-[#7AA27D] font-bold block">
+                  <span className="text-[10px] uppercase tracking-wider text-[#16A34A] font-bold block">
                     Confirmation Email Sent
                   </span>
-                  <span className="text-xs text-[#FAF6F0]/90 font-medium truncate block">
-                    Sent to: <strong className="text-[#E2B98E]">{emailSentTo || formData.email}</strong>
+                  <span className="text-xs text-slate-700 font-medium truncate block">
+                    Sent to: <strong className="text-black">{emailSentTo || formData.email}</strong>
                   </span>
                 </div>
               </div>
@@ -554,7 +553,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
               href={getWhatsAppLeadLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-[#12231A] font-bold px-6 py-4 rounded-full transition-all shadow-lg text-xs uppercase tracking-wider cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold px-6 py-4 rounded-xl transition-all shadow-md text-xs uppercase tracking-wider cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Send Ticket to WhatsApp</span>
@@ -568,8 +567,8 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   fullName: '',
                   phone: '',
                   email: '',
-                  city: initialCity || '',
-                  service: initialService || '',
+                  city: initialCity || 'Chanda Nagar',
+                  service: initialService || 'laptop-repair',
                   serviceMode: 'doorstep',
                   contactMethod: 'phone',
                   slotDate: getTodayDateString(),
@@ -583,7 +582,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 });
                 setLocationStatus('');
               }}
-              className="inline-flex items-center justify-center px-6 py-4 rounded-full border border-[#E2B98E]/30 hover:bg-[#E2B98E]/10 text-[#FAF6F0] text-xs font-semibold transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-4 rounded-xl border border-slate-300 hover:bg-slate-100 text-black text-xs font-semibold transition-colors cursor-pointer"
             >
               Book Another Service Slot
             </button>
@@ -596,12 +595,12 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
         <div>
           {/* Header */}
           <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold mb-3 shadow-inner">
-              <Sparkles className="w-3.5 h-3.5 text-[#E2B98E]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-semibold mb-3 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#22C55E]" />
               Same-Day Dispatch & Instant Slot Booking
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#FAF6F0] tracking-tight">{title}</h3>
-            {subtitle && <p className="text-sm text-[#FAF6F0]/75 mt-2 leading-relaxed">{subtitle}</p>}
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight">{title}</h3>
+            {subtitle && <p className="text-sm text-slate-600 mt-2 leading-relaxed">{subtitle}</p>}
           </div>
 
           <form onSubmit={handleSubmit} noValidate className="space-y-4">
@@ -624,10 +623,10 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 {/* 1. SELECT SERVICE / DEVICE */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="block text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider">
-                      1. SELECT SERVICE / DEVICE <span className="text-[#E2B98E]">*</span>
+                    <label className="block text-[11px] font-bold text-black uppercase tracking-wider">
+                      1. SELECT SERVICE / DEVICE <span className="text-rose-500">*</span>
                     </label>
-                    <span className="text-[10px] text-[#FAF6F0]/60">Select to auto-fill</span>
+                    <span className="text-[10px] text-slate-500">Select to auto-fill</span>
                   </div>
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -645,25 +644,24 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                             }
                           }}
                           className={`p-3 rounded-2xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all group cursor-pointer ${isSelected
-                              ? 'bg-[#6E4331]/35 border-2 border-[#E2B98E] shadow-lg shadow-black/40 ring-1 ring-[#E2B98E]/50'
-                              : 'bg-[#14281E]/70 border border-[#E2B98E]/15 hover:border-[#E2B98E]/40 hover:bg-[#183023]'
+                            ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] shadow-sm ring-1 ring-[#22C55E]/30'
+                            : 'bg-slate-50 border-slate-200 hover:border-[#22C55E]/50 hover:bg-slate-100'
                             }`}
                         >
                           <div
                             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected
-                                ? 'bg-[#E2B98E] text-[#24160E] shadow-md'
-                                : 'bg-[#12231A] text-[#E2B98E] border border-[#E2B98E]/20'
+                              ? 'bg-[#22C55E] text-white shadow-sm'
+                              : 'bg-white text-[#06223A] border border-slate-200'
                               }`}
                           >
                             <IconComponent className="w-5 h-5" />
                           </div>
                           <span
-                            className={`text-[11px] font-bold tracking-tight ${isSelected ? 'text-[#FAF6F0]' : 'text-[#FAF6F0]/80'
-                              }`}
+                            className="text-[11px] font-extrabold tracking-tight text-black"
                           >
                             {tile.label}
                           </span>
-                          <span className="text-[9px] text-[#FAF6F0]/50 truncate max-w-full">
+                          <span className="text-[9px] text-slate-500 truncate max-w-full font-medium">
                             {tile.desc}
                           </span>
                         </button>
@@ -671,7 +669,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                     })}
                   </div>
                   {errors.service && (
-                    <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
+                    <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
                       <AlertCircle className="w-3 h-3 flex-shrink-0" />
                       {errors.service}
                     </p>
@@ -682,12 +680,12 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="fullName" className="block text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5 text-[#E2B98E]" />
-                        <span>FULL NAME</span> <span className="text-[#E2B98E]">*</span>
+                      <label htmlFor="fullName" className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <User className="w-3.5 h-3.5 text-[#16A34A]" />
+                        <span>FULL NAME</span> <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3.5 top-3 w-4 h-4 text-[#E2B98E]/60 pointer-events-none" />
+                        <User className="absolute left-3.5 top-3 w-4 h-4 text-slate-400 pointer-events-none" />
                         <input
                           type="text"
                           id="fullName"
@@ -695,14 +693,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                           placeholder="Your Name"
-                          className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.fullName
-                              ? 'border-rose-500/80 focus:ring-rose-500'
-                              : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
+                          className={`w-full bg-white pl-10 pr-4 py-2.5 text-sm text-black placeholder-slate-400 rounded-xl border ${errors.fullName
+                            ? 'border-rose-500 focus:ring-rose-500'
+                            : 'border-slate-300 focus:border-[#22C55E] focus:ring-[#22C55E]/20'
                             } focus:outline-none focus:ring-2 transition-all`}
                         />
                       </div>
                       {errors.fullName && (
-                        <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
                           <AlertCircle className="w-3 h-3 flex-shrink-0" />
                           {errors.fullName}
                         </p>
@@ -710,12 +708,12 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                        <Phone className="w-3.5 h-3.5 text-[#E2B98E]" />
-                        <span>MOBILE NUMBER</span> <span className="text-[#E2B98E]">*</span>
+                      <label htmlFor="phone" className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-[#16A34A]" />
+                        <span>MOBILE NUMBER</span> <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
-                        <span className="absolute left-3.5 top-2.5 text-xs text-[#E2B98E] font-bold">+91</span>
+                        <span className="absolute left-3.5 top-2.5 text-xs text-black font-bold">+91</span>
                         <input
                           type="tel"
                           id="phone"
@@ -724,14 +722,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
                           placeholder="10-Digit Mobile Number"
-                          className={`w-full bg-[#12231A] pl-12 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.phone
-                              ? 'border-rose-500/80 focus:ring-rose-500'
-                              : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
+                          className={`w-full bg-white pl-12 pr-4 py-2.5 text-sm text-black placeholder-slate-400 rounded-xl border ${errors.phone
+                            ? 'border-rose-500 focus:ring-rose-500'
+                            : 'border-slate-300 focus:border-[#22C55E] focus:ring-[#22C55E]/20'
                             } focus:outline-none focus:ring-2 transition-all`}
                         />
                       </div>
                       {errors.phone && (
-                        <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
                           <AlertCircle className="w-3 h-3 flex-shrink-0" />
                           {errors.phone}
                         </p>
@@ -740,12 +738,12 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                      <Mail className="w-3.5 h-3.5 text-[#E2B98E]" />
-                      <span>EMAIL ADDRESS (TO RECEIVE BOOKING CONFIRMATION)</span> <span className="text-[#E2B98E]">*</span>
+                    <label htmlFor="email" className="block text-[11px] font-bold text-black uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-[#16A34A]" />
+                      <span>EMAIL ADDRESS (TO RECEIVE BOOKING CONFIRMATION)</span> <span className="text-rose-500">*</span>
                     </label>
                     <div className="relative">
-                      <Mail className="absolute left-3.5 top-3 w-4 h-4 text-[#E2B98E]/60 pointer-events-none" />
+                      <Mail className="absolute left-3.5 top-3 w-4 h-4 text-slate-400 pointer-events-none" />
                       <input
                         type="email"
                         id="email"
@@ -753,14 +751,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. customer@gmail.com"
-                        className={`w-full bg-[#12231A] pl-10 pr-4 py-2.5 text-sm text-[#FAF6F0] placeholder-[#FAF6F0]/30 rounded-xl border ${errors.email
-                            ? 'border-rose-500/80 focus:ring-rose-500'
-                            : 'border-[#E2B98E]/20 focus:border-[#E2B98E] focus:ring-[#E2B98E]/20'
+                        className={`w-full bg-white pl-10 pr-4 py-2.5 text-sm text-black placeholder-slate-400 rounded-xl border ${errors.email
+                          ? 'border-rose-500 focus:ring-rose-500'
+                          : 'border-slate-300 focus:border-[#22C55E] focus:ring-[#22C55E]/20'
                           } focus:outline-none focus:ring-2 transition-all`}
                       />
                     </div>
                     {errors.email && (
-                      <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
                         <AlertCircle className="w-3 h-3 flex-shrink-0" />
                         {errors.email}
                       </p>
@@ -768,55 +766,55 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   </div>
                 </div>
 
-                {/* 3. Location / Area in Nellore */}
-                <div className="p-4 rounded-2xl bg-[#14281E]/60 border border-[#E2B98E]/15 space-y-3">
+                {/* 3. Location / Area in Chanda Nagar */}
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <label className="text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
-                      <span>SELECT LOCATION IN {formData.city ? formData.city.toUpperCase() : 'NELLORE'}</span>
-                      <span className="text-[#E2B98E]">*</span>
+                    <label className="text-[11px] font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-[#16A34A]" />
+                      <span>SELECT LOCATION IN {formData.city ? formData.city.toUpperCase() : 'CHANDA NAGAR'}</span>
+                      <span className="text-rose-500">*</span>
                     </label>
 
                     <button
                       type="button"
                       onClick={handleFetchLocation}
                       disabled={isFetchingLocation}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#12231A] border border-[#E2B98E]/30 text-[11px] font-medium text-[#E2B98E] hover:bg-[#E2B98E]/10 transition-colors cursor-pointer w-fit"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-300 text-[11px] font-semibold text-[#06223A] hover:bg-slate-100 transition-colors cursor-pointer w-fit shadow-xs"
                     >
                       {isFetchingLocation ? (
-                        <Loader2 className="w-3 h-3 animate-spin" />
+                        <Loader2 className="w-3 h-3 animate-spin text-[#16A34A]" />
                       ) : (
-                        <Navigation className="w-3 h-3" />
+                        <Navigation className="w-3 h-3 text-[#16A34A]" />
                       )}
                       <span>{isFetchingLocation ? 'Locating...' : 'GPS Detect'}</span>
                     </button>
                   </div>
 
                   {locationStatus && (
-                    <p className={`text-[11px] px-3 py-1.5 rounded-lg ${locationStatus.includes('✅') ? 'bg-[#7AA27D]/20 text-[#9BBF9C]' : 'bg-rose-500/10 text-rose-300'}`}>
+                    <p className={`text-[11px] px-3 py-1.5 rounded-lg font-medium ${locationStatus.includes('✅') ? 'bg-[#22C55E]/15 text-[#15803D]' : 'bg-rose-50 text-rose-600'}`}>
                       {locationStatus}
                     </p>
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] text-[#FAF6F0]/60 mb-1">Select Area / Locality</label>
+                      <label className="block text-[10px] text-slate-500 font-semibold mb-1">Select Area / Locality</label>
                       <select
                         onChange={(e) => {
                           const area = e.target.value;
                           if (area) {
                             setFormData((prev) => ({
                               ...prev,
-                              address: prev.address ? `${area}, ${prev.address}` : `${area}, ${formData.city || 'Nellore'}`,
+                              address: prev.address ? `${area}, ${prev.address}` : `${area}, ${formData.city || 'Chanda Nagar'}`,
                             }));
                           }
                         }}
                         defaultValue=""
-                        className="w-full bg-[#12231A] border border-[#E2B98E]/20 focus:border-[#E2B98E] rounded-xl px-3.5 py-2.5 text-xs text-[#FAF6F0] focus:outline-none focus:ring-2 focus:ring-[#E2B98E]/20 transition-all"
+                        className="w-full bg-white border border-slate-300 focus:border-[#22C55E] rounded-xl px-3.5 py-2.5 text-xs text-black focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 transition-all font-medium"
                       >
-                        <option value="" disabled className="bg-[#12231A] text-[#FAF6F0]">-- Select Area in Nellore --</option>
-                        {NELLORE_AREAS.map((area) => (
-                          <option key={area} value={area} className="bg-[#12231A] text-[#FAF6F0]">
+                        <option value="" disabled>-- Select Area in Chanda Nagar --</option>
+                        {CHANDA_NAGAR_AREAS.map((area) => (
+                          <option key={area} value={area}>
                             {area}
                           </option>
                         ))}
@@ -824,18 +822,18 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-[10px] text-[#FAF6F0]/60 mb-1">Target Service Hub</label>
+                      <label className="block text-[10px] text-slate-500 font-semibold mb-1">Target Service Hub</label>
                       <select
                         id="city"
                         name="city"
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="w-full bg-[#12231A] border border-[#E2B98E]/20 focus:border-[#E2B98E] rounded-xl px-3.5 py-2.5 text-xs text-[#FAF6F0] focus:outline-none focus:ring-2 focus:ring-[#E2B98E]/20 transition-all"
+                        className="w-full bg-white border border-slate-300 focus:border-[#22C55E] rounded-xl px-3.5 py-2.5 text-xs text-black focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 transition-all font-medium"
                       >
-                        <option value="nellore" className="bg-[#12231A] text-[#FAF6F0]">Nellore (Doorstep Dispatch Hub)</option>
-                        <option value="bengaluru" className="bg-[#12231A] text-[#FAF6F0]">Bengaluru (HSR Layout Center)</option>
-                        <option value="vizag" className="bg-[#12231A] text-[#FAF6F0]">Visakhapatnam (Seethammapeta Center)</option>
-                        <option value="chennai" className="bg-[#12231A] text-[#FAF6F0]">Chennai (MG Road Center)</option>
+                        <option value="Chanda Nagar">Chanda Nagar (Doorstep Dispatch Hub)</option>
+                        <option value="bengaluru">Bengaluru (HSR Layout Center)</option>
+                        <option value="vizag">Visakhapatnam (Seethammapeta Center)</option>
+                        <option value="chennai">Chennai (MG Road Center)</option>
                       </select>
                     </div>
                   </div>
@@ -848,11 +846,11 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       placeholder="Door / Flat No., Landmark, or Street details..."
-                      className={`w-full bg-[#12231A] border ${errors.address ? 'border-rose-500/80' : 'border-[#E2B98E]/20 focus:border-[#E2B98E]'
-                        } rounded-xl px-3.5 py-2 text-xs text-[#FAF6F0] placeholder-[#FAF6F0]/30 focus:outline-none focus:ring-2 focus:ring-[#E2B98E]/20 transition-all`}
+                      className={`w-full bg-white border ${errors.address ? 'border-rose-500' : 'border-slate-300 focus:border-[#22C55E]'
+                        } rounded-xl px-3.5 py-2 text-xs text-black placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 transition-all`}
                     />
                     {errors.address && (
-                      <p className="mt-1 text-xs text-rose-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
                         <AlertCircle className="w-3 h-3 flex-shrink-0" />
                         {errors.address}
                       </p>
@@ -860,31 +858,29 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   </div>
                 </div>
 
-
-
-                {/* 7. Preferred Reply Mode */}
+                {/* 4. Preferred Reply Mode */}
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs text-[#FAF6F0]/70">Preferred reply:</span>
+                  <span className="text-xs text-slate-600 font-medium">Preferred reply:</span>
                   <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2 cursor-pointer text-xs text-[#FAF6F0]/90">
+                    <label className="flex items-center gap-2 cursor-pointer text-xs text-black font-semibold">
                       <input
                         type="radio"
                         name="contactMethod"
                         value="phone"
                         checked={formData.contactMethod === 'phone'}
                         onChange={() => setFormData({ ...formData, contactMethod: 'phone' })}
-                        className="accent-[#E2B98E]"
+                        className="accent-[#22C55E]"
                       />
                       <span>Phone Call</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer text-xs text-[#FAF6F0]/90">
+                    <label className="flex items-center gap-2 cursor-pointer text-xs text-black font-semibold">
                       <input
                         type="radio"
                         name="contactMethod"
                         value="whatsapp"
                         checked={formData.contactMethod === 'whatsapp'}
                         onChange={() => setFormData({ ...formData, contactMethod: 'whatsapp' })}
-                        className="accent-[#E2B98E]"
+                        className="accent-[#22C55E]"
                       />
                       <span>WhatsApp</span>
                     </label>
@@ -895,7 +891,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 <button
                   type="button"
                   onClick={handleProceedToStep2}
-                  className="w-full mt-3 inline-flex items-center justify-center gap-2 sand-btn-3d font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-full transition-all group cursor-pointer shadow-xl text-[#24160E]"
+                  className="w-full mt-3 inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-extrabold text-xs uppercase tracking-wider py-4 px-6 rounded-xl transition-all group cursor-pointer shadow-md shadow-[#22C55E]/30"
                 >
                   <span>Proceed to Book Service</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -910,13 +906,13 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
               <div className="space-y-4 animate-in fade-in duration-200">
 
                 {/* Step 1 Quick Summary Preview */}
-                <div className="p-4 rounded-2xl bg-[#14281E]/80 border border-[#E2B98E]/25 flex items-center justify-between gap-3 shadow-md">
-                  <div className="space-y-0.5 text-xs text-[#FAF6F0]/85">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3 shadow-xs">
+                  <div className="space-y-0.5 text-xs text-slate-700">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-[#FAF6F0]">{formData.fullName}</span>
-                      <span className="text-[10px] text-[#E2B98E] font-mono">+91 {formData.phone}</span>
+                      <span className="font-extrabold text-black">{formData.fullName}</span>
+                      <span className="text-[10px] text-[#16A34A] font-mono font-bold">+91 {formData.phone}</span>
                     </div>
-                    <p className="text-[11px] text-[#D2DCD2]">
+                    <p className="text-[11px] text-slate-600">
                       📅 {formData.slotDate} • ⏰ {formData.slotTime.split('(')[0].trim()} • 📍 {formData.city.toUpperCase()}
                     </p>
                   </div>
@@ -924,20 +920,20 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setCurrentStep(1)}
-                    className="text-[11px] px-3 py-1.5 rounded-full border border-[#E2B98E]/30 text-[#E2B98E] hover:bg-[#E2B98E]/10 transition-colors font-medium flex-shrink-0"
+                    className="text-[11px] px-3 py-1.5 rounded-full border border-slate-300 text-black hover:bg-slate-100 transition-colors font-semibold flex-shrink-0"
                   >
                     Edit Details
                   </button>
                 </div>
 
                 {/* 1. EXCLUSIVE OFFERS & DISCOUNTS */}
-                <div className="p-4 rounded-2xl bg-[#14281E]/60 border border-[#E2B98E]/15 space-y-3">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider flex items-center gap-1.5">
-                      <Tag className="w-3.5 h-3.5 text-[#E2B98E]" />
+                    <span className="text-xs font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
+                      <Tag className="w-3.5 h-3.5 text-[#16A34A]" />
                       <span>Select Exclusive Offer or Coupon</span>
                     </span>
-                    <span className="text-[10px] text-[#7AA27D] font-semibold bg-[#7AA27D]/15 px-2 py-0.5 rounded-full border border-[#7AA27D]/30">
+                    <span className="text-[10px] text-[#16A34A] font-bold bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
                       Discounts Apply Instantly
                     </span>
                   </div>
@@ -956,21 +952,21 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                             setShowCustomOfferInput(false);
                           }}
                           className={`p-3 rounded-2xl cursor-pointer border transition-all flex items-start justify-between gap-2.5 ${isSelected
-                              ? 'bg-[#6E4331]/40 border-[#E2B98E] shadow-md shadow-[#E2B98E]/10'
-                              : 'bg-[#12231A]/80 border-[#E2B98E]/15 hover:border-[#E2B98E]/40'
+                            ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] shadow-sm'
+                            : 'bg-white border-slate-200 hover:border-slate-300'
                             }`}
                         >
                           <div className="space-y-0.5">
                             <div className="flex items-center gap-2">
-                              <span className="text-xs font-bold text-[#FAF6F0]">{offer.title}</span>
-                              <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#E2B98E]/20 text-[#E2B98E]">
+                              <span className="text-xs font-bold text-black">{offer.title}</span>
+                              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#22C55E]/20 text-[#16A34A] font-bold">
                                 {offer.code}
                               </span>
                             </div>
-                            <p className="text-[10px] text-[#FAF6F0]/70 leading-tight">{offer.desc}</p>
+                            <p className="text-[10px] text-slate-500 leading-tight font-medium">{offer.desc}</p>
                           </div>
 
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isSelected ? 'bg-[#E2B98E] text-[#24160E]' : 'border border-[#E2B98E]/30 text-transparent'
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isSelected ? 'bg-[#22C55E] text-white' : 'border border-slate-300 text-transparent'
                             }`}>
                             <Check className="w-3 h-3 stroke-[3]" />
                           </div>
@@ -984,19 +980,19 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                     <button
                       type="button"
                       onClick={() => setShowCustomOfferInput(!showCustomOfferInput)}
-                      className="text-[11px] text-[#E2B98E] hover:underline font-medium flex items-center gap-1"
+                      className="text-[11px] text-[#16A34A] hover:underline font-semibold flex items-center gap-1"
                     >
                       <span>{showCustomOfferInput ? 'Hide promo code entry' : 'Have a different promo coupon code?'}</span>
                     </button>
 
                     {formData.selectedOffer && (
-                      <span className="text-[11px] text-[#7AA27D] font-medium flex items-center gap-1.5 bg-[#7AA27D]/10 px-2 py-0.5 rounded-full border border-[#7AA27D]/30">
+                      <span className="text-[11px] text-[#16A34A] font-bold flex items-center gap-1.5 bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Coupon: {formData.selectedOffer}</span>
                         <button
                           type="button"
                           onClick={() => setFormData({ ...formData, selectedOffer: '', customOfferCode: '' })}
-                          className="ml-1 text-[#FAF6F0]/70 hover:text-rose-400 p-0.5 transition-colors cursor-pointer"
+                          className="ml-1 text-slate-500 hover:text-rose-500 p-0.5 transition-colors cursor-pointer"
                           title="Remove coupon"
                         >
                           <X className="w-3 h-3" />
@@ -1012,7 +1008,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                         value={formData.customOfferCode}
                         onChange={(e) => setFormData({ ...formData, customOfferCode: e.target.value.toUpperCase() })}
                         placeholder="ENTER COUPON CODE (e.g. SPECIAL50)"
-                        className="flex-1 bg-[#12231A] border border-[#E2B98E]/20 rounded-xl px-3.5 py-2 text-xs text-[#FAF6F0] uppercase font-mono placeholder-[#FAF6F0]/30 focus:outline-none focus:border-[#E2B98E]"
+                        className="flex-1 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-black uppercase font-mono placeholder-slate-400 focus:outline-none focus:border-[#22C55E]"
                       />
                       <button
                         type="button"
@@ -1021,7 +1017,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                             setFormData({ ...formData, selectedOffer: formData.customOfferCode.trim() });
                           }
                         }}
-                        className="px-4 py-2 rounded-xl sand-btn-3d text-[#24160E] font-bold text-xs"
+                        className="px-4 py-2 rounded-xl bg-[#06223A] hover:bg-[#0A3356] text-white font-bold text-xs"
                       >
                         Apply
                       </button>
@@ -1030,32 +1026,32 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 </div>
 
                 {/* 2. CHECKOUT & SERVICE SUMMARY */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#14281E] border-2 border-[#E2B98E]/30 space-y-3.5 shadow-xl">
-                  <div className="flex items-center justify-between border-b border-[#E2B98E]/15 pb-2.5">
-                    <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider flex items-center gap-1.5">
-                      <Receipt className="w-3.5 h-3.5 text-[#E2B98E]" />
+                <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 shadow-sm">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                    <span className="text-xs font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
+                      <Receipt className="w-3.5 h-3.5 text-[#16A34A]" />
                       <span>Checkout & Final Price Summary</span>
                     </span>
-                    <span className="text-[10px] bg-[#7AA27D]/20 text-[#7AA27D] font-bold px-2 py-0.5 rounded-full border border-[#7AA27D]/30">
+                    <span className="text-[10px] bg-[#22C55E]/20 text-[#16A34A] font-bold px-2 py-0.5 rounded-full border border-[#22C55E]/30">
                       🎉 Total Saved: ₹{totalSavings}
                     </span>
                   </div>
 
                   {/* Itemized summary */}
-                  <div className="space-y-2 text-xs text-[#FAF6F0]/85">
+                  <div className="space-y-2 text-xs text-slate-700">
                     <div className="flex items-center justify-between">
                       <span>Standard Initial Diagnostic & Inspection:</span>
-                      <span className="font-mono">₹{BASE_DIAGNOSTIC_FEE}</span>
+                      <span className="font-mono font-bold text-black">₹{BASE_DIAGNOSTIC_FEE}</span>
                     </div>
-                    <div className="flex items-center justify-between text-[#FAF6F0]/70">
+                    <div className="flex items-center justify-between text-slate-600">
                       <span>Doorstep Visit & Inspection Travel:</span>
                       <div className="flex items-center gap-1.5">
-                        <span className="line-through text-[#FAF6F0]/40 font-mono">₹{DOORSTEP_FEE_ORIGINAL}</span>
-                        <span className="text-[#7AA27D] font-bold">FREE</span>
+                        <span className="line-through text-slate-400 font-mono">₹{DOORSTEP_FEE_ORIGINAL}</span>
+                        <span className="text-[#16A34A] font-bold">FREE</span>
                       </div>
                     </div>
                     {formData.selectedOffer && (
-                      <div className="flex items-center justify-between text-[#7AA27D] font-medium">
+                      <div className="flex items-center justify-between text-[#16A34A] font-medium">
                         <span className="flex items-center gap-1">
                           <Gift className="w-3 h-3" />
                           <span>Offer Discount ({formData.selectedOffer}):</span>
@@ -1063,25 +1059,25 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                         <span className="font-mono font-bold">-₹{discountAmount}</span>
                       </div>
                     )}
-                    <div className="pt-2 border-t border-[#E2B98E]/15 flex items-center justify-between font-bold text-sm text-[#FAF6F0]">
+                    <div className="pt-2 border-t border-slate-200 flex items-center justify-between font-bold text-sm text-black">
                       <span>Total Payable at Doorstep:</span>
-                      <span className="text-base font-mono text-[#E2B98E]">
+                      <span className="text-base font-mono text-[#16A34A] font-extrabold">
                         {netDiagnosticDue === 0 ? '₹0 FREE' : `₹${netDiagnosticDue}`}
                       </span>
                     </div>
                   </div>
 
                   {/* Payment Method Selector */}
-                  <div className="pt-2 border-t border-[#E2B98E]/10 space-y-2">
-                    <label className="block text-[11px] font-semibold text-[#E2B98E] uppercase tracking-wider">
+                  <div className="pt-2 border-t border-slate-200 space-y-2">
+                    <label className="block text-[11px] font-bold text-black uppercase tracking-wider">
                       Payment Method
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <label
                         onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_cod' })}
                         className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_cod'
-                            ? 'bg-[#6E4331]/40 border-[#E2B98E] text-[#FAF6F0]'
-                            : 'bg-[#12231A]/60 border-[#E2B98E]/15 text-[#FAF6F0]/70 hover:border-[#E2B98E]/40'
+                          ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] text-black'
+                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                           }`}
                       >
                         <input
@@ -1090,19 +1086,19 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value="doorstep_cod"
                           checked={formData.paymentMethod === 'doorstep_cod'}
                           onChange={() => { }}
-                          className="accent-[#E2B98E]"
+                          className="accent-[#22C55E]"
                         />
                         <div className="text-left">
-                          <div className="text-xs font-bold">Pay After Service (Cash / UPI)</div>
-                          <div className="text-[10px] text-[#FAF6F0]/60">Zero advance fee required</div>
+                          <div className="text-xs font-bold text-black">Pay After Service (Cash / UPI)</div>
+                          <div className="text-[10px] text-slate-500 font-medium">Zero advance fee required</div>
                         </div>
                       </label>
 
                       <label
                         onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_upi' })}
                         className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_upi'
-                            ? 'bg-[#6E4331]/40 border-[#E2B98E] text-[#FAF6F0]'
-                            : 'bg-[#12231A]/60 border-[#E2B98E]/15 text-[#FAF6F0]/70 hover:border-[#E2B98E]/40'
+                          ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] text-black'
+                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                           }`}
                       >
                         <input
@@ -1111,14 +1107,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                           value="doorstep_upi"
                           checked={formData.paymentMethod === 'doorstep_upi'}
                           onChange={() => { }}
-                          className="accent-[#E2B98E]"
+                          className="accent-[#22C55E]"
                         />
                         <div className="text-left">
-                          <div className="text-xs font-bold flex items-center gap-1">
-                            <CreditCard className="w-3 h-3 text-[#E2B98E]" />
+                          <div className="text-xs font-bold text-black flex items-center gap-1">
+                            <CreditCard className="w-3 h-3 text-[#16A34A]" />
                             <span>UPI / Card on Doorstep</span>
                           </div>
-                          <div className="text-[10px] text-[#FAF6F0]/60">Pay via QR code or card machine</div>
+                          <div className="text-[10px] text-slate-500 font-medium">Pay via QR code or card machine</div>
                         </div>
                       </label>
                     </div>
@@ -1130,7 +1126,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   <button
                     type="button"
                     onClick={() => setCurrentStep(1)}
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-4 rounded-full border border-[#E2B98E]/30 text-[#FAF6F0] text-xs font-semibold hover:bg-[#E2B98E]/10 transition-colors"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-4 rounded-xl border border-slate-300 text-black text-xs font-bold hover:bg-slate-100 transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back</span>
@@ -1139,7 +1135,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 inline-flex items-center justify-center gap-2 sand-btn-3d font-bold text-xs uppercase tracking-wider py-4 px-6 rounded-full transition-all disabled:opacity-70 disabled:cursor-not-allowed group cursor-pointer shadow-xl text-[#24160E]"
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-extrabold text-xs uppercase tracking-wider py-4 px-6 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed group cursor-pointer shadow-md shadow-[#22C55E]/30"
                   >
                     {isSubmitting ? (
                       <>
@@ -1148,7 +1144,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                       </>
                     ) : (
                       <>
-                        <PartyPopper className="w-4 h-4 text-[#24160E]" />
+                        <PartyPopper className="w-4 h-4 text-white" />
                         <span>Confirm Request & Book Service</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
@@ -1159,14 +1155,14 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
             )}
 
             {/* Privacy notice and instant call option */}
-            <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF6F0]/65 pt-3 border-t border-[#E2B98E]/10 gap-2">
-              <span className="text-[11px] text-[#FAF6F0]/60">🔒 100% Privacy Protected • Instant Slot Lock</span>
+            <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100 gap-2 font-medium">
+              <span className="text-[11px] text-slate-500">🔒 100% Privacy Protected • Instant Slot Lock</span>
               <div className="flex items-center gap-3">
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
-                  className="hover:text-[#E2B98E] transition-colors flex items-center gap-1.5 font-medium text-[#FAF6F0]/80"
+                  className="hover:text-[#16A34A] transition-colors flex items-center gap-1.5 font-bold text-slate-700"
                 >
-                  <Phone className="w-3.5 h-3.5 text-[#E2B98E]" />
+                  <Phone className="w-3.5 h-3.5 text-[#16A34A]" />
                   <span>Direct Help: {siteConfig.phoneDisplay}</span>
                 </a>
               </div>

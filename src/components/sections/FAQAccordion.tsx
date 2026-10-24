@@ -25,19 +25,19 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
   };
 
   return (
-    <section className="py-10 sm:py-14 bg-[#12231A] border-t border-[#E2B98E]/10 relative">
+    <section className="py-12 sm:py-16 bg-slate-50 border-t border-slate-200 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold mb-3 shadow-inner">
-            <HelpCircle className="w-3.5 h-3.5 text-[#E2B98E]" />
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-semibold mb-3 shadow-sm">
+            <HelpCircle className="w-3.5 h-3.5 text-[#22C55E]" />
             Clear Answers
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FAF6F0] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-[#FAF6F0]/75 text-sm sm:text-base mt-3 leading-relaxed">
+            <p className="text-slate-700 text-sm sm:text-base mt-3 leading-relaxed">
               {subtitle}
             </p>
           )}
@@ -49,24 +49,24 @@ export const FAQAccordion: React.FC<FAQAccordionProps> = ({
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-[#E2B98E]/15 bg-[#173022] overflow-hidden transition-all shadow-md"
+                className="rounded-2xl border border-slate-200 bg-white overflow-hidden transition-all shadow-sm"
               >
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full py-4 px-5 sm:px-6 text-left flex items-center justify-between gap-4 hover:bg-[#203F30]/50 transition-colors focus:outline-none"
+                  className="w-full py-4 px-5 sm:px-6 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-semibold text-[#FAF6F0]">
+                  <span className="text-sm sm:text-base font-semibold text-black hover:text-[#16A34A] transition-colors">
                     {faq.question}
                   </span>
-                  <div className={`w-8 h-8 rounded-full icon-badge-3d flex items-center justify-center text-[#E2B98E] transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
+                  <div className={`w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#06223A] transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180 bg-[#22C55E] text-white' : ''}`}>
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-5 pt-2 text-xs sm:text-sm text-[#FAF6F0]/80 leading-relaxed border-t border-[#E2B98E]/10 animate-in fade-in duration-200">
+                  <div className="px-5 sm:px-6 pb-5 pt-2 text-xs sm:text-sm text-slate-700 leading-relaxed border-t border-slate-100 animate-in fade-in duration-200">
                     <p>{faq.answer}</p>
                   </div>
                 )}

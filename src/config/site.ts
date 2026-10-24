@@ -261,7 +261,7 @@ export const servicesData: Record<string, ServiceInfo> = {
   }
 };
 
-export const citiesData: Record<string, CityInfo> = {
+const baseCitiesData: Record<string, CityInfo> = {
   bengaluru: {
     id: "bengaluru",
     slug: "bengaluru",
@@ -349,32 +349,49 @@ export const citiesData: Record<string, CityInfo> = {
       "Residential apartment community CCTV upgrade and DVR hard drive restoration"
     ]
   },
-  nellore: {
-    id: "nellore",
-    slug: "nellore",
-    name: "Nellore",
+  "chanda-nagar": {
+    id: "chanda-nagar",
+    slug: "chanda-nagar",
+    name: "Chanda Nagar",
     state: "Andhra Pradesh",
-    popularName: "Nellore",
-    address: "Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001",
+    popularName: "Chanda Nagar",
+    address: "Trunk Road, Near VRC Centre, Chanda Nagar, Andhra Pradesh 524001",
     coverageRadius: "20 km",
-    description: "Doorstep computer and laptop repair, certified chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch within 90 minutes in Nellore.",
-    leadTime: "Doorstep Dispatch in Nellore within 90 minutes",
-    serviceHub: "Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh",
+    description: "Doorstep computer and laptop repair, certified chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch within 90 minutes in Chanda Nagar.",
+    leadTime: "Doorstep Dispatch in Chanda Nagar within 90 minutes",
+    serviceHub: "Trunk Road, Near VRC Centre, Chanda Nagar, Andhra Pradesh",
     localities: [
       "Trunk Road (0 km)", "VRC Centre (0.5 km)", "Dargamitta (1.5 km)", "Magunta Layout (2 km)",
       "Pogathota (1.5 km)", "Stonehousepet (2 km)", "Balaji Nagar (2.5 km)", "Vedayapalem (3 km)",
-      "Harmathpet (2 km)", "Ramamurthy Nagar (3.5 km)", "Nellore Rural (5 km)", "Kovur (6 km)"
+      "Harmathpet (2 km)", "Ramamurthy Nagar (3.5 km)", "Chanda Nagar Rural (5 km)", "Kovur (6 km)"
     ],
     helpline: "+91 95156 61677",
-    email: "nellore@doorstepservice.in",
+    email: "chandanagar@doorstepservice.in",
     serviceHighlights: [
-      "Doorstep technician dispatch in Nellore within 90 minutes",
+      "Doorstep technician dispatch in Chanda Nagar within 90 minutes",
       "No booking fee — Free registration & inspection",
-      "Verified local Nellore certified engineers",
+      "Verified local Chanda Nagar certified engineers",
       "Computer, Laptop, Networking, and CCTV surveillance repair"
     ]
   }
 };
+
+// Transparent Proxy that allows lookup by alias (e.g. 'nellore' or 'Chanda Nagar')
+// while keeping Object.values(citiesData) containing strictly the 4 unique cities.
+export const citiesData: Record<string, CityInfo> = new Proxy(baseCitiesData, {
+  get(target, prop: string | symbol) {
+    if (typeof prop === 'string') {
+      if (prop in target) return target[prop];
+      const normalized = prop.toLowerCase().replace(/\s+/g, '-');
+      if (normalized === 'nellore' || normalized === 'chanda-nagar' || normalized === 'chandanagar') {
+        return target['chanda-nagar'];
+      }
+    }
+    return Reflect.get(target, prop);
+  }
+});
+
+export const primaryCities: CityInfo[] = Object.values(baseCitiesData);
 
 export const whyChooseUsPoints = [
   {

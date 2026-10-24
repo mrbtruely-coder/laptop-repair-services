@@ -47,10 +47,10 @@ export const SubLocationPage: React.FC = () => {
   const localityDistance = currentLocality?.distance || 'Within 25 km';
 
   const iconMap: Record<string, React.ReactNode> = {
-    'laptop-repair': <Laptop className="w-5 h-5 text-[#E2B98E]" />,
-    'computer-repair': <Monitor className="w-5 h-5 text-[#9BBF9C]" />,
-    'networking': <Network className="w-5 h-5 text-[#E2B98E]" />,
-    'cctv-repair-installation': <Video className="w-5 h-5 text-[#9BBF9C]" />,
+    'laptop-repair': <Laptop className="w-5 h-5 text-[#16A34A]" />,
+    'computer-repair': <Monitor className="w-5 h-5 text-[#06223A]" />,
+    'networking': <Network className="w-5 h-5 text-[#16A34A]" />,
+    'cctv-repair-installation': <Video className="w-5 h-5 text-[#06223A]" />,
   };
 
   const localityFaqs = [
@@ -106,62 +106,62 @@ export const SubLocationPage: React.FC = () => {
       />
 
       {/* Hero Header for Sub-Location */}
-      <section className="py-10 sm:py-16 bg-[#102016] border-b border-[#E2B98E]/15 relative overflow-hidden">
+      <section className="py-10 sm:py-16 bg-white border-b border-slate-200 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-bold uppercase tracking-wider shadow-inner">
-                <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-bold uppercase tracking-wider shadow-sm">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E]" />
                 <span>Doorstep Dispatch Hub • {localityName}, {city.name}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF6F0] tracking-tight leading-tight">
-                Computer, Laptop, Networking & CCTV Repair in <span className="gradient-text">{localityName}</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight leading-tight">
+                Computer, Laptop, Networking & CCTV Repair in <span className="text-[#16A34A]">{localityName}</span>
               </h1>
 
-              <p className="text-sm sm:text-base text-[#FAF6F0]/80 leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed max-w-3xl">
                 Need reliable on-site IT support in <strong>{localityName}</strong>? Our mobile technician squad dispatches directly from our {city.popularName || city.name} hub ({localityDistance}) with authentic OEM parts, zero hidden diagnostic fees, and a 90-day warranty.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[#FAF6F0]/75">
-                <div className="flex items-center gap-1.5 text-[#E2B98E] font-semibold">
-                  <Zap className="w-4 h-4 text-[#E2B98E]" />
+              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-700">
+                <div className="flex items-center gap-1.5 text-[#16A34A] font-bold">
+                  <Zap className="w-4 h-4 text-[#16A34A]" />
                   <span>Doorstep Arrival: 45–90 Mins</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#9BBF9C] font-semibold">
-                  <CheckCircle2 className="w-4 h-4 text-[#9BBF9C]" />
+                <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
+                  <CheckCircle2 className="w-4 h-4 text-[#16A34A]" />
                   <span>Hub Distance: {localityDistance}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#FAF6F0]/80">
-                  <ShieldCheck className="w-4 h-4 text-[#E2B98E]" />
+                <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
+                  <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
                   <span>Pay After Service Guarantee</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Contact Card */}
-            <div className="lg:col-span-4 p-6 rounded-3xl nature-panel border border-[#E2B98E]/20 shadow-xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E2B98E]/10">
+            <div className="lg:col-span-4 p-6 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#E2B98E]" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#FAF6F0]">
+                  <Sparkles className="w-4 h-4 text-[#22C55E]" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-black">
                     {localityName} Dispatch
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#E2B98E] font-bold">ONLINE</span>
+                <span className="text-[11px] font-mono text-[#16A34A] font-bold">ONLINE</span>
               </div>
 
-              <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Connect directly with our {city.name} support desk to lock in a technician slot for {localityName}.
               </p>
 
               <div className="space-y-2.5 pt-1">
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
-                  className="w-full inline-flex items-center justify-center gap-2 sand-btn-3d text-[#24160E] font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#06223A] hover:bg-[#0A3356] text-white font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-sm active:scale-95"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-[#22C55E]" />
                   <span>Call {siteConfig.phoneDisplay}</span>
                 </a>
 
@@ -169,7 +169,7 @@ export const SubLocationPage: React.FC = () => {
                   href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent(`Hello, I need laptop / computer repair in ${localityName}, ${city.name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-[#12231A] font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-sm active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>WhatsApp {localityName} Desk</span>
@@ -184,9 +184,9 @@ export const SubLocationPage: React.FC = () => {
                       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-md active:scale-95 group cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-black border border-slate-300 font-bold text-xs py-3 px-4 rounded-xl transition-all shadow-xs active:scale-95 group cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <Calendar className="w-4 h-4 text-[#16A34A]" />
                   <span>Book Service Now</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -198,19 +198,19 @@ export const SubLocationPage: React.FC = () => {
       </section>
 
       {/* Main Content Area: Services in Locality & Side-by-Side Booking Section */}
-      <section className="py-12 sm:py-18 bg-[#12231A]">
+      <section className="py-12 sm:py-18 bg-slate-50">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
           {/* Services Tailored for this Locality */}
           <div>
             <div className="mb-8">
-              <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider block mb-1">
+              <span className="text-xs font-bold text-[#16A34A] uppercase tracking-wider block mb-1">
                 Localized IT Solutions
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#FAF6F0]">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">
                 Services Available in {localityName}
               </h2>
-              <p className="text-xs sm:text-sm text-[#FAF6F0]/70 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
                 Specialized doorstep services available for homes, startups, and commercial stores in {localityName}.
               </p>
             </div>
@@ -219,30 +219,30 @@ export const SubLocationPage: React.FC = () => {
               {Object.values(servicesData).map((srv) => (
                 <div
                   key={srv.id}
-                  className="nature-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#E2B98E]/50 transition-all shadow-md"
+                  className="bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#22C55E] border border-slate-200 transition-all shadow-sm"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-2.5 rounded-xl bg-[#12231A] border border-[#E2B98E]/20 text-[#E2B98E] group-hover:border-[#E2B98E]/50 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[#06223A] group-hover:border-[#22C55E] transition-colors">
                         {iconMap[srv.id]}
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#E2B98E] bg-[#6E4331]/30 px-2 py-0.5 rounded-full border border-[#E2B98E]/20">
+                      <span className="text-[10px] font-mono font-bold text-[#16A34A] bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
                         AVAILABLE
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-[#FAF6F0] group-hover:text-[#E2B98E] transition-colors">
+                    <h3 className="text-base font-bold text-black group-hover:text-[#16A34A] transition-colors">
                       {srv.shortTitle} in {localityName}
                     </h3>
-                    <p className="text-xs text-[#FAF6F0]/70 mt-2 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed">
                       {srv.tagline}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#E2B98E]/10">
+                  <div className="pt-4 mt-4 border-t border-slate-100">
                     <Link
                       to={`/${city.slug}/${srv.slug}`}
-                      className="w-full inline-flex items-center justify-between text-xs font-semibold text-[#E2B98E] hover:text-[#FAF6F0] py-1 transition-colors"
+                      className="w-full inline-flex items-center justify-between text-xs font-bold text-[#16A34A] hover:text-[#06223A] py-1 transition-colors"
                     >
                       <span>Explore Details</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -260,46 +260,46 @@ export const SubLocationPage: React.FC = () => {
             <div className="lg:col-span-5 space-y-6">
               
               {/* Coverage & Hub Details Card */}
-              <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/20 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-semibold">
                   Verified Local Hub
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
+                <h3 className="text-xl sm:text-2xl font-bold text-black">
                   Doorstep Service for {localityName}
                 </h3>
                 
-                <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Our service engineers carry ESD-safe diagnostic stations, replacement screens, and high-speed NVMe drives right to your doorstep in <strong>{localityName}</strong>.
                 </p>
 
-                <div className="space-y-2.5 pt-2 text-xs text-[#FAF6F0]/85 border-t border-[#E2B98E]/10">
+                <div className="space-y-2.5 pt-2 text-xs text-slate-700 border-t border-slate-100">
                   <div className="flex items-start gap-2">
-                    <MapPin className="w-4 h-4 text-[#E2B98E] flex-shrink-0 mt-0.5" />
+                    <MapPin className="w-4 h-4 text-[#16A34A] flex-shrink-0 mt-0.5" />
                     <span><strong>Operating Service Hub:</strong> {city.address}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#E2B98E] flex-shrink-0" />
+                    <Clock className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
                     <span><strong>Working Hours:</strong> {siteConfig.workingHours}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-[#7AA27D] flex-shrink-0" />
+                    <ShieldCheck className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
                     <span><strong>Warranty:</strong> {siteConfig.warrantyHighlight}</span>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
+                <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 flex flex-col gap-1.5">
                   <span>Need instant route confirmation for {localityName}?</span>
-                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
+                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#16A34A] hover:underline font-bold flex items-center gap-1">
                     <span>Call our dispatch manager →</span>
                   </a>
                 </div>
               </div>
 
               {/* Other Localities in City (Clickable Pills) */}
-              <div className="p-6 rounded-3xl nature-panel border border-[#E2B98E]/15 space-y-4">
-                <h4 className="text-sm font-bold text-[#FAF6F0] flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#E2B98E]" />
+              <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+                <h4 className="text-sm font-bold text-black flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#16A34A]" />
                   <span>Other Localities Served in {city.name}</span>
                 </h4>
                 
@@ -310,16 +310,16 @@ export const SubLocationPage: React.FC = () => {
                       <Link
                         key={idx}
                         to={`/service-center/${city.slug}/${loc.slug}`}
-                        className={`p-2 px-3 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm ${
+                        className={`p-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xs ${
                           isCurrent
-                            ? 'bg-[#E2B98E] text-[#24160E] font-bold shadow-md'
-                            : 'bg-[#12231A]/80 border border-[#E2B98E]/15 text-[#FAF6F0]/85 hover:border-[#E2B98E]/50 hover:bg-[#183023] hover:text-[#FAF6F0]'
+                            ? 'bg-[#22C55E]/15 text-black border border-[#22C55E]'
+                            : 'bg-slate-50 border border-slate-200 text-slate-700 hover:border-[#22C55E] hover:bg-white'
                         }`}
                       >
-                        <MapPin className={`w-3 h-3 ${isCurrent ? 'text-[#24160E]' : 'text-[#E2B98E]'}`} />
+                        <MapPin className={`w-3 h-3 ${isCurrent ? 'text-[#16A34A]' : 'text-slate-400'}`} />
                         <span>{loc.name}</span>
                         {loc.distance && (
-                          <span className={`text-[10px] ${isCurrent ? 'text-[#24160E]/70' : 'text-[#FAF6F0]/50'}`}>
+                          <span className={`text-[10px] ${isCurrent ? 'text-slate-500' : 'text-slate-400'}`}>
                             ({loc.distance})
                           </span>
                         )}

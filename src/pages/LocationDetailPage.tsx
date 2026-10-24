@@ -35,14 +35,14 @@ export const LocationDetailPage: React.FC = () => {
   // If a sub-locality slug is in the URL, identify it
   const currentLocality = localitySlug
     ? allParsedLocalities.find((l) => l.slug === localitySlug.toLowerCase()) || {
-        name: localitySlug
-          .split('-')
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(' '),
-        slug: localitySlug.toLowerCase(),
-        distance: 'Local Area',
-        fullName: localitySlug
-      }
+      name: localitySlug
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' '),
+      slug: localitySlug.toLowerCase(),
+      distance: 'Local Area',
+      fullName: localitySlug
+    }
     : null;
 
   const isSubLocality = Boolean(currentLocality);
@@ -50,17 +50,18 @@ export const LocationDetailPage: React.FC = () => {
   const fullDisplayName = currentLocality ? `${currentLocality.name}, ${city.name}` : city.name;
 
   const iconMap: Record<string, React.ReactNode> = {
-    'laptop-repair': <Laptop className="w-5 h-5 text-[#E2B98E]" />,
-    'computer-repair': <Monitor className="w-5 h-5 text-[#9BBF9C]" />,
-    'networking': <Network className="w-5 h-5 text-[#E2B98E]" />,
-    'cctv-repair-installation': <Video className="w-5 h-5 text-[#9BBF9C]" />,
+    'laptop-repair': <Laptop className="w-5 h-5 text-[#16A34A]" />,
+    'computer-repair': <Monitor className="w-5 h-5 text-[#06223A]" />,
+    'networking': <Network className="w-5 h-5 text-[#16A34A]" />,
+    'cctv-repair-installation': <Video className="w-5 h-5 text-[#06223A]" />,
   };
 
   const cityTitles: Record<string, string> = {
     bengaluru: 'Computer & Laptop Repair Services in Bengaluru | HSR Layout Hub & Doorstep Service',
     vizag: 'Computer & Laptop Repair in Vizag (Visakhapatnam) | Dwaraka Nagar Hub',
-    chennai: 'Computer & Laptop Repair Services in Chennai | OMR & Central Tech Hubs',
-    nellore: 'Computer & Laptop Repair Services in Nellore | 90-Min Dispatch Hub',
+    'chanda-nagar': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
+    'Chanda Nagar': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
+    'nellore': 'Computer & Laptop Repair Services in Chanda Nagar | 90-Min Dispatch Hub',
   };
 
   const pageTitle = isSubLocality
@@ -77,25 +78,25 @@ export const LocationDetailPage: React.FC = () => {
 
   const breadcrumbsList = isSubLocality
     ? [
-        { name: 'Service Centers', url: '/service-center' },
-        { name: city.name, url: `/service-center/${city.slug}` },
-        { name: locationDisplayName, url: `/service-center/${city.slug}/${currentLocality?.slug}` },
-      ]
+      { name: 'Service Centers', url: '/service-center' },
+      { name: city.name, url: `/service-center/${city.slug}` },
+      { name: locationDisplayName, url: `/service-center/${city.slug}/${currentLocality?.slug}` },
+    ]
     : [
-        { name: 'Service Centers', url: '/service-center' },
-        { name: city.name, url: `/service-center/${city.slug}` },
-      ];
+      { name: 'Service Centers', url: '/service-center' },
+      { name: city.name, url: `/service-center/${city.slug}` },
+    ];
 
   const breadcrumbsItems = isSubLocality
     ? [
-        { label: 'Service Centers', path: '/service-center' },
-        { label: city.name, path: `/service-center/${city.slug}` },
-        { label: locationDisplayName },
-      ]
+      { label: 'Service Centers', path: '/service-center' },
+      { label: city.name, path: `/service-center/${city.slug}` },
+      { label: locationDisplayName },
+    ]
     : [
-        { label: 'Service Centers', path: '/service-center' },
-        { label: city.name },
-      ];
+      { label: 'Service Centers', path: '/service-center' },
+      { label: city.name },
+    ];
 
   const pageFaqs = [
     {
@@ -134,13 +135,13 @@ export const LocationDetailPage: React.FC = () => {
       <Breadcrumbs items={breadcrumbsItems} />
 
       {/* Hero Header */}
-      <section className="py-10 sm:py-16 bg-[#102016] border-b border-[#E2B98E]/15 relative overflow-hidden">
+      <section className="py-10 sm:py-16 bg-white border-b border-slate-200 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-bold uppercase tracking-wider shadow-inner">
-                <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-bold uppercase tracking-wider shadow-sm">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E]" />
                 <span>
                   {isSubLocality
                     ? `Verified Doorstep Hub • ${fullDisplayName}`
@@ -148,68 +149,68 @@ export const LocationDetailPage: React.FC = () => {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF6F0] tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight leading-tight">
                 {isSubLocality ? (
                   <>
                     Computer, Laptop, Networking & CCTV Repair in{' '}
-                    <span className="gradient-text">{locationDisplayName}</span>
+                    <span className="text-[#16A34A]">{locationDisplayName}</span>
                   </>
                 ) : (
                   <>
                     Computer, Laptop & IT Repair Services in{' '}
-                    <span className="gradient-text">{city.name}</span>
+                    <span className="text-[#16A34A]">{city.name}</span>
                   </>
                 )}
               </h1>
 
-              <p className="text-sm sm:text-base text-[#FAF6F0]/80 leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed max-w-3xl">
                 {isSubLocality
                   ? `Need dependable on-site IT support in ${locationDisplayName}? Our mobile technician fleet operates directly from our ${city.popularName || city.name} hub (${currentLocality?.distance || 'within coverage radius'}) with OEM parts, upfront quotes, and 90-day warranty.`
                   : city.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[#FAF6F0]/80">
-                <div className="flex items-center gap-1.5 text-[#E2B98E] font-semibold">
-                  <Zap className="w-4 h-4 text-[#E2B98E]" />
+              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-700">
+                <div className="flex items-center gap-1.5 text-[#16A34A] font-bold">
+                  <Zap className="w-4 h-4 text-[#16A34A]" />
                   <span>{isSubLocality ? 'Doorstep Dispatch: 45–90 Mins' : city.leadTime}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#9BBF9C] font-semibold">
-                  <MapPin className="w-4 h-4 text-[#9BBF9C] flex-shrink-0" />
+                <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
+                  <MapPin className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
                   <span>
                     {isSubLocality
                       ? `Hub Distance: ${currentLocality?.distance || 'Within 25 km'}`
                       : city.address}
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#FAF6F0]/80">
-                  <ShieldCheck className="w-4 h-4 text-[#E2B98E]" />
+                <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
+                  <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
                   <span>Up to 90 Days Warranty</span>
                 </div>
               </div>
             </div>
 
             {/* Quick Contact Card */}
-            <div className="lg:col-span-4 p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/25 shadow-xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E2B98E]/10">
+            <div className="lg:col-span-4 p-6 sm:p-7 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#E2B98E]" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#FAF6F0]">
+                  <Sparkles className="w-4 h-4 text-[#22C55E]" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-black">
                     {locationDisplayName} Service Desk
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#E2B98E] font-bold">ACTIVE</span>
+                <span className="text-[11px] font-mono text-[#16A34A] font-bold">ACTIVE</span>
               </div>
 
-              <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Connect directly with our {city.name} support dispatcher for immediate slot scheduling.
               </p>
 
               <div className="space-y-2.5 pt-1">
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
-                  className="w-full inline-flex items-center justify-center gap-2 sand-btn-3d text-[#24160E] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#06223A] hover:bg-[#0A3356] text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-sm active:scale-95"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-[#22C55E]" />
                   <span>Call {siteConfig.phoneDisplay}</span>
                 </a>
 
@@ -219,7 +220,7 @@ export const LocationDetailPage: React.FC = () => {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-[#12231A] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-sm active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>WhatsApp {locationDisplayName} Desk</span>
@@ -234,9 +235,9 @@ export const LocationDetailPage: React.FC = () => {
                       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 group cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-black border border-slate-300 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-xs active:scale-95 group cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <Calendar className="w-4 h-4 text-[#16A34A]" />
                   <span>Book Service Now</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -248,19 +249,19 @@ export const LocationDetailPage: React.FC = () => {
       </section>
 
       {/* City Services & Localities Section */}
-      <section className="py-14 sm:py-20 bg-[#12231A]">
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          
+
           {/* Services Available in this City / SubLocality */}
           <div>
             <div className="mb-8">
-              <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider block mb-1">
+              <span className="text-xs font-bold text-[#16A34A] uppercase tracking-wider block mb-1">
                 Local Offerings
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#FAF6F0]">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">
                 Available Services in {locationDisplayName}
               </h2>
-              <p className="text-xs sm:text-sm text-[#FAF6F0]/70 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
                 Dedicated on-site diagnostics and repairs tailored for {locationDisplayName}.
               </p>
             </div>
@@ -269,30 +270,30 @@ export const LocationDetailPage: React.FC = () => {
               {Object.values(servicesData).map((srv) => (
                 <div
                   key={srv.id}
-                  className="nature-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#E2B98E]/50 transition-all shadow-md"
+                  className="bg-white rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#22C55E] border border-slate-200 transition-all shadow-sm"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-2.5 rounded-xl bg-[#12231A] border border-[#E2B98E]/20 text-[#E2B98E] group-hover:border-[#E2B98E]/50 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[#06223A] group-hover:border-[#22C55E] transition-colors">
                         {iconMap[srv.id]}
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-[#E2B98E] bg-[#6E4331]/30 px-2 py-0.5 rounded-full border border-[#E2B98E]/20">
+                      <span className="text-[10px] font-mono font-bold text-[#16A34A] bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
                         AVAILABLE
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-[#FAF6F0] group-hover:text-[#E2B98E] transition-colors">
+                    <h3 className="text-base font-bold text-black group-hover:text-[#16A34A] transition-colors">
                       {srv.shortTitle} in {locationDisplayName}
                     </h3>
-                    <p className="text-xs text-[#FAF6F0]/70 mt-2 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed">
                       {srv.tagline}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#E2B98E]/10">
+                  <div className="pt-4 mt-4 border-t border-slate-100">
                     <Link
                       to={`/${city.slug}/${srv.slug}`}
-                      className="w-full inline-flex items-center justify-between text-xs font-semibold text-[#E2B98E] hover:text-[#FAF6F0] py-1 transition-colors"
+                      className="w-full inline-flex items-center justify-between text-xs font-bold text-[#16A34A] hover:text-[#06223A] py-1 transition-colors"
                     >
                       <span>Explore Details</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -305,32 +306,32 @@ export const LocationDetailPage: React.FC = () => {
 
           {/* Side By Side: Key Localities Coverage & Booking Form */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Left Column: Key Localities Breakdown & Service Hub Details */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/20 space-y-4">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-semibold">
                     Verified 25 km Coverage Radius
                   </div>
                   {isSubLocality && (
                     <Link
                       to={`/service-center/${city.slug}`}
-                      className="text-xs font-semibold text-[#E2B98E] hover:underline"
+                      className="text-xs font-semibold text-[#16A34A] hover:underline"
                     >
                       ← All {city.name} Localities
                     </Link>
                   )}
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
+                <h3 className="text-xl sm:text-2xl font-bold text-black">
                   {isSubLocality
                     ? `Localities Served Around ${locationDisplayName}`
                     : `Key Localities Served in ${city.name} (Within 25 km Radius)`}
                 </h3>
-                
-                <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
-                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-[#E2B98E]">25 km radius</strong> of our service center ({city.address}):
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-black">25 km radius</strong> of our service center ({city.address}):
                 </p>
 
                 {/* Localities Grid with Clickable Links */}
@@ -341,44 +342,39 @@ export const LocationDetailPage: React.FC = () => {
                       <Link
                         key={idx}
                         to={`/service-center/${city.slug}/${loc.slug}`}
-                        className={`p-2.5 rounded-xl border text-xs flex items-center justify-between transition-all shadow-sm group ${
-                          isSelected
-                            ? 'bg-[#E2B98E] text-[#24160E] font-bold border-[#E2B98E] shadow-md'
-                            : 'bg-[#12231A]/80 border-[#E2B98E]/15 text-[#FAF6F0]/90 hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E]'
-                        }`}
+                        className={`p-2.5 rounded-xl border text-xs flex items-center justify-between transition-all shadow-xs group ${isSelected
+                            ? 'bg-[#22C55E]/15 text-black font-extrabold border-[#22C55E]'
+                            : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-[#22C55E] hover:bg-white'
+                          }`}
                       >
                         <div className="flex items-center gap-2 min-w-0">
                           <MapPin
-                            className={`w-3.5 h-3.5 flex-shrink-0 group-hover:scale-110 transition-transform ${
-                              isSelected ? 'text-[#24160E]' : 'text-[#E2B98E]'
-                            }`}
+                            className={`w-3.5 h-3.5 flex-shrink-0 group-hover:scale-110 transition-transform ${isSelected ? 'text-[#16A34A]' : 'text-slate-500'
+                              }`}
                           />
-                          <span className="truncate font-medium">{loc.name}</span>
+                          <span className="truncate font-semibold">{loc.name}</span>
                           {loc.distance && (
                             <span
-                              className={`text-[10px] shrink-0 ${
-                                isSelected ? 'text-[#24160E]/70' : 'text-[#FAF6F0]/50'
-                              }`}
+                              className="text-[10px] shrink-0 text-slate-400"
                             >
                               ({loc.distance})
                             </span>
                           )}
                         </div>
                         <ArrowRight
-                          className={`w-3 h-3 group-hover:translate-x-0.5 transition-all shrink-0 ml-1 ${
-                            isSelected ? 'text-[#24160E]' : 'text-[#E2B98E]/50 group-hover:text-[#E2B98E]'
-                          }`}
+                          className={`w-3 h-3 group-hover:translate-x-0.5 transition-all shrink-0 ml-1 ${isSelected ? 'text-[#16A34A]' : 'text-slate-400 group-hover:text-[#16A34A]'
+                            }`}
                         />
                       </Link>
                     );
                   })}
                 </div>
 
-                <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
+                <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 flex flex-col gap-1.5">
                   <span>Need service at a doorstep in {locationDisplayName}?</span>
                   <a
                     href={`tel:${siteConfig.phoneRaw}`}
-                    className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1"
+                    className="text-[#16A34A] hover:underline font-bold flex items-center gap-1"
                   >
                     <span>Call for instant route dispatch →</span>
                   </a>
@@ -386,26 +382,26 @@ export const LocationDetailPage: React.FC = () => {
               </div>
 
               {/* Regional Service Commitments & Operating Timings */}
-              <div className="p-5 rounded-2xl nature-panel border border-[#E2B98E]/15 space-y-3">
-                <h4 className="text-sm font-bold text-[#FAF6F0] flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#7AA27D]" />
+              <div className="p-5 rounded-2xl bg-white border border-slate-200 space-y-3 shadow-xs">
+                <h4 className="text-sm font-bold text-black flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
                   <span>{locationDisplayName} Service Commitments</span>
                 </h4>
-                <ul className="space-y-2 text-xs text-[#FAF6F0]/80">
+                <ul className="space-y-2 text-xs text-slate-700">
                   {city.serviceHighlights.map((hl, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0 mt-0.5" />
                       <span>{hl}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="pt-2 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 space-y-1.5">
+                <div className="pt-2 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
                   <p className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                    <Clock className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                     <span><strong>Working Hours:</strong> {siteConfig.workingHours}</span>
                   </p>
                   <p className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0" />
                     <span><strong>Operating Service Hub:</strong> {city.serviceHub}</span>
                   </p>
                 </div>

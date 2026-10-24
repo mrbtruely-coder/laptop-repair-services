@@ -33,31 +33,26 @@ export const CityServicePage: React.FC = () => {
     return <Navigate to="/locations" replace />;
   }
 
-  const iconConfig: Record<string, { icon: React.ReactNode; badgeClass: string }> = {
+  const iconConfig: Record<string, { icon: React.ReactNode }> = {
     'laptop-repair': {
-      icon: <Laptop className="w-8 h-8 text-[#24160E]" />,
-      badgeClass: 'icon-badge-sand',
+      icon: <Laptop className="w-8 h-8 text-white" />,
     },
     'computer-repair': {
-      icon: <Monitor className="w-8 h-8 text-[#FAF6F0]" />,
-      badgeClass: 'icon-badge-clay',
+      icon: <Monitor className="w-8 h-8 text-white" />,
     },
     'networking': {
-      icon: <Network className="w-8 h-8 text-[#FAF6F0]" />,
-      badgeClass: 'icon-badge-sage',
+      icon: <Network className="w-8 h-8 text-white" />,
     },
     'cctv-repair-installation': {
-      icon: <Video className="w-8 h-8 text-[#E2B98E]" />,
-      badgeClass: 'icon-badge-3d',
+      icon: <Video className="w-8 h-8 text-white" />,
     },
   };
 
   const currentIcon = iconConfig[service.id] || {
-    icon: <Wrench className="w-8 h-8 text-[#FAF6F0]" />,
-    badgeClass: 'icon-badge-clay',
+    icon: <Wrench className="w-8 h-8 text-white" />,
   };
 
-  // Unique SEO titles & descriptions exactly following the prompt guidelines
+  // Unique SEO titles & descriptions
   const getCityServiceMeta = () => {
     const key = `${city.id}-${service.id}`;
     switch (key) {
@@ -133,29 +128,37 @@ export const CityServicePage: React.FC = () => {
           desc: 'Professional CCTV installation, camera troubleshooting, DVR recording recovery, and mobile streaming setup across Chennai apartments, villas, and corporate offices.',
           keywords: ['CCTV installation Chennai', 'security camera service OMR Chennai', 'DVR repair Velachery', 'IP camera setup Chennai', 'CCTV maintenance AMC Chennai']
         };
+      case 'Chanda Nagar-laptop-repair':
+      case 'chanda-nagar-laptop-repair':
       case 'nellore-laptop-repair':
         return {
-          title: 'Laptop Repair in Nellore (Trunk Road, VRC Centre) | 90-Min Doorstep Dispatch',
-          desc: 'Doorstep laptop repair in Nellore. Chip-level motherboard diagnostics, screen replacement, and battery servicing across Trunk Road, VRC Centre, Magunta Layout & Dargamitta. 90-min dispatch.',
-          keywords: ['laptop repair Nellore', 'laptop screen replacement Nellore', 'doorstep laptop service Trunk Road Nellore', 'chip level motherboard repair Nellore', 'laptop repair VRC Centre']
+          title: 'Laptop Repair in Chanda Nagar (Trunk Road, VRC Centre) | 90-Min Doorstep Dispatch',
+          desc: 'Doorstep laptop repair in Chanda Nagar. Chip-level motherboard diagnostics, screen replacement, and battery servicing across Trunk Road, VRC Centre, Magunta Layout & Dargamitta. 90-min dispatch.',
+          keywords: ['laptop repair Chanda Nagar', 'laptop screen replacement Chanda Nagar', 'doorstep laptop service Trunk Road Chanda Nagar', 'chip level motherboard repair Chanda Nagar', 'laptop repair VRC Centre']
         };
+      case 'Chanda Nagar-computer-repair':
+      case 'chanda-nagar-computer-repair':
       case 'nellore-computer-repair':
         return {
-          title: 'Computer & Desktop Repair in Nellore | Fast Hardware Diagnostics',
-          desc: 'Reliable desktop computer repair in Nellore. SMPS replacement, motherboard fixes, Windows OS recovery, and PC tuning across Trunk Road, Balaji Nagar & Magunta Layout.',
-          keywords: ['computer repair Nellore', 'desktop service Nellore', 'PC repair Trunk Road Nellore', 'SMPS power supply replacement Nellore']
+          title: 'Computer & Desktop Repair in Chanda Nagar | Fast Hardware Diagnostics',
+          desc: 'Reliable desktop computer repair in Chanda Nagar. SMPS replacement, motherboard fixes, Windows OS recovery, and PC tuning across Trunk Road, Balaji Nagar & Magunta Layout.',
+          keywords: ['computer repair Chanda Nagar', 'desktop service Chanda Nagar', 'PC repair Trunk Road Chanda Nagar', 'SMPS power supply replacement Chanda Nagar']
         };
+      case 'Chanda Nagar-networking':
+      case 'chanda-nagar-networking':
       case 'nellore-networking':
         return {
-          title: 'Networking & Wi-Fi Setup in Nellore | Home & Commercial IT Solutions',
-          desc: 'Structured CAT6 network cabling, high-speed Wi-Fi router setup, and LAN troubleshooting for businesses, retail stores, and residences across Nellore.',
-          keywords: ['networking setup Nellore', 'office Wi-Fi installation Nellore', 'CAT6 cabling Nellore', 'router configuration Nellore']
+          title: 'Networking & Wi-Fi Setup in Chanda Nagar | Home & Commercial IT Solutions',
+          desc: 'Structured CAT6 network cabling, high-speed Wi-Fi router setup, and LAN troubleshooting for businesses, retail stores, and residences across Chanda Nagar.',
+          keywords: ['networking setup Chanda Nagar', 'office Wi-Fi installation Chanda Nagar', 'CAT6 cabling Chanda Nagar', 'router configuration Chanda Nagar']
         };
+      case 'Chanda Nagar-cctv-repair-installation':
+      case 'chanda-nagar-cctv-repair-installation':
       case 'nellore-cctv-repair-installation':
         return {
-          title: 'CCTV Installation & Repair in Nellore | Security Camera Setup & DVR Fix',
-          desc: 'Professional CCTV camera installation, DVR/NVR hard drive repair, and mobile live viewing setup across Nellore homes, shops, and warehouses.',
-          keywords: ['CCTV installation Nellore', 'security camera repair Nellore', 'DVR repair Nellore', 'IP camera setup Trunk Road Nellore']
+          title: 'CCTV Installation & Repair in Chanda Nagar | Security Camera Setup & DVR Fix',
+          desc: 'Professional CCTV camera installation, DVR/NVR hard drive repair, and mobile live viewing setup across Chanda Nagar homes, shops, and warehouses.',
+          keywords: ['CCTV installation Chanda Nagar', 'security camera repair Chanda Nagar', 'DVR repair Chanda Nagar', 'IP camera setup Trunk Road Chanda Nagar']
         };
       default:
         return {
@@ -168,12 +171,12 @@ export const CityServicePage: React.FC = () => {
 
   const meta = getCityServiceMeta();
 
-  // Localized contextual notes per city
   const localizedInsights: Record<string, string> = {
     bengaluru: 'Our Bengaluru dispatch network specifically caters to high-demand corporate professionals, startups, and remote software engineers. We stock genuine displays, RAM/SSD upgrades, and maintain specialized diagnostic rigs for fast turnaround across Outer Ring Road and tech corridors.',
     vizag: 'Operating in Visakhapatnam means our technicians pay special attention to coastal salt humidity corrosion on laptop motherboards and desktop SMPS units. We apply anti-corrosive chemical baths and conformal coating during servicing to maximize hardware longevity.',
-    chennai: 'Serving Chennai’s extensive IT corridor along OMR, GST Road, and central business hubs, our field engineers travel equipped with portable diagnostic analyzers and replacement modules for same-day on-site troubleshooting.',
-    nellore: 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.'
+    'chanda-nagar': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
+    'Chanda Nagar': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.',
+    'nellore': 'Providing direct 90-minute doorstep service coverage across Trunk Road, VRC Centre, Dargamitta, and Magunta Layout. Certified field technicians arrive equipped with genuine spares, diagnostic multimeters, and offer no-fee doorstep visit registration.'
   };
 
   const localizedFaqs = [
@@ -217,81 +220,77 @@ export const CityServicePage: React.FC = () => {
         ]}
       />
 
-      {/* Hero Header with Nature Palette */}
-      <section className="py-12 sm:py-16 bg-[#12231A] border-b border-[#E2B98E]/15 relative overflow-hidden">
-        {/* Ambient Glows */}
-        <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#7AA27D]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#E2B98E]/10 rounded-full blur-3xl pointer-events-none" />
-
+      {/* Hero Header */}
+      <section className="py-12 sm:py-16 bg-white border-b border-slate-200 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
-                <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-semibold shadow-sm">
+                <MapPin className="w-3.5 h-3.5 text-[#22C55E]" />
                 <span>{city.name} Regional IT Hub</span>
-                <span className="text-[#FAF6F0]/60">• 25 km Radial Coverage</span>
+                <span className="text-slate-500">• 25 km Radial Coverage</span>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className={`w-16 h-16 rounded-2xl ${currentIcon.badgeClass} flex items-center justify-center flex-shrink-0 shadow-xl`}>
+                <div className="w-16 h-16 rounded-2xl bg-[#06223A] flex items-center justify-center flex-shrink-0 shadow-md">
                   {currentIcon.icon}
                 </div>
                 <div>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF6F0] tracking-tight">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-black tracking-tight">
                     {service.shortTitle} in {city.name}
                   </h1>
                 </div>
               </div>
 
-              <p className="text-base sm:text-lg text-[#D2DCD2] leading-relaxed max-w-3xl">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed max-w-3xl">
                 {meta.desc}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs">
-                <div className="flex items-center gap-1.5 bg-[#14281E] px-3.5 py-2 rounded-full border border-[#7AA27D]/30 text-[#FAF6F0]">
-                  <CheckCircle2 className="w-4 h-4 text-[#7AA27D]" />
+              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
+                <div className="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-full border border-slate-200 text-slate-800 font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-[#16A34A]" />
                   <span>{city.leadTime} Doorstep Visits</span>
                 </div>
-                <div className="flex items-center gap-1.5 bg-[#14281E] px-3.5 py-2 rounded-full border border-[#E2B98E]/30 text-[#FAF6F0]">
-                  <ShieldCheck className="w-4 h-4 text-[#E2B98E]" />
+                <div className="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-full border border-slate-200 text-slate-800 font-medium">
+                  <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
                   <span>Up to 90 Days Hardware Warranty</span>
                 </div>
-                <div className="flex items-center gap-1.5 bg-[#14281E] px-3.5 py-2 rounded-full border border-[#E2B98E]/30 text-[#FAF6F0]">
-                  <Clock className="w-4 h-4 text-[#E2B98E]" />
+                <div className="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-full border border-slate-200 text-slate-800 font-medium">
+                  <Clock className="w-4 h-4 text-[#16A34A]" />
                   <span>Verified Spares & On-Site Diagnostics</span>
                 </div>
               </div>
             </div>
 
             {/* Helpline Card */}
-            <div className="lg:col-span-4 clay-card p-6 sm:p-7 rounded-3xl border border-[#E2B98E]/30 shadow-2xl space-y-4">
+            <div className="lg:col-span-4 bg-slate-50 p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-sm space-y-4">
               <div className="space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#E2B98E] font-bold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#16A34A] font-bold">
                   {city.name} Regional Support Desk
                 </span>
-                <h3 className="text-lg font-bold text-[#FAF6F0]">
+                <h3 className="text-lg font-bold text-black">
                   {city.popularName || city.name} Helpline
                 </h3>
               </div>
-              <p className="text-xs text-[#FAF6F0]/80 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Connect directly with our local coordinator at {city.serviceHub} for immediate diagnostic booking.
               </p>
 
               <div className="space-y-2.5 pt-1">
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
-                  className="w-full inline-flex items-center justify-center gap-2 sand-btn-3d text-[#24160E] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md group"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#06223A] hover:bg-[#0A3356] text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-sm group"
                 >
-                  <Phone className="w-4 h-4 text-[#24160E]" />
+                  <Phone className="w-4 h-4 text-[#22C55E]" />
                   <span>Call {city.helpline}</span>
                 </a>
 
                 <a
-                  href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent(`Hello TechFix, I need ${service.title} in ${city.name}.`)}`}
+                  href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent(`Hello, I need ${service.title} in ${city.name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-[#12231A] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#22C55E] hover:bg-[#16A34A] text-white font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-sm"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
@@ -306,9 +305,9 @@ export const CityServicePage: React.FC = () => {
                       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 group cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-black border border-slate-300 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-xs active:scale-95 group cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <Calendar className="w-4 h-4 text-[#16A34A]" />
                   <span>Book Service Now</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -319,20 +318,20 @@ export const CityServicePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Local Insights & Coverage with Nature Palette */}
-      <section className="py-14 sm:py-20 bg-[#12231A]">
+      {/* Local Insights & Coverage */}
+      <section className="py-14 sm:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-          
+
           {/* Localized insight box */}
-          <div className="p-6 sm:p-8 rounded-3xl nature-panel border border-[#E2B98E]/20 space-y-3 shadow-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/25 text-[#E2B98E] text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5 text-[#E2B98E]" />
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 space-y-3 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/25 text-[#16A34A] text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[#22C55E]" />
               <span>Regional Engineering Context</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
+            <h2 className="text-xl sm:text-2xl font-bold text-black">
               Why Local Expertise Matters for {service.shortTitle} in {city.name}
             </h2>
-            <p className="text-xs sm:text-sm text-[#D2DCD2] leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
               {localizedInsights[city.id] || city.description}
             </p>
           </div>
@@ -340,24 +339,24 @@ export const CityServicePage: React.FC = () => {
           {/* Common Problems Solved */}
           <div>
             <div className="mb-6">
-              <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider block mb-1">
+              <span className="text-xs font-bold text-[#16A34A] uppercase tracking-wider block mb-1">
                 Common Symptoms
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
+              <h3 className="text-xl sm:text-2xl font-bold text-black">
                 Frequently Diagnosed {service.shortTitle} Issues in {city.name}
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {service.commonProblems.slice(0, 6).map((item, idx) => (
-                <div key={idx} className="p-5 rounded-2xl bg-[#14281E] border border-[#E2B98E]/15 hover:border-[#E2B98E]/30 transition-all shadow-md">
-                  <div className="flex items-center gap-2.5 text-sm font-semibold text-[#FAF6F0] mb-2">
-                    <div className="w-6 h-6 rounded-lg bg-[#6E4331]/40 border border-[#E2B98E]/20 flex items-center justify-center flex-shrink-0">
-                      <AlertCircle className="w-3.5 h-3.5 text-[#E2B98E]" />
+                <div key={idx} className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#22C55E] transition-all shadow-xs">
+                  <div className="flex items-center gap-2.5 text-sm font-semibold text-black mb-2">
+                    <div className="w-6 h-6 rounded-lg bg-[#22C55E]/15 border border-[#22C55E]/25 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-3.5 h-3.5 text-[#16A34A]" />
                     </div>
                     <span>{item.problem}</span>
                   </div>
-                  <p className="text-xs text-[#D2DCD2] leading-relaxed pl-8">
+                  <p className="text-xs text-slate-600 leading-relaxed pl-8">
                     {item.solution}
                   </p>
                 </div>
@@ -367,20 +366,20 @@ export const CityServicePage: React.FC = () => {
 
           {/* SIDE BY SIDE: Localities Served & Lead Booking Form */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Left Column: Localities Served */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/25 shadow-xl space-y-4">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
                 <div className="flex flex-col gap-2">
-                  <span className="text-xs text-[#7AA27D] font-semibold bg-[#7AA27D]/15 px-3 py-1 rounded-full border border-[#7AA27D]/30 w-fit">
+                  <span className="text-xs text-[#16A34A] font-semibold bg-[#22C55E]/15 px-3 py-1 rounded-full border border-[#22C55E]/30 w-fit">
                     Hub: {city.serviceHub}
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#FAF6F0]">
+                  <h3 className="text-lg sm:text-xl font-bold text-black">
                     Doorstep {service.shortTitle} Coverage Across {city.name} Localities (25 km Radius)
                   </h3>
                 </div>
-                <p className="text-xs text-[#D2DCD2] leading-relaxed">
-                  Our mobile engineers are dispatched from our hub at <strong className="text-[#E2B98E] font-medium">{city.address}</strong> to all neighbourhoods strictly within a 25 km radius:
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Our mobile engineers are dispatched from our hub at <strong className="text-black font-semibold">{city.address}</strong> to all neighbourhoods strictly within a 25 km radius:
                 </p>
 
                 {/* Localities as Clickable Links */}
@@ -391,24 +390,24 @@ export const CityServicePage: React.FC = () => {
                       <Link
                         key={idx}
                         to={`/service-center/${city.slug}/${loc.slug}`}
-                        className="p-2.5 rounded-xl bg-[#12231A] border border-[#E2B98E]/20 text-xs text-[#FAF6F0]/90 flex items-center justify-between shadow-sm hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E] transition-all group"
+                        className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-center justify-between shadow-xs hover:border-[#22C55E] hover:bg-white hover:text-black transition-all group"
                       >
                         <div className="flex items-center gap-1.5 min-w-0">
-                          <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                          <MapPin className="w-3.5 h-3.5 text-[#16A34A] flex-shrink-0 group-hover:scale-110 transition-transform" />
                           <span className="truncate font-medium">{loc.name}</span>
                           {loc.distance && (
-                            <span className="text-[10px] text-[#FAF6F0]/50 shrink-0">({loc.distance})</span>
+                            <span className="text-[10px] text-slate-400 shrink-0">({loc.distance})</span>
                           )}
                         </div>
-                        <ArrowRight className="w-3 h-3 text-[#E2B98E]/50 group-hover:text-[#E2B98E] group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
+                        <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-[#16A34A] group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
                       </Link>
                     );
                   })}
                 </div>
 
-                <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
+                <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 flex flex-col gap-1.5">
                   <span>Need doorstep {service.shortTitle.toLowerCase()} in {city.name}?</span>
-                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
+                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#16A34A] hover:underline font-bold flex items-center gap-1">
                     <span>Call {siteConfig.phoneDisplay} for instant route dispatch →</span>
                   </a>
                 </div>

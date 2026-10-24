@@ -48,31 +48,53 @@ export const themeConfig = {
     loose: '1.8',
   },
 
-  // Core Organic Tactile Nature Palette (NO Blue and White)
+  // Exact Brand Colors Extracted From Logo (Tech Navy, Circuit Green, Pure White)
   colors: {
+    navy: {
+      darkest: '#03101B',
+      dark: '#041624',
+      base: '#06223A',
+      card: '#082842',
+      light: '#0A3356',
+      border: '#0D426E',
+    },
+    green: {
+      base: '#22C55E',
+      dark: '#16A34A',
+      light: '#4ADE80',
+      glow: 'rgba(34, 197, 94, 0.35)',
+      subtle: 'rgba(34, 197, 94, 0.12)',
+    },
+    white: '#FFFFFF',
+    slate: {
+      light: '#F8FAFC',
+      muted: '#CBD5E1',
+      dim: '#94A3B8',
+    },
+    // Backwards-compatible aliases remapped directly to logo colors
     forest: {
-      dark: '#12231A',
-      base: '#183023',
-      card: '#203F30',
-      light: '#2A523F',
+      dark: '#041624',
+      base: '#06223A',
+      card: '#082842',
+      light: '#0A3356',
     },
     clay: {
-      base: '#6E4331',
-      dark: '#4A2B1D',
-      light: '#8E5841',
+      base: '#06223A',
+      dark: '#041624',
+      light: '#082842',
     },
     sand: {
-      base: '#E2B98E',
-      hover: '#D5A472',
-      light: '#F4E7D7',
-      dark: '#24160E',
+      base: '#22C55E',
+      hover: '#16A34A',
+      light: '#DCFCE7',
+      dark: '#041624',
     },
     sage: {
-      base: '#7AA27D',
-      light: '#9BBF9C',
-      dark: '#466949',
+      base: '#22C55E',
+      light: '#4ADE80',
+      dark: '#16A34A',
     },
-    cream: '#FAF6F0',
+    cream: '#FFFFFF',
   },
 } as const;
 

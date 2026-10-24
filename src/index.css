@@ -223,26 +223,35 @@
 
 @layer base {
   :root {
-    --color-forest-dark: #12231A;
-    --color-forest: #183023;
-    --color-forest-card: #203F30;
-    --color-forest-light: #2A523F;
-    --color-clay: #6E4331;
-    --color-clay-dark: #4A2B1D;
-    --color-clay-light: #8E5841;
-    --color-sand: #E2B98E;
-    --color-sand-hover: #D5A472;
-    --color-sand-light: #F4E7D7;
-    --color-sage: #7AA27D;
-    --color-cream: #FAF6F0;
+    --color-bg-white: #FFFFFF;
+    --color-bg-slate: #F8FAFC;
+    --color-border-slate: #E2E8F0;
+    --color-navy: #06223A;
+    --color-navy-dark: #041624;
+    --color-navy-light: #0A3356;
+    --color-green: #22C55E;
+    --color-green-dark: #16A34A;
+    --color-green-light: #4ADE80;
+    --color-forest-dark: #FFFFFF;
+    --color-forest: #F8FAFC;
+    --color-forest-card: #FFFFFF;
+    --color-forest-light: #F1F5F9;
+    --color-clay: #06223A;
+    --color-clay-dark: #041624;
+    --color-clay-light: #082842;
+    --color-sand: #22C55E;
+    --color-sand-hover: #16A34A;
+    --color-sand-light: #DCFCE7;
+    --color-sage: #22C55E;
+    --color-cream: #06223A;
     --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-sans: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   }
 
   body {
-    background-color: #12231A;
-    color: #FAF6F0;
+    background-color: #FFFFFF;
+    color: #000000;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -254,90 +263,164 @@
     font-family: var(--font-heading);
     letter-spacing: -0.025em;
     font-weight: 700;
-    color: #FAF6F0;
+    color: #000000;
+  }
+
+  /* Universal White Theme Form Inputs & Controls */
+  input, select, textarea {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border-color: #CBD5E1 !important;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #22C55E !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2) !important;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #64748B !important;
+  }
+  option {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
   }
 }
 
-/* Custom scrollbar matching nature forest palette */
+/* Universal Text Visibility Overrides: Force text to black across all components */
+[class*="text-[#FAF6F0]"],
+[class*="text-[#D2DCD2]"],
+[class*="text-[#FAF6F0]/70"],
+[class*="text-[#FAF6F0]/75"],
+[class*="text-[#FAF6F0]/80"],
+[class*="text-[#FAF6F0]/85"],
+[class*="text-[#FAF6F0]/90"],
+[class*="text-[#FAF6F0]/65"],
+[class*="text-[#FAF6F0]/60"],
+[class*="text-[#FAF6F0]/50"] {
+  color: #000000 !important;
+}
+
+/* Subtext & Muted description text */
+[class*="text-[#D2DCD2]"],
+[class*="text-[#FAF6F0]/70"],
+[class*="text-[#FAF6F0]/65"],
+[class*="text-[#FAF6F0]/60"] {
+  color: #334155 !important;
+}
+
+/* Universal Background Resets: Turn legacy dark backgrounds into clean white / slate */
+[class*="bg-[#12231A]"],
+[class*="bg-[#0E1B14]"],
+[class*="bg-[#14281E]"],
+[class*="bg-[#152B20]"],
+[class*="bg-[#173022]"],
+[class*="bg-[#0D1B12]"] {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #000000 !important;
+}
+
+/* Universal Badge & Pill Overrides: Convert legacy brown/gold badges to clean mint green & dark text */
+[class*="bg-[#6E4331]"] {
+  background-color: rgba(34, 197, 94, 0.12) !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+  color: #16A34A !important;
+}
+[class*="bg-[#6E4331]"] * {
+  color: #16A34A !important;
+}
+[class*="text-[#E2B98E]"] {
+  color: #16A34A !important;
+}
+
+/* Maintain crisp white text on tactile 3D buttons */
+.sand-btn-3d,
+.clay-btn-3d,
+.sand-btn-3d *,
+.clay-btn-3d * {
+  color: #FFFFFF !important;
+}
+
+/* Custom scrollbar matching logo white, navy & green */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #12231A;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A523F;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E2B98E;
+  background: #22C55E;
 }
 
-/* Tactile 3D cards & panels inspired by the reference design */
+/* White Theme Tactile Cards & Panels */
 .nature-panel {
-  background: linear-gradient(145deg, #1C382A 0%, #14281E 100%);
-  border: 1px solid rgba(226, 185, 142, 0.16);
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 30px -5px rgba(6, 34, 58, 0.08), 0 1px 3px rgba(6, 34, 58, 0.04);
 }
 
 .nature-card {
-  background: linear-gradient(145deg, #203F30 0%, #173023 100%);
-  border: 1px solid rgba(226, 185, 142, 0.14);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 20px -2px rgba(6, 34, 58, 0.05), 0 1px 2px rgba(6, 34, 58, 0.03);
 }
 .nature-card:hover {
-  border-color: rgba(226, 185, 142, 0.5);
+  border-color: #22C55E;
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.65), 0 0 24px rgba(226, 185, 142, 0.18);
+  box-shadow: 0 16px 32px -6px rgba(6, 34, 58, 0.12), 0 0 20px rgba(34, 197, 94, 0.15);
 }
 
 .clay-card {
-  background: linear-gradient(145deg, #6E4331 0%, #4D2D1F 100%);
-  border: 1px solid rgba(226, 185, 142, 0.22);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 18px -2px rgba(6, 34, 58, 0.05);
 }
 .clay-card:hover {
-  border-color: rgba(226, 185, 142, 0.55);
+  border-color: #22C55E;
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.65), 0 0 20px rgba(110, 67, 49, 0.4);
+  box-shadow: 0 14px 28px -6px rgba(6, 34, 58, 0.1), 0 0 20px rgba(34, 197, 94, 0.15);
 }
 
 .sand-card {
-  background: linear-gradient(145deg, #C29062 0%, #8C603B 100%);
-  border: 1px solid rgba(244, 231, 215, 0.35);
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(34, 197, 94, 0.3);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px -4px rgba(34, 197, 94, 0.35);
 }
 .sand-card:hover {
-  border-color: rgba(250, 246, 240, 0.6);
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.65), 0 0 24px rgba(194, 144, 98, 0.35);
+  box-shadow: 0 14px 30px -4px rgba(34, 197, 94, 0.45);
 }
 
 .sage-card {
-  background: linear-gradient(145deg, #5B8460 0%, #3B5B3F 100%);
-  border: 1px solid rgba(226, 185, 142, 0.25);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px -2px rgba(6, 34, 58, 0.05);
 }
 .sage-card:hover {
-  border-color: rgba(226, 185, 142, 0.5);
+  border-color: #22C55E;
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.65), 0 0 20px rgba(122, 162, 125, 0.3);
+  box-shadow: 0 12px 24px -4px rgba(6, 34, 58, 0.1);
 }
 
-/* Glass panel adapted to nature theme */
+/* Glass panel adapted to light theme */
 .glass-panel {
-  background: linear-gradient(145deg, rgba(32, 63, 48, 0.85) 0%, rgba(20, 39, 30, 0.95) 100%);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 185, 142, 0.18);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 20px 40px -10px rgba(6, 34, 58, 0.08);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #FAF6F0 0%, #E2B98E 60%, #C49362 100%);
+  background: linear-gradient(135deg, #06223A 0%, #16A34A 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -352,69 +435,75 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(226, 185, 142, 0.5), rgba(122, 162, 125, 0.3), transparent);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.6), rgba(6, 34, 58, 0.2), transparent);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
 
-/* Tactile 3D circular icon button & badges */
+/* Tactile 3D circular icon button & badges for White Theme */
 .icon-badge-3d {
-  background: linear-gradient(145deg, #2A523F 0%, #173022 100%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(226, 185, 142, 0.2);
+  background: #F1F5F9;
+  color: #06223A;
+  box-shadow: 0 4px 10px rgba(6, 34, 58, 0.06);
+  border: 1px solid #E2E8F0;
 }
 
 .icon-badge-clay {
-  background: linear-gradient(145deg, #6E4331 0%, #3D2216 100%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(226, 185, 142, 0.25);
+  background: #06223A;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(6, 34, 58, 0.15);
+  border: 1px solid #06223A;
 }
 
 .icon-badge-sand {
-  background: linear-gradient(145deg, #E2B98E 0%, #B88556 100%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(250, 246, 240, 0.4);
+  background: #22C55E;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+  border: 1px solid #16A34A;
 }
 
 .icon-badge-sage {
-  background: linear-gradient(145deg, #7AA27D 0%, #466949 100%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(226, 185, 142, 0.25);
+  background: #DCFCE7;
+  color: #16A34A;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
-/* 3D tactile buttons */
+/* 3D tactile buttons: Circuit Green (Primary) and Deep Navy (Secondary) */
 .sand-btn-3d {
-  background: linear-gradient(135deg, #E2B98E 0%, #C89666 100%);
-  color: #24160E;
-  box-shadow: 0 8px 20px -3px rgba(200, 150, 102, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px -2px rgba(34, 197, 94, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  border: none;
 }
 .sand-btn-3d:hover {
-  background: linear-gradient(135deg, #EAC49D 0%, #D4A373 100%);
-  box-shadow: 0 10px 24px -2px rgba(200, 150, 102, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  box-shadow: 0 8px 22px -2px rgba(34, 197, 94, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .clay-btn-3d {
-  background: linear-gradient(135deg, #6E4331 0%, #4E2D20 100%);
-  color: #FAF6F0;
-  box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(226, 185, 142, 0.25);
+  background: #06223A;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px -2px rgba(6, 34, 58, 0.25);
+  border: 1px solid #06223A;
 }
 .clay-btn-3d:hover {
-  background: linear-gradient(135deg, #7F4E39 0%, #5C3526 100%);
-  box-shadow: 0 10px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  background: #0A3356;
+  box-shadow: 0 8px 22px -2px rgba(6, 34, 58, 0.35);
+  border-color: #22C55E;
 }
 
 .forest-btn-3d {
-  background: linear-gradient(135deg, #203F30 0%, #162B21 100%);
-  color: #FAF6F0;
-  box-shadow: 0 8px 20px -3px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(226, 185, 142, 0.2);
+  background: #F1F5F9;
+  color: #06223A;
+  box-shadow: 0 4px 12px rgba(6, 34, 58, 0.05);
+  border: 1px solid #CBD5E1;
 }
 .forest-btn-3d:hover {
-  background: linear-gradient(135deg, #2A523F 0%, #1C362A 100%);
-  border-color: rgba(226, 185, 142, 0.4);
+  background: #E2E8F0;
+  border-color: #22C55E;
 }
 
 /* Responsive bottom bar hide on desktop */

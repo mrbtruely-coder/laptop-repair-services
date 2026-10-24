@@ -58,14 +58,25 @@ export const CITY_GEO_REGISTRY: Record<string, GeoLocationData> = {
     regionName: 'Tamil Nadu',
     postalCode: '600020',
   },
-  nellore: {
+  'chanda-nagar': {
     region: 'IN-AP',
-    placename: 'Nellore',
+    placename: 'Chanda Nagar',
     position: '14.4426;79.9865',
     lat: 14.4426,
     lng: 79.9865,
     streetAddress: 'Trunk Road, Near VRC Centre',
-    locality: 'Nellore',
+    locality: 'Chanda Nagar',
+    regionName: 'Andhra Pradesh',
+    postalCode: '524001',
+  },
+  'nellore': {
+    region: 'IN-AP',
+    placename: 'Chanda Nagar',
+    position: '14.4426;79.9865',
+    lat: 14.4426,
+    lng: 79.9865,
+    streetAddress: 'Trunk Road, Near VRC Centre',
+    locality: 'Chanda Nagar',
     regionName: 'Andhra Pradesh',
     postalCode: '524001',
   },
@@ -116,14 +127,14 @@ export const SEO: React.FC<SEOProps> = ({
     matchedGeo = CITY_GEO_REGISTRY.vizag;
   } else if (normalizedCityKey.includes('chennai')) {
     matchedGeo = CITY_GEO_REGISTRY.chennai;
-  } else if (normalizedCityKey.includes('nellore')) {
-    matchedGeo = CITY_GEO_REGISTRY.nellore;
+  } else if (normalizedCityKey.includes('chanda') || normalizedCityKey.includes('nellore')) {
+    matchedGeo = CITY_GEO_REGISTRY['chanda-nagar'];
   }
 
   // Fallback to South India multi-city geo
   const activeGeo = matchedGeo || {
     region: 'IN-KA',
-    placename: 'Bengaluru, Visakhapatnam, Chennai, Nellore',
+    placename: 'Bengaluru, Visakhapatnam, Chennai, Chanda Nagar',
     position: '12.9116;77.6433',
     lat: 12.9116,
     lng: 77.6433,
@@ -143,7 +154,7 @@ export const SEO: React.FC<SEOProps> = ({
     'office networking CAT6 cabling',
     'fast doorstep technician dispatch',
     '90 days service warranty',
-    ...(city ? [`${city} computer repair`, `${city} laptop service`, `${city} CCTV installation`] : ['Bengaluru laptop repair', 'Vizag computer service', 'Chennai networking', 'Nellore doorstep repair']),
+    ...(city ? [`${city} computer repair`, `${city} laptop service`, `${city} CCTV installation`] : ['Bengaluru laptop repair', 'Vizag computer service', 'Chennai networking', 'Chanda Nagar doorstep repair']),
   ];
   // Deduplicate keywords
   const uniqueKeywords = Array.from(new Set(effectiveKeywords));
@@ -213,16 +224,16 @@ export const SEO: React.FC<SEOProps> = ({
     },
     areaServed: city
       ? [
-          {
-            '@type': 'City',
-            name: city,
-          },
-          {
-            '@type': 'State',
-            name: state || activeGeo.regionName,
-          },
-        ]
-      : ['Bengaluru', 'Visakhapatnam', 'Chennai', 'Nellore', 'Karnataka', 'Andhra Pradesh', 'Tamil Nadu'],
+        {
+          '@type': 'City',
+          name: city,
+        },
+        {
+          '@type': 'State',
+          name: state || activeGeo.regionName,
+        },
+      ]
+      : ['Bengaluru', 'Visakhapatnam', 'Chennai', 'Chanda Nagar', 'Karnataka', 'Andhra Pradesh', 'Tamil Nadu'],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Doorstep Hardware & Electronics Repair Services',
@@ -275,7 +286,7 @@ export const SEO: React.FC<SEOProps> = ({
       telephone: siteConfig.phoneRaw,
       url: siteConfig.domain,
     },
-    areaServed: city || 'Bengaluru, Visakhapatnam, Chennai, Nellore',
+    areaServed: city || 'Bengaluru, Visakhapatnam, Chennai, Chanda Nagar',
     description: description,
     offers: {
       '@type': 'Offer',
