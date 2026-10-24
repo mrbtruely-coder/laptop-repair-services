@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Wrench,
   Phone,
   MessageSquare,
   Mail,
@@ -49,13 +48,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl icon-badge-3d flex items-center justify-center text-[#E2B98E] shadow-md">
-                <Wrench className="w-5 h-5" />
+            <Link to="/" className="inline-block group">
+              <div className="bg-white/95 hover:bg-white px-3.5 py-2 rounded-2xl shadow-md border border-[#E2B98E]/30 inline-flex items-center transition-all group-hover:scale-102 group-hover:shadow-lg">
+                <img
+                  src="/logo.png"
+                  alt="Doorstep Laptop Repair Services"
+                  className="h-9 sm:h-11 md:h-12 w-auto object-contain"
+                />
               </div>
-              <span className="text-xl font-extrabold text-[#FAF6F0] tracking-tight">
-                {siteConfig.brandName} <span className="text-[#E2B98E] font-medium">DOORSTEP</span>
-              </span>
             </Link>
 
             <p className="text-xs text-[#FAF6F0]/70 leading-relaxed max-w-sm">

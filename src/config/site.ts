@@ -45,15 +45,15 @@ export function parseLocality(locStr: string): LocalityInfo {
 }
 
 export const siteConfig = {
-  brandName: "TECHFIX",
-  legalName: "TechFix Computer & IT Solutions",
+  brandName: "Doorstep Laptop Repair Services",
+  legalName: "Doorstep Laptop Repair Services",
   brandSubtitle: "Computer, Laptop, Networking & CCTV Specialists",
-  domain: "https://techfixservices.in",
+  domain: "https://laptoprepairsservices.com",
   phoneDisplay: "+91 95156 61677",
   phoneRaw: "+919515661677",
   whatsappDisplay: "+91 95156 61677",
   whatsappRaw: "919515661677",
-  supportEmail: "support@techfixservices.in",
+  supportEmail: "support@laptoprepairsservices.com",
   workingHours: "Monday – Sunday: 8:30 AM to 8:30 PM",
   warrantyHighlight: "Up to 90 Days Service Warranty on hardware replacements",
   serviceModes: [

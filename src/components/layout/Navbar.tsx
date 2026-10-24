@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Wrench,
   ChevronDown,
   Phone,
   MessageSquare,
@@ -102,22 +101,13 @@ export const Navbar: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E2B98E] to-[#6E4331] p-0.5 shadow-md shadow-black/40 group-hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-[#12231A] rounded-[10px] flex items-center justify-center">
-                  <Wrench className="w-5 h-5 text-[#E2B98E]" />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-extrabold tracking-tight text-[#FAF6F0] flex items-center gap-1.5">
-                  {siteConfig.brandName}
-                  <span className="text-[#24160E] text-[10px] px-1.5 py-0.5 rounded-full bg-[#E2B98E] font-bold tracking-normal">
-                    DOORSTEP
-                  </span>
-                </span>
-                <span className="text-[10px] uppercase tracking-wider text-[#D2DCD2] font-medium">
-                  Home Service Repair
-                </span>
+            <Link to="/" className="flex items-center group">
+              <div className="bg-white/95 hover:bg-white px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-md border border-[#E2B98E]/30 flex items-center transition-all group-hover:scale-102 group-hover:shadow-lg">
+                <img
+                  src="/logo.png"
+                  alt="Doorstep Laptop Repair Services"
+                  className="h-7 sm:h-9 md:h-10 w-auto object-contain"
+                />
               </div>
             </Link>
 
