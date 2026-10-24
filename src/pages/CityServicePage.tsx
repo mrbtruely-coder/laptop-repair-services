@@ -19,7 +19,8 @@ import {
   Sparkles,
   Clock,
   Wrench,
-  ArrowRight
+  ArrowRight,
+  Calendar
 } from 'lucide-react';
 
 export const CityServicePage: React.FC = () => {
@@ -295,6 +296,22 @@ export const CityServicePage: React.FC = () => {
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
                 </a>
+
+                {/* Book Service Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById('booking-section');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 group cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <span>Book Service Now</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
 
@@ -399,7 +416,7 @@ export const CityServicePage: React.FC = () => {
             </div>
 
             {/* Right Column: Lead Booking Form */}
-            <div className="lg:col-span-7">
+            <div id="booking-section" className="lg:col-span-7 scroll-mt-28">
               <EnquiryForm
                 initialCity={city.id}
                 initialService={service.id}

@@ -15,22 +15,45 @@ import {
   Laptop,
   Monitor,
   Network,
-  Video
+  Video,
+  Sparkles,
+  Zap,
+  Calendar
 } from 'lucide-react';
 
 export const LocationDetailPage: React.FC = () => {
-  const { citySlug } = useParams<{ citySlug: string }>();
+  const { citySlug, localitySlug } = useParams<{ citySlug: string; localitySlug?: string }>();
   const city = citySlug ? citiesData[citySlug] : null;
 
   if (!city) {
-    return <Navigate to="/locations" replace />;
+    return <Navigate to="/service-center" replace />;
   }
 
+  // Parse all localities for this city
+  const allParsedLocalities = city.localities.map(parseLocality);
+
+  // If a sub-locality slug is in the URL, identify it
+  const currentLocality = localitySlug
+    ? allParsedLocalities.find((l) => l.slug === localitySlug.toLowerCase()) || {
+        name: localitySlug
+          .split('-')
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' '),
+        slug: localitySlug.toLowerCase(),
+        distance: 'Local Area',
+        fullName: localitySlug
+      }
+    : null;
+
+  const isSubLocality = Boolean(currentLocality);
+  const locationDisplayName = currentLocality ? currentLocality.name : city.name;
+  const fullDisplayName = currentLocality ? `${currentLocality.name}, ${city.name}` : city.name;
+
   const iconMap: Record<string, React.ReactNode> = {
-    'laptop-repair': <Laptop className="w-5 h-5 text-cyan-400" />,
-    'computer-repair': <Monitor className="w-5 h-5 text-blue-400" />,
-    'networking': <Network className="w-5 h-5 text-emerald-400" />,
-    'cctv-repair-installation': <Video className="w-5 h-5 text-amber-400" />,
+    'laptop-repair': <Laptop className="w-5 h-5 text-[#E2B98E]" />,
+    'computer-repair': <Monitor className="w-5 h-5 text-[#9BBF9C]" />,
+    'networking': <Network className="w-5 h-5 text-[#E2B98E]" />,
+    'cctv-repair-installation': <Video className="w-5 h-5 text-[#9BBF9C]" />,
   };
 
   const cityTitles: Record<string, string> = {
@@ -40,31 +63,51 @@ export const LocationDetailPage: React.FC = () => {
     nellore: 'Computer & Laptop Repair Services in Nellore | 90-Min Dispatch Hub',
   };
 
-  const cityDescriptions: Record<string, string> = {
-    bengaluru: 'Reliable computer and laptop repair, networking support, and CCTV installation across Bengaluru. Doorstep engineer visits in Koramangala, Indiranagar, Whitefield, HSR Layout, and all major tech corridors.',
-    vizag: 'Looking for computer or laptop repair in Visakhapatnam? Fast hardware diagnostics, chip-level motherboard servicing, and CCTV setups across Dwaraka Nagar, MVP Colony, Gajuwaka, and Greater Vizag.',
-    chennai: 'Professional IT repair services in Chennai. On-site laptop motherboard repair, PC troubleshooting, office CAT6 cabling, and CCTV solutions across OMR, Velachery, T Nagar, Guindy, and Anna Nagar.',
-    nellore: 'Doorstep computer and laptop repair, certified chip-level diagnostics, desktop PC troubleshooting, networking, and CCTV installation with rapid technician dispatch within 90 minutes in Nellore. Pay after diagnosis.',
-  };
+  const pageTitle = isSubLocality
+    ? `Computer, Laptop, Networking & CCTV Repair in ${fullDisplayName}`
+    : cityTitles[city.id] || `Computer & Laptop Repair in ${city.name}`;
 
-  const cityKeywords: Record<string, string[]> = {
-    bengaluru: ['laptop repair Bengaluru', 'computer service HSR Layout', 'CCTV installation Bengaluru', 'office networking Bangalore', 'doorstep laptop repair Koramangala', 'motherboard chip repair Bengaluru'],
-    vizag: ['laptop repair Vizag', 'computer repair Visakhapatnam', 'CCTV camera installation Dwaraka Nagar', 'desktop service MVP Colony', 'networking cabling Vizag', 'anti-corrosion laptop repair Vizag'],
-    chennai: ['laptop repair Chennai', 'doorstep computer service OMR Chennai', 'laptop screen replacement Velachery', 'CCTV repair Chennai', 'office CAT6 cabling Guindy', 'MacBook repair Chennai'],
-    nellore: ['laptop repair Nellore', 'doorstep computer service Trunk Road Nellore', 'networking setup Nellore', 'CCTV installation Nellore', 'laptop repair VRC Centre', 'chip level repair Nellore']
-  };
+  const pageDescription = isSubLocality
+    ? `Certified doorstep computer, laptop, networking, and CCTV camera repair in ${fullDisplayName}. Fast technician dispatch (${currentLocality?.distance || 'within 45–90 mins'}), transparent diagnosis, and 90-day warranty.`
+    : city.description;
 
-  const cityFaqs = [
+  const canonicalPath = isSubLocality
+    ? `/service-center/${city.slug}/${currentLocality?.slug}`
+    : `/service-center/${city.slug}`;
+
+  const breadcrumbsList = isSubLocality
+    ? [
+        { name: 'Service Centers', url: '/service-center' },
+        { name: city.name, url: `/service-center/${city.slug}` },
+        { name: locationDisplayName, url: `/service-center/${city.slug}/${currentLocality?.slug}` },
+      ]
+    : [
+        { name: 'Service Centers', url: '/service-center' },
+        { name: city.name, url: `/service-center/${city.slug}` },
+      ];
+
+  const breadcrumbsItems = isSubLocality
+    ? [
+        { label: 'Service Centers', path: '/service-center' },
+        { label: city.name, path: `/service-center/${city.slug}` },
+        { label: locationDisplayName },
+      ]
+    : [
+        { label: 'Service Centers', path: '/service-center' },
+        { label: city.name },
+      ];
+
+  const pageFaqs = [
     {
-      question: `What computer and laptop services do you offer in ${city.name}?`,
-      answer: `In ${city.name}, we provide chip-level motherboard repair, OEM screen replacements, keyboard/battery swaps, SSD upgrades, desktop SMPS replacements, office CAT6 cabling, and HD/IP CCTV security camera installation.`
+      question: `What computer and laptop services do you offer in ${locationDisplayName}?`,
+      answer: `In ${locationDisplayName}, we provide chip-level motherboard repair, OEM screen replacements, keyboard/battery swaps, SSD upgrades, desktop SMPS replacements, office CAT6 cabling, and HD/IP CCTV security camera installation.`
     },
     {
-      question: `How fast can a technician visit my doorstep in ${city.name}?`,
-      answer: `Our field engineers provide rapid on-site dispatches across ${city.localities.slice(0, 5).join(', ')} and surrounding localities, typically reaching your location within 90 minutes to 2 hours of booking.`
+      question: `How fast can a technician reach my doorstep in ${locationDisplayName}?`,
+      answer: `Our service hub is located at ${city.address}. For ${locationDisplayName}${currentLocality?.distance ? ` (${currentLocality.distance})` : ''}, technician arrival is typically within 45 to 90 minutes of booking confirmation.`
     },
     {
-      question: `Do you provide a service warranty on repairs in ${city.name}?`,
+      question: `Do you provide a service warranty on repairs in ${locationDisplayName}?`,
       answer: `Yes, all genuine replacement parts and hardware repair services carry up to 90 days service warranty backed by our central support desk.`
     }
   ];
@@ -72,82 +115,132 @@ export const LocationDetailPage: React.FC = () => {
   return (
     <>
       <SEO
-        title={cityTitles[city.id] || `Computer & Laptop Repair in ${city.name}`}
-        description={cityDescriptions[city.id] || city.description}
-        canonicalPath={`/service-center/${city.slug}`}
-        keywords={cityKeywords[city.id] || [`laptop repair ${city.name}`, `computer service ${city.name}`]}
-        breadcrumbs={[
-          { name: 'Service Centers', url: '/service-center' },
-          { name: city.name, url: `/service-center/${city.slug}` },
+        title={pageTitle}
+        description={pageDescription}
+        canonicalPath={canonicalPath}
+        keywords={[
+          `laptop repair ${locationDisplayName}`,
+          `computer service ${locationDisplayName} ${city.name}`,
+          `CCTV installation ${locationDisplayName}`,
+          `wifi networking ${locationDisplayName}`,
+          `doorstep PC repair ${locationDisplayName}`
         ]}
+        breadcrumbs={breadcrumbsList}
         city={city.name}
         state={city.state}
-        faqs={cityFaqs}
+        faqs={pageFaqs}
       />
 
-      <Breadcrumbs
-        items={[
-          { label: 'Service Centers', path: '/service-center' },
-          { label: city.name },
-        ]}
-      />
+      <Breadcrumbs items={breadcrumbsItems} />
 
       {/* Hero Header */}
-      <section className="py-12 sm:py-16 bg-[#070B14] border-b border-white/5 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="py-10 sm:py-16 bg-[#102016] border-b border-[#E2B98E]/15 relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-cyan-400 text-xs font-semibold">
-                <MapPin className="w-3.5 h-3.5" />
-                <span>Verified City Service Coverage • {city.state}</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-bold uppercase tracking-wider shadow-inner">
+                <MapPin className="w-3.5 h-3.5 text-[#E2B98E]" />
+                <span>
+                  {isSubLocality
+                    ? `Verified Doorstep Hub • ${fullDisplayName}`
+                    : `Verified City Service Coverage • ${city.state}`}
+                </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                Computer, Laptop & IT Repair Services in {city.name}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF6F0] tracking-tight leading-tight">
+                {isSubLocality ? (
+                  <>
+                    Computer, Laptop, Networking & CCTV Repair in{' '}
+                    <span className="gradient-text">{locationDisplayName}</span>
+                  </>
+                ) : (
+                  <>
+                    Computer, Laptop & IT Repair Services in{' '}
+                    <span className="gradient-text">{city.name}</span>
+                  </>
+                )}
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl">
-                {city.description}
+              <p className="text-sm sm:text-base text-[#FAF6F0]/80 leading-relaxed max-w-3xl">
+                {isSubLocality
+                  ? `Need dependable on-site IT support in ${locationDisplayName}? Our mobile technician fleet operates directly from our ${city.popularName || city.name} hub (${currentLocality?.distance || 'within coverage radius'}) with OEM parts, upfront quotes, and 90-day warranty.`
+                  : city.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-400">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>{city.leadTime}</span>
+              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-[#FAF6F0]/80">
+                <div className="flex items-center gap-1.5 text-[#E2B98E] font-semibold">
+                  <Zap className="w-4 h-4 text-[#E2B98E]" />
+                  <span>{isSubLocality ? 'Doorstep Dispatch: 45–90 Mins' : city.leadTime}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#E2B98E] font-medium">
-                  <MapPin className="w-4 h-4 text-[#E2B98E] flex-shrink-0" />
-                  <span>{city.address}</span>
+                <div className="flex items-center gap-1.5 text-[#9BBF9C] font-semibold">
+                  <MapPin className="w-4 h-4 text-[#9BBF9C] flex-shrink-0" />
+                  <span>
+                    {isSubLocality
+                      ? `Hub Distance: ${currentLocality?.distance || 'Within 25 km'}`
+                      : city.address}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[#FAF6F0]/80">
+                  <ShieldCheck className="w-4 h-4 text-[#E2B98E]" />
+                  <span>Up to 90 Days Warranty</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-4 bg-[#0B1220] p-6 rounded-2xl border border-white/10 shadow-xl space-y-4">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-                {city.popularName || city.name} Service Desk
-              </h3>
-              <p className="text-xs text-slate-400">
-                Contact our local dispatch team for immediate technician scheduling or workshop pickup.
+            {/* Quick Contact Card */}
+            <div className="lg:col-span-4 p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/25 shadow-xl space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E2B98E]/10">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#E2B98E]" />
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#FAF6F0]">
+                    {locationDisplayName} Service Desk
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-[#E2B98E] font-bold">ACTIVE</span>
+              </div>
+
+              <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
+                Connect directly with our {city.name} support dispatcher for immediate slot scheduling.
               </p>
 
-              <a
-                href={`tel:${siteConfig.phoneRaw}`}
-                className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs py-3 px-4 rounded-xl transition-colors shadow-md"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Call {city.helpline}</span>
-              </a>
+              <div className="space-y-2.5 pt-1">
+                <a
+                  href={`tel:${siteConfig.phoneRaw}`}
+                  className="w-full inline-flex items-center justify-center gap-2 sand-btn-3d text-[#24160E] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Call {siteConfig.phoneDisplay}</span>
+                </a>
 
-              <a
-                href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent(`Hello TechFix, I need repair assistance in ${city.name}.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-semibold text-xs py-3 px-4 rounded-xl transition-colors shadow-md"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp {city.popularName || city.name} Team</span>
-              </a>
+                <a
+                  href={`https://wa.me/${siteConfig.whatsappRaw}?text=${encodeURIComponent(
+                    `Hello, I need computer / laptop repair assistance in ${locationDisplayName}, ${city.name}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-[#12231A] font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>WhatsApp {locationDisplayName} Desk</span>
+                </a>
+
+                {/* Book Service Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById('booking-section');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#6E4331] hover:bg-[#85523D] text-[#FAF6F0] border border-[#E2B98E]/30 font-bold text-xs py-3.5 px-4 rounded-xl transition-all shadow-md active:scale-95 group cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4 text-[#E2B98E]" />
+                  <span>Book Service Now</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
             </div>
 
           </div>
@@ -155,51 +248,53 @@ export const LocationDetailPage: React.FC = () => {
       </section>
 
       {/* City Services & Localities Section */}
-      <section className="py-14 sm:py-20 bg-[#0B1220]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <section className="py-14 sm:py-20 bg-[#12231A]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
-          {/* Services Available in this City */}
+          {/* Services Available in this City / SubLocality */}
           <div>
             <div className="mb-8">
-              <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-bold text-[#E2B98E] uppercase tracking-wider block mb-1">
                 Local Offerings
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Available Services Across {city.name}
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#FAF6F0]">
+                Available Services in {locationDisplayName}
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                Explore dedicated landing pages tailored to your specific hardware requirement in {city.name}.
+              <p className="text-xs sm:text-sm text-[#FAF6F0]/70 mt-1">
+                Dedicated on-site diagnostics and repairs tailored for {locationDisplayName}.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {Object.values(servicesData).map((srv) => (
                 <div
                   key={srv.id}
-                  className="glass-card rounded-2xl p-6 flex flex-col justify-between group"
+                  className="nature-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#E2B98E]/50 transition-all shadow-md"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="p-2.5 rounded-xl bg-[#070B14] border border-white/5 group-hover:border-cyan-500/40 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-[#12231A] border border-[#E2B98E]/20 text-[#E2B98E] group-hover:border-[#E2B98E]/50 transition-colors">
                         {iconMap[srv.id]}
                       </div>
-                      <span className="text-[11px] font-mono text-cyan-400">AVAILABLE</span>
+                      <span className="text-[10px] font-mono font-bold text-[#E2B98E] bg-[#6E4331]/30 px-2 py-0.5 rounded-full border border-[#E2B98E]/20">
+                        AVAILABLE
+                      </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">
-                      {srv.shortTitle}
+                    <h3 className="text-base font-bold text-[#FAF6F0] group-hover:text-[#E2B98E] transition-colors">
+                      {srv.shortTitle} in {locationDisplayName}
                     </h3>
-                    <p className="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#FAF6F0]/70 mt-2 line-clamp-3 leading-relaxed">
                       {srv.tagline}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-white/5">
+                  <div className="pt-4 mt-4 border-t border-[#E2B98E]/10">
                     <Link
                       to={`/${city.slug}/${srv.slug}`}
-                      className="w-full inline-flex items-center justify-between text-xs font-semibold text-cyan-400 hover:text-cyan-300 py-1"
+                      className="w-full inline-flex items-center justify-between text-xs font-semibold text-[#E2B98E] hover:text-[#FAF6F0] py-1 transition-colors"
                     >
-                      <span>{srv.shortTitle} in {city.name}</span>
+                      <span>Explore Details</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -208,48 +303,84 @@ export const LocationDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Side by Side: Key Localities Coverage & Booking Form */}
+          {/* Side By Side: Key Localities Coverage & Booking Form */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Column: Key Localities Breakdown & Service Hub Details */}
             <div className="lg:col-span-5 space-y-6">
               <div className="p-6 sm:p-7 rounded-3xl nature-panel border border-[#E2B98E]/20 space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
-                  Verified 25 km Coverage Radius
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6E4331]/35 border border-[#E2B98E]/30 text-[#E2B98E] text-xs font-semibold shadow-inner">
+                    Verified 25 km Coverage Radius
+                  </div>
+                  {isSubLocality && (
+                    <Link
+                      to={`/service-center/${city.slug}`}
+                      className="text-xs font-semibold text-[#E2B98E] hover:underline"
+                    >
+                      ← All {city.name} Localities
+                    </Link>
+                  )}
                 </div>
+
                 <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6F0]">
-                  Key Localities Served in {city.name} (Within 25 km Radius)
+                  {isSubLocality
+                    ? `Localities Served Around ${locationDisplayName}`
+                    : `Key Localities Served in ${city.name} (Within 25 km Radius)`}
                 </h3>
+                
                 <p className="text-xs text-[#FAF6F0]/75 leading-relaxed">
-                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-[#E2B98E]">25 km radius</strong> of our service center ({city.address}) for doorstep inspections, repairs, and pickup:
+                  Our mobile technician units operate throughout the following neighbourhoods strictly within a <strong className="text-[#E2B98E]">25 km radius</strong> of our service center ({city.address}):
                 </p>
 
+                {/* Localities Grid with Clickable Links */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                  {city.localities.map((locStr, idx) => {
-                    const loc = parseLocality(locStr);
+                  {allParsedLocalities.map((loc, idx) => {
+                    const isSelected = isSubLocality && currentLocality?.slug === loc.slug;
                     return (
                       <Link
                         key={idx}
                         to={`/service-center/${city.slug}/${loc.slug}`}
-                        className="p-2.5 rounded-xl bg-[#12231A]/80 border border-[#E2B98E]/15 text-xs text-[#FAF6F0]/90 flex items-center justify-between hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E] transition-all shadow-sm group"
+                        className={`p-2.5 rounded-xl border text-xs flex items-center justify-between transition-all shadow-sm group ${
+                          isSelected
+                            ? 'bg-[#E2B98E] text-[#24160E] font-bold border-[#E2B98E] shadow-md'
+                            : 'bg-[#12231A]/80 border-[#E2B98E]/15 text-[#FAF6F0]/90 hover:border-[#E2B98E] hover:bg-[#183023] hover:text-[#E2B98E]'
+                        }`}
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                          <MapPin
+                            className={`w-3.5 h-3.5 flex-shrink-0 group-hover:scale-110 transition-transform ${
+                              isSelected ? 'text-[#24160E]' : 'text-[#E2B98E]'
+                            }`}
+                          />
                           <span className="truncate font-medium">{loc.name}</span>
                           {loc.distance && (
-                            <span className="text-[10px] text-[#FAF6F0]/50 shrink-0">({loc.distance})</span>
+                            <span
+                              className={`text-[10px] shrink-0 ${
+                                isSelected ? 'text-[#24160E]/70' : 'text-[#FAF6F0]/50'
+                              }`}
+                            >
+                              ({loc.distance})
+                            </span>
                           )}
                         </div>
-                        <ArrowRight className="w-3 h-3 text-[#E2B98E]/50 group-hover:text-[#E2B98E] group-hover:translate-x-0.5 transition-all shrink-0 ml-1" />
+                        <ArrowRight
+                          className={`w-3 h-3 group-hover:translate-x-0.5 transition-all shrink-0 ml-1 ${
+                            isSelected ? 'text-[#24160E]' : 'text-[#E2B98E]/50 group-hover:text-[#E2B98E]'
+                          }`}
+                        />
                       </Link>
                     );
                   })}
                 </div>
 
                 <div className="pt-3 border-t border-[#E2B98E]/10 text-xs text-[#FAF6F0]/70 flex flex-col gap-1.5">
-                  <span>Need service at a doorstep within or near 25 km of {city.name} hub?</span>
-                  <a href={`tel:${siteConfig.phoneRaw}`} className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1">
-                    <span>Call for instant 25 km route dispatch →</span>
+                  <span>Need service at a doorstep in {locationDisplayName}?</span>
+                  <a
+                    href={`tel:${siteConfig.phoneRaw}`}
+                    className="text-[#E2B98E] hover:underline font-semibold flex items-center gap-1"
+                  >
+                    <span>Call for instant route dispatch →</span>
                   </a>
                 </div>
               </div>
@@ -258,7 +389,7 @@ export const LocationDetailPage: React.FC = () => {
               <div className="p-5 rounded-2xl nature-panel border border-[#E2B98E]/15 space-y-3">
                 <h4 className="text-sm font-bold text-[#FAF6F0] flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#7AA27D]" />
-                  <span>{city.name} Service Commitments</span>
+                  <span>{locationDisplayName} Service Commitments</span>
                 </h4>
                 <ul className="space-y-2 text-xs text-[#FAF6F0]/80">
                   {city.serviceHighlights.map((hl, idx) => (
@@ -275,18 +406,18 @@ export const LocationDetailPage: React.FC = () => {
                   </p>
                   <p className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#E2B98E] flex-shrink-0" />
-                    <span><strong>Service Hub:</strong> {city.serviceHub}</span>
+                    <span><strong>Operating Service Hub:</strong> {city.serviceHub}</span>
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Right Column: Booking Form */}
-            <div className="lg:col-span-7">
+            <div id="booking-section" className="lg:col-span-7 scroll-mt-28">
               <EnquiryForm
                 initialCity={city.id}
-                title={`Book an IT Repair in ${city.name}`}
-                subtitle={`Select your required service below. Our ${city.name} support dispatcher will get in touch promptly.`}
+                title={`Book an IT Repair in ${locationDisplayName}`}
+                subtitle={`Instant doorstep technician dispatch for ${locationDisplayName}, ${city.name}. Select your service below.`}
               />
             </div>
 
@@ -297,3 +428,4 @@ export const LocationDetailPage: React.FC = () => {
     </>
   );
 };
+export default LocationDetailPage;
