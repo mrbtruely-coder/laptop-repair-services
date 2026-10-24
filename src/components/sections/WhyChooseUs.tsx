@@ -50,7 +50,7 @@ export const WhyChooseUs: React.FC = () => {
         {/* Diagnostic reassurance banner */}
         <div className="mt-12 p-6 sm:p-8 rounded-3xl nature-panel flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="space-y-1.5 text-center sm:text-left">
-            <h4 className="text-[#FAF6F0] font-bold text-base sm:text-lg">Need advice on an uncertain hardware or appliance problem?</h4>
+            <h4 className="text-[#FAF6F0] font-bold text-base sm:text-lg">Need advice on an uncertain computer, laptop, or network issue?</h4>
             <p className="text-xs sm:text-sm text-[#FAF6F0]/75">Speak directly with a senior support engineer for free initial symptom guidance.</p>
           </div>
           <a

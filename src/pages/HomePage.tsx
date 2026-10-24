@@ -20,7 +20,7 @@ export const HomePage: React.FC = () => {
           'doorstep laptop repair Bengaluru',
           'laptop motherboard repair Vizag',
           'computer desktop repair Chennai',
-          'appliance and laptop repair Nellore',
+          'computer and laptop repair Nellore',
           'CCTV installation and DVR repair',
           'office networking CAT6 cabling',
           'chip-level laptop servicing',

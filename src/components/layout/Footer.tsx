@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
             </Link>
 
             <p className="text-xs text-[#FAF6F0]/70 leading-relaxed max-w-sm">
-              Professional laptop servicing, computer diagnostics, home appliance repairs, enterprise networking, and CCTV security. Focused on customer transparency and verified technicians.
+              Professional laptop servicing, desktop computer diagnostics, enterprise networking, and CCTV security. Focused on customer transparency and verified technicians.
             </p>
 
             <div className="pt-2 space-y-2 text-xs">
@@ -194,7 +194,7 @@ export const Footer: React.FC = () => {
         {/* Verification & Transparency Disclaimer */}
         <div className="mt-12 pt-6 border-t border-[#E2B98E]/10 text-[11px] text-[#FAF6F0]/55 leading-relaxed bg-[#14281E]/60 p-5 rounded-2xl border border-[#E2B98E]/10">
           <p>
-            <strong className="text-[#E2B98E]">Service Policy & Disclaimer:</strong> {siteConfig.brandName} operates for computer, laptop, networking, CCTV, and doorstep appliance diagnostics across Bengaluru, Visakhapatnam, Chennai, and Nellore. All diagnostic estimates are quoted before work begins. Brand names (Dell, HP, Lenovo, Apple, Samsung, LG, Whirlpool, etc.) are used solely for descriptive compatibility identification.
+            <strong className="text-[#E2B98E]">Service Policy & Disclaimer:</strong> {siteConfig.brandName} operates for computer, laptop, networking, and CCTV diagnostics across Bengaluru, Visakhapatnam, Chennai, and Nellore. All diagnostic estimates are quoted before work begins. Brand names (Dell, HP, Lenovo, Apple, Asus, Acer, Cisco, Hikvision, Dahua, etc.) are used solely for descriptive compatibility identification.
           </p>
         </div>
 

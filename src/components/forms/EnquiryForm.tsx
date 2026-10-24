@@ -21,11 +21,9 @@ import {
   Gift,
   ShieldCheck,
   User,
-  Wind,
-  Refrigerator,
-  WashingMachine,
   Laptop,
   Monitor,
+  Network,
   Video,
   Mail,
 } from 'lucide-react';
@@ -69,14 +67,14 @@ interface EnquiryFormProps {
   className?: string;
 }
 
-export const APPLIANCE_TILES = [
-  { id: 'ac-service', label: 'AC SERVICE', icon: Wind, desc: 'Cooling & Repair' },
-  { id: 'refrigerator', label: 'REFRIGERATOR', icon: Refrigerator, desc: 'Cooling & Gas' },
-  { id: 'washing-machine', label: 'WASHING MACHINE', icon: WashingMachine, desc: 'Motor & Drum' },
-  { id: 'laptop-repair', label: 'LAPTOP REPAIR', icon: Laptop, desc: 'Screen & Motherboard' },
-  { id: 'computer-repair', label: 'DESKTOP / PC', icon: Monitor, desc: 'Hardware & OS' },
-  { id: 'cctv-repair-installation', label: 'CCTV & NETWORK', icon: Video, desc: 'Security & Wi-Fi' },
+export const SERVICE_TILES = [
+  { id: 'laptop-repair', label: 'LAPTOP REPAIR', icon: Laptop, desc: 'Screen, Battery & Motherboard' },
+  { id: 'computer-repair', label: 'DESKTOP / PC', icon: Monitor, desc: 'Hardware, SMPS & BSOD' },
+  { id: 'networking', label: 'NETWORKING', icon: Network, desc: 'Wi-Fi, CAT6 & Routers' },
+  { id: 'cctv-repair-installation', label: 'CCTV REPAIR', icon: Video, desc: 'Camera, DVR & Security' },
 ];
+
+export const APPLIANCE_TILES = SERVICE_TILES;
 
 export const NELLORE_AREAS = [
   'Trunk Road',
@@ -137,9 +135,9 @@ const CONFETTI_COLORS = [
 
 export const EnquiryForm: React.FC<EnquiryFormProps> = ({
   initialCity = 'nellore',
-  initialService = 'ac-service',
+  initialService = 'laptop-repair',
   title = "Request Service",
-  subtitle = "Tap your appliance, enter details, and book your technician.",
+  subtitle = "Select your device or service, enter details, and book your technician.",
   className = "",
 }) => {
   const getTodayDateString = () => new Date().toISOString().split('T')[0];
@@ -151,7 +149,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     phone: '',
     email: '',
     city: initialCity || 'nellore',
-    service: initialService || 'ac-service',
+    service: initialService || 'laptop-repair',
     serviceMode: 'doorstep',
     contactMethod: 'phone',
     slotDate: getTodayDateString(),
@@ -293,7 +291,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     if (!formData.description || formData.description.trim().length < 2) {
       setFormData((prev) => ({
         ...prev,
-        description: 'Doorstep diagnostic inspection and appliance repair dispatch',
+        description: 'Doorstep diagnostic inspection and device repair dispatch',
       }));
     }
 
@@ -623,17 +621,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                 =================================================== */}
             {currentStep === 1 && (
               <div className="space-y-4 animate-in fade-in duration-200">
-                {/* 1. TAP YOUR APPLIANCE / SERVICE */}
+                {/* 1. SELECT SERVICE / DEVICE */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="block text-[11px] font-bold text-[#E2B98E] uppercase tracking-wider">
-                      1. TAP YOUR APPLIANCE / SERVICE <span className="text-[#E2B98E]">*</span>
+                      1. SELECT SERVICE / DEVICE <span className="text-[#E2B98E]">*</span>
                     </label>
                     <span className="text-[10px] text-[#FAF6F0]/60">Select to auto-fill</span>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {APPLIANCE_TILES.map((tile) => {
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    {SERVICE_TILES.map((tile) => {
                       const IconComponent = tile.icon;
                       const isSelected = formData.service === tile.id;
                       return (

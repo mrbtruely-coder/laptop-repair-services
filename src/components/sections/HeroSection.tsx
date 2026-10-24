@@ -18,9 +18,9 @@ export const HeroSection: React.FC = () => {
             {/* Top pill badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6E4331]/40 border border-[#E2B98E]/40 text-xs font-semibold text-[#E2B98E] shadow-md">
               <span className="w-2 h-2 rounded-full bg-[#E2B98E] animate-ping" />
-              <span>Doorstep Hardware & Appliance Specialists</span>
+              <span>Doorstep Computer & IT Hardware Specialists</span>
               <span className="text-[#D2DCD2]/50">|</span>
-              <span className="text-[#FAF6F0]">Home Service Repair </span>
+              <span className="text-[#FAF6F0]">Laptop, Desktop, Network & CCTV</span>
             </div>
 
             {/* Primary H1 */}

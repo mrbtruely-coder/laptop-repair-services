@@ -27,7 +27,7 @@ export const ContactPage: React.FC = () => {
     <>
       <SEO
         title="Book Doorstep Repair & Dispatch | Nellore, Bengaluru, Vizag, Chennai"
-        description="Easy 2-step repair booking. Select your device or appliance, choose your location, and request verified technician dispatch in Nellore, Bengaluru, Vizag & Chennai. Pay after service."
+        description="Easy 2-step repair booking. Select your computer, laptop, networking, or CCTV service, and request verified technician dispatch in Nellore, Bengaluru, Vizag & Chennai. Pay after service."
         canonicalPath="/contact"
         keywords={[
           'book laptop repair',
@@ -67,7 +67,7 @@ export const ContactPage: React.FC = () => {
 
               {/* Description */}
               <p className="text-[#FAF6F0]/80 text-sm sm:text-base leading-relaxed">
-                <strong className="text-[#E2B98E]">Simple Booking:</strong> 1. Tap the icon of your broken appliance or computer, 2. Enter your name and mobile number.
+                <strong className="text-[#E2B98E]">Simple Booking:</strong> 1. Select your device or service, 2. Enter your name and mobile number.
               </p>
               
               <p className="text-[#FAF6F0]/75 text-xs sm:text-sm leading-relaxed">
@@ -138,9 +138,9 @@ export const ContactPage: React.FC = () => {
             <div id="booking-dispatch-card" className="lg:col-span-7">
               <EnquiryForm
                 title="Request Service"
-                subtitle="Tap your appliance, enter details, and book your technician."
+                subtitle="Select your service, enter details, and book your technician."
                 initialCity="nellore"
-                initialService="ac-service"
+                initialService="laptop-repair"
               />
             </div>
 
@@ -162,12 +162,12 @@ export const ContactPage: React.FC = () => {
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#FAF6F0] tracking-tight">
-            Need Quick Appliance Repair?
+            Need Quick Computer or Laptop Repair?
           </h2>
 
           {/* Subtitle */}
           <p className="text-[#FAF6F0]/75 text-sm sm:text-base mt-3 leading-relaxed max-w-2xl mx-auto">
-            Don't let a broken AC, refrigerator, washing machine, or laptop interrupt your routine. Tap below to call or chat with our Nellore technicians immediately.
+            Don't let a broken laptop screen, desktop failure, network drop, or faulty CCTV interrupt your business or routine. Tap below to call or chat with our certified technicians immediately.
           </p>
 
           {/* 3 Prominent Action Buttons (Warm Tactile Palette: NO blue, NO white!) */}

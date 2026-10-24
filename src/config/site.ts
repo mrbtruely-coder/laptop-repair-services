@@ -342,7 +342,7 @@ export const citiesData: Record<string, CityInfo> = {
     popularName: "Nellore",
     address: "Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh 524001",
     coverageRadius: "20 km",
-    description: "Doorstep appliance and electronics repair, certified laptop chip-level fixes, AC servicing, and quick technician dispatch within 90 minutes in Nellore.",
+    description: "Doorstep computer and laptop repair, certified chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch within 90 minutes in Nellore.",
     leadTime: "Doorstep Dispatch in Nellore within 90 minutes",
     serviceHub: "Trunk Road, Near VRC Centre, Nellore, Andhra Pradesh",
     localities: [
@@ -356,7 +356,7 @@ export const citiesData: Record<string, CityInfo> = {
       "Doorstep technician dispatch in Nellore within 90 minutes",
       "No booking fee — Free registration & inspection",
       "Verified local Nellore certified engineers",
-      "AC, Refrigerator, Washing Machine, and Laptop hardware repair"
+      "Computer, Laptop, Networking, and CCTV surveillance repair"
     ]
   }
 };

@@ -37,21 +37,21 @@ export const LocationDetailPage: React.FC = () => {
     bengaluru: 'Computer & Laptop Repair Services in Bengaluru | HSR Layout Hub & Doorstep Service',
     vizag: 'Computer & Laptop Repair in Vizag (Visakhapatnam) | Dwaraka Nagar Hub',
     chennai: 'Computer & Laptop Repair Services in Chennai | OMR & Central Tech Hubs',
-    nellore: 'Doorstep Appliance & Laptop Repair Services in Nellore | 90-Min Dispatch Hub',
+    nellore: 'Computer & Laptop Repair Services in Nellore | 90-Min Dispatch Hub',
   };
 
   const cityDescriptions: Record<string, string> = {
     bengaluru: 'Reliable computer and laptop repair, networking support, and CCTV installation across Bengaluru. Doorstep engineer visits in Koramangala, Indiranagar, Whitefield, HSR Layout, and all major tech corridors.',
     vizag: 'Looking for computer or laptop repair in Visakhapatnam? Fast hardware diagnostics, chip-level motherboard servicing, and CCTV setups across Dwaraka Nagar, MVP Colony, Gajuwaka, and Greater Vizag.',
     chennai: 'Professional IT repair services in Chennai. On-site laptop motherboard repair, PC troubleshooting, office CAT6 cabling, and CCTV solutions across OMR, Velachery, T Nagar, Guindy, and Anna Nagar.',
-    nellore: 'Doorstep appliance and electronics repair, certified laptop chip-level fixes, desktop PC troubleshooting, and rapid technician dispatch within 90 minutes in Nellore. Pay after diagnosis.',
+    nellore: 'Doorstep computer and laptop repair, certified chip-level diagnostics, desktop PC troubleshooting, networking, and CCTV installation with rapid technician dispatch within 90 minutes in Nellore. Pay after diagnosis.',
   };
 
   const cityKeywords: Record<string, string[]> = {
     bengaluru: ['laptop repair Bengaluru', 'computer service HSR Layout', 'CCTV installation Bengaluru', 'office networking Bangalore', 'doorstep laptop repair Koramangala', 'motherboard chip repair Bengaluru'],
     vizag: ['laptop repair Vizag', 'computer repair Visakhapatnam', 'CCTV camera installation Dwaraka Nagar', 'desktop service MVP Colony', 'networking cabling Vizag', 'anti-corrosion laptop repair Vizag'],
     chennai: ['laptop repair Chennai', 'doorstep computer service OMR Chennai', 'laptop screen replacement Velachery', 'CCTV repair Chennai', 'office CAT6 cabling Guindy', 'MacBook repair Chennai'],
-    nellore: ['laptop repair Nellore', 'doorstep computer service Trunk Road Nellore', 'appliance repair Nellore', 'CCTV installation Nellore', 'laptop repair VRC Centre', 'chip level repair Nellore']
+    nellore: ['laptop repair Nellore', 'doorstep computer service Trunk Road Nellore', 'networking setup Nellore', 'CCTV installation Nellore', 'laptop repair VRC Centre', 'chip level repair Nellore']
   };
 
   const cityFaqs = [
