@@ -428,19 +428,22 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     };
 
     try {
-      // Send confirmation email via Node.js backend (live Render API with fallback)
+      // Send confirmation email via Vercel serverless /api/book-service with fallback to live Render endpoint
       let response;
       try {
-        response = await fetch(liveBackendEndpoint, {
+        response = await fetch('/api/book-service', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(bookingPayload),
         });
-      } catch (directErr) {
-        console.warn('Direct live backend fetch error, trying proxy /api:', directErr);
-        response = await fetch('/api/book-service', {
+        if (!response.ok) {
+          throw new Error('Vercel /api responded with ' + response.status);
+        }
+      } catch (err1) {
+        console.warn('Vercel API error, trying Render backend fallback:', err1);
+        response = await fetch(liveBackendEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
