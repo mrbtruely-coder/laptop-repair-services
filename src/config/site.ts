@@ -56,6 +56,8 @@ export const siteConfig = {
   supportEmail: "support@laptoprepairsservices.com",
   workingHours: "Monday – Sunday: 8:30 AM to 8:30 PM",
   warrantyHighlight: "Up to 90 Days Service Warranty on hardware replacements",
+  playStoreUrl: (import.meta as any).env?.VITE_PLAY_STORE_URL || "https://play.google.com/store/apps/details?id=com.doorstephub.customer&pcampaignid=web_share",
+  appStoreUrl: (import.meta as any).env?.VITE_APP_STORE_URL || "https://apps.apple.com/in/app/doorstep-hub-all-your-needs/id6475340236",
   serviceModes: [
     {
       id: "doorstep",

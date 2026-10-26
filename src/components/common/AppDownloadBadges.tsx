@@ -1,18 +1,26 @@
 import React from 'react';
+import { siteConfig } from '../../config/site';
 
 interface AppDownloadBadgesProps {
   className?: string;
   theme?: 'dark' | 'light' | 'navy';
   size?: 'sm' | 'md' | 'lg';
+  playStoreUrl?: string;
+  appStoreUrl?: string;
 }
 
 export const AppDownloadBadges: React.FC<AppDownloadBadgesProps> = ({
   className = '',
   theme = 'navy',
-  size = 'md'
+  size = 'md',
+  playStoreUrl,
+  appStoreUrl,
 }) => {
   const isNavy = theme === 'navy';
   const isLight = theme === 'light';
+
+  const finalPlayStoreUrl = playStoreUrl || siteConfig.playStoreUrl;
+  const finalAppStoreUrl = appStoreUrl || siteConfig.appStoreUrl;
 
   const btnBg = isNavy
     ? 'bg-[#06223A] hover:bg-[#0A3356] text-white border border-[#06223A]'
@@ -27,10 +35,10 @@ export const AppDownloadBadges: React.FC<AppDownloadBadgesProps> = ({
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       {/* Google Play Store Badge */}
       <a
-        href="https://play.google.com/store"
+        href={finalPlayStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download on Google Play Store"
+        aria-label="Download Doorstep Hub on Google Play Store"
         className={`inline-flex items-center gap-3 rounded-xl transition-all shadow-sm hover:shadow-md hover:scale-[1.02] ${btnBg} ${pad}`}
       >
         {/* Play Store SVG */}
@@ -64,10 +72,10 @@ export const AppDownloadBadges: React.FC<AppDownloadBadgesProps> = ({
 
       {/* Apple App Store Badge */}
       <a
-        href="https://www.apple.com/app-store/"
+        href={finalAppStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download on Apple App Store"
+        aria-label="Download Doorstep Hub on Apple App Store"
         className={`inline-flex items-center gap-3 rounded-xl transition-all shadow-sm hover:shadow-md hover:scale-[1.02] ${btnBg} ${pad}`}
       >
         {/* Apple SVG */}

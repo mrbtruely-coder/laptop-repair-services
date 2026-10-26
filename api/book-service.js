@@ -74,13 +74,18 @@ export default async function handler(req, res) {
         : 'Doorstep Cash / Pay After Service';
 
     // Configure Nodemailer directly with verified host & port 465 (SSL)
+    const smtpUser = process.env.BOOKINGS_EMAIL_USER || 'bookinginfo@homeappliancerepairsservices.com';
+    const smtpPass = process.env.BOOKINGS_EMAIL_PASS || 'vinod#';
+    const smtpHost = process.env.BOOKINGS_EMAIL_HOST || 'homeappliancerepairsservices.com';
+    const smtpPort = Number(process.env.BOOKINGS_EMAIL_PORT) || 465;
+
     const transporter = nodemailer.createTransport({
-      host: 'mail.goexpertsapps.com',
-      port: 465,
-      secure: true,
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
       auth: {
-        user: 'bookings@doorstephub.com',
-        pass: 'jwT6NlDRBYh5',
+        user: smtpUser,
+        pass: smtpPass,
       },
       tls: {
         rejectUnauthorized: false,
@@ -96,7 +101,7 @@ export default async function handler(req, res) {
       <html>
       <head>
         <meta charset="utf-8">
-        <title>Booking Confirmation - Door Step Service</title>
+        <title>Booking Confirmation - Laptop Repairs & Services</title>
       </head>
       <body style="margin: 0; padding: 0; background-color: #06223A; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #FFFFFF;">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #06223A; padding: 25px 12px;">
@@ -105,6 +110,9 @@ export default async function handler(req, res) {
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 620px; background-color: #0B2D4C; border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                 <tr>
                   <td style="background: linear-gradient(135deg, #06223A 0%, #0F3B63 100%); padding: 25px 20px; text-align: center; border-bottom: 2px solid #22C55E;">
+                    <div style="text-align: center; margin-bottom: 12px;">
+                      <img src="https://laptoprepairsservices.com/logo.png" alt="Laptop Repairs & Services" style="max-height: 52px; width: auto; max-width: 220px; vertical-align: middle; background-color: #FFFFFF; padding: 6px 14px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+                    </div>
                     <span style="display: inline-block; background-color: #22C55E; color: #06223A; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">
                       BOOKING CONFIRMED
                     </span>
@@ -222,7 +230,7 @@ export default async function handler(req, res) {
                       Laptop Repairs & Services • Same-day Doorstep Support across Bengaluru, Vizag, Chennai & Hyderabad
                     </p>
                     <p style="margin: 0; color: rgba(255, 255, 255, 0.4); font-size: 10px;">
-                      © 2026 Door Step Service. All rights reserved.
+                      © 2026 Laptop Repairs & Services. All rights reserved.
                     </p>
                   </td>
                 </tr>
@@ -234,7 +242,7 @@ export default async function handler(req, res) {
       </html>
     `;
 
-    // 2. Team Notification Email (Sent to doorstephub@gmail.com)
+    // 2. Team Notification Email
     const teamHtml = `
       <!DOCTYPE html>
       <html>
@@ -246,6 +254,9 @@ export default async function handler(req, res) {
         <table style="max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 10px; border: 2px solid #22C55E; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
           <tr style="background-color: #06223A; color: #ffffff;">
             <td style="padding: 16px 20px;">
+              <div style="margin-bottom: 10px;">
+                <img src="https://laptoprepairsservices.com/logo.png" alt="Laptop Repairs & Services" style="max-height: 40px; width: auto; background-color: #ffffff; padding: 4px 10px; border-radius: 6px; display: inline-block;" />
+              </div>
               <div style="font-size: 11px; font-weight: bold; color: #22C55E; text-transform: uppercase;">NEW CUSTOMER BOOKING RECEIVED</div>
               <h2 style="margin: 4px 0 0; color: #ffffff; font-size: 19px;">Ticket #${ticketId} — ${city}</h2>
               <div style="font-size: 11px; color: #cbd5e1; margin-top: 4px;">Time: ${submittedTime}</div>
@@ -319,12 +330,13 @@ export default async function handler(req, res) {
     `;
 
     const sendPromises = [];
+    const teamNotificationEmail = process.env.TEAM_NOTIFICATION_EMAIL || smtpUser;
 
     // Dispatch 1: Customer email (if provided)
     if (email && email.includes('@')) {
       sendPromises.push(
         transporter.sendMail({
-          from: '"Door Step Service" <bookings@doorstephub.com>',
+          from: `"Laptop Repairs & Services" <${smtpUser}>`,
           to: email,
           subject: `Booking Confirmed: Doorstep Repair Dispatch (#${ticketId})`,
           html: customerHtml,
@@ -335,11 +347,11 @@ export default async function handler(req, res) {
       );
     }
 
-    // Dispatch 2: Team alert email (doorstephub@gmail.com)
+    // Dispatch 2: Team alert email
     sendPromises.push(
       transporter.sendMail({
-        from: '"Door Step Service Bookings" <bookings@doorstephub.com>',
-        to: 'doorstephub@gmail.com',
+        from: `"Laptop Repairs & Services Bookings" <${smtpUser}>`,
+        to: teamNotificationEmail,
         subject: `🚨 NEW BOOKING: ${fullName} - ${serviceName} (${city}) [#${ticketId}]`,
         html: teamHtml,
       }).catch((err) => {
@@ -355,7 +367,7 @@ export default async function handler(req, res) {
       message: 'Booking completed successfully and emails sent.',
       ticketId,
       sentToCustomer: email || null,
-      sentToTeam: 'doorstephub@gmail.com',
+      sentToTeam: teamNotificationEmail,
     });
   } catch (err) {
     console.error('Serverless booking error:', err);

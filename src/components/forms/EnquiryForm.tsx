@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Phone,
   MessageSquare,
@@ -11,14 +11,11 @@ import {
   Clock,
   MapPin,
   Navigation,
-  Tag,
   Sparkles,
   Check,
   X,
-  CreditCard,
   Receipt,
   PartyPopper,
-  Gift,
   ShieldCheck,
   User,
   Laptop,
@@ -93,9 +90,7 @@ interface FormState {
   slotDate: string;
   slotTime: string;
   address: string;
-  selectedOffer: string;
-  customOfferCode: string;
-  paymentMethod: 'doorstep_cod' | 'doorstep_upi';
+  paymentMethod: 'doorstep_cod';
   description: string;
   honeypot: string; // Spam protection
 }
@@ -147,36 +142,7 @@ export const CHANDA_NAGAR_AREAS = HYDERABAD_AREAS;
 export const NELLORE_AREAS = HYDERABAD_AREAS;
 export const APPLIANCE_TILES = SERVICE_TILES;
 
-const AVAILABLE_OFFERS = [
-  {
-    code: 'FIRST150',
-    title: '₹150 Flat OFF',
-    desc: 'Valid on your first doorstep service visit',
-    badge: 'POPULAR',
-    discount: 150,
-  },
-  {
-    code: 'DIAGFREE',
-    title: '100% Free Diagnostics',
-    desc: 'Zero inspection charge when servicing with us',
-    badge: 'ZERO RISK',
-    discount: 499,
-  },
-  {
-    code: 'FESTIVE20',
-    title: '20% OFF Servicing',
-    desc: 'Motherboard cleaning, thermal paste & tune-up',
-    badge: 'BEST VALUE',
-    discount: 100,
-  },
-  {
-    code: 'STUDENT10',
-    title: '10% Student / Senior OFF',
-    desc: 'Applicable with valid ID card verification',
-    badge: 'SPECIAL',
-    discount: 50,
-  },
-];
+
 
 const CONFETTI_COLORS = [
   '#22C55E',
@@ -229,8 +195,6 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     slotDate: getTodayDateString(),
     slotTime: 'Morning (9:00 AM – 12:00 PM)',
     address: '',
-    selectedOffer: 'FIRST150',
-    customOfferCode: '',
     paymentMethod: 'doorstep_cod',
     description: '',
     honeypot: '',
@@ -243,7 +207,16 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
   const [emailSentTo, setEmailSentTo] = useState<string>('');
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
   const [locationStatus, setLocationStatus] = useState<string>('');
-  const [showCustomOfferInput, setShowCustomOfferInput] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 7000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   // Dynamic city & localities data
   const normalizedCityKey = (formData.city || 'hyderabad').toLowerCase();
@@ -253,25 +226,8 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
   // Pricing breakdown calculations for Checkout
   const BASE_DIAGNOSTIC_FEE = 499;
   const DOORSTEP_FEE_ORIGINAL = 199;
-
-  const getOfferDiscount = () => {
-    switch (formData.selectedOffer) {
-      case 'FIRST150':
-        return 150;
-      case 'DIAGFREE':
-        return BASE_DIAGNOSTIC_FEE;
-      case 'FESTIVE20':
-        return 100;
-      case 'STUDENT10':
-        return 50;
-      default:
-        return formData.selectedOffer ? 100 : 0;
-    }
-  };
-
-  const discountAmount = getOfferDiscount();
-  const netDiagnosticDue = Math.max(0, BASE_DIAGNOSTIC_FEE - discountAmount);
-  const totalSavings = discountAmount + DOORSTEP_FEE_ORIGINAL;
+  const netDiagnosticDue = BASE_DIAGNOSTIC_FEE;
+  const totalSavings = DOORSTEP_FEE_ORIGINAL;
 
   const handleFetchLocation = () => {
     if (!navigator.geolocation) {
@@ -404,65 +360,69 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     }
 
     setIsSubmitting(true);
+    setToast(null);
 
     const generatedTicket = 'TF-' + Math.floor(100000 + Math.random() * 900000);
     setTicketId(generatedTicket);
 
-    const liveBackendEndpoint = 'https://laptop-repair-services-backend.onrender.com/api/book-service';
+    const backendEndpoint = 'https://serviceapis.laptoprepairsservices.com/api/book-service';
+    const serviceDisplayNames: Record<string, string> = {
+      'laptop-repair': 'Laptop Hardware Diagnostics & Motherboard Servicing',
+      'computer-repair': 'Desktop & PC Repair & Troubleshooting',
+      'networking': 'Structured IT Networking, CAT6 Cabling & Wi-Fi Setup',
+      'cctv-repair-installation': 'CCTV Camera Surveillance, Mounting & DVR Setup',
+    };
+    const resolvedServiceName = serviceDisplayNames[formData.service] || formData.service || 'Laptop Hardware Diagnostics & Motherboard Servicing';
+
     const bookingPayload = {
       fullName: formData.fullName,
       phone: formData.phone,
       email: formData.email,
       service: formData.service,
+      serviceType: resolvedServiceName,
       subcategory: formData.subcategory,
       address: formData.address,
       city: formData.city || 'Hyderabad',
+      state: 'Telangana',
       ticketId: generatedTicket,
-      discountAmount,
+      discountAmount: 0,
       payableAmount: netDiagnosticDue,
       contactMethod: formData.contactMethod,
-      slotDate: formData.slotDate,
-      slotTime: formData.slotTime,
-      description: formData.description,
-      paymentMethod: formData.paymentMethod,
+      slotDate: formData.slotDate || new Date().toISOString().split('T')[0],
+      slotTime: formData.slotTime || 'Within 90 Minutes (Express Dispatch)',
+      preferredDate: formData.slotDate || new Date().toISOString().split('T')[0],
+      preferredTime: formData.slotTime || 'Within 90 Minutes (Express Dispatch)',
+      description: formData.description || 'Doorstep diagnostic and repair service',
+      issueDescription: formData.description || 'Doorstep diagnostic and repair service',
+      notes: formData.description || '',
+      paymentMethod: 'doorstep_cod',
     };
 
     try {
-      // Send confirmation email via Vercel serverless /api/book-service with fallback to live Render endpoint
-      let response;
-      try {
-        response = await fetch('/api/book-service', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bookingPayload),
-        });
-        if (!response.ok) {
-          throw new Error('Vercel /api responded with ' + response.status);
-        }
-      } catch (err1) {
-        console.warn('Vercel API error, trying Render backend fallback:', err1);
-        response = await fetch(liveBackendEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bookingPayload),
-        });
+      const response = await fetch(backendEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingPayload),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok || !resData.success) {
+        const errMsg = resData.error || resData.message;
+        setToast({ type: 'error', message: errMsg });
+        setIsSubmitting(false);
+        return;
       }
 
-      if (response && response.ok) {
-        const resData = await response.json();
-        console.log('✅ Booking dispatch response:', resData);
-        setEmailSentTo(formData.email);
-      } else {
-        console.warn('Backend response not OK:', response?.status);
-        setEmailSentTo(formData.email);
-      }
-    } catch (err) {
-      console.error('Failed to communicate with Node.js backend:', err);
+      // Dynamic toast message directly from backend response with NO static or fallback string
+      setToast({ type: 'success', message: resData.message });
       setEmailSentTo(formData.email);
+      setIsSuccess(true);
+    } catch (err: any) {
+      console.error('Failed to communicate with Node.js backend:', err);
+      setToast({ type: 'error', message: err?.message || String(err) });
+      setIsSubmitting(false);
+      return;
     }
 
     try {
@@ -480,14 +440,9 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     }
 
     setIsSubmitting(false);
-    setIsSuccess(true);
   };
 
   const getWhatsAppLeadLink = () => {
-    const offerText = formData.selectedOffer
-      ? `• Applied Offer: ${formData.selectedOffer} (Saved ₹${discountAmount})\n`
-      : '';
-
     const text = encodeURIComponent(
       `🎉 Hello ${siteConfig.brandName}, I have booked a service slot!\n` +
       `• Ticket ID: ${ticketId || 'Pending'}\n` +
@@ -500,8 +455,8 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       `• Scheduled Date: ${formData.slotDate}\n` +
       `• Time Slot: ${formData.slotTime}\n` +
       (formData.address ? `• Doorstep Address: ${formData.address}\n` : '') +
-      offerText +
-      `• Estimated Doorstep Due: ₹${netDiagnosticDue} (Pay after service)\n` +
+      `• Payment Mode: Cash on Delivery (Pay after service)\n` +
+      `• Estimated Doorstep Due: ₹${netDiagnosticDue}\n` +
       `• Problem Summary: ${formData.description}\n\n` +
       `Please confirm technician dispatch for my slot!`
     );
@@ -513,6 +468,39 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       {/* Background glow accents */}
       <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#22C55E]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#06223A]/5 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Floating Dynamic Backend Toast Notification (No static or fallback text) */}
+      {toast && (
+        <div className="fixed top-5 right-5 z-50 max-w-md w-[calc(100vw-2.5rem)] animate-in slide-in-from-top-4 duration-300">
+          <div
+            className={`rounded-2xl p-4 shadow-2xl border flex items-start gap-3 backdrop-blur-md ${
+              toast.type === 'success'
+                ? 'bg-[#06223A] border-[#22C55E] text-white shadow-[#22C55E]/30'
+                : 'bg-rose-950 border-rose-500 text-white shadow-rose-900/30'
+            }`}
+          >
+            {toast.type === 'success' ? (
+              <CheckCircle2 className="w-5 h-5 text-[#22C55E] flex-shrink-0 mt-0.5" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" />
+            )}
+            <div className="flex-1 text-xs">
+              <div className="font-extrabold uppercase tracking-wider text-[10px] text-slate-300 mb-0.5">
+                {toast.type === 'success' ? 'Server Notification' : 'Server Alert'}
+              </div>
+              <p className="font-semibold text-slate-100 leading-relaxed">{toast.message}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setToast(null)}
+              className="text-slate-400 hover:text-white transition-colors p-1"
+              aria-label="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {isSuccess ? (
         /* ========================================================
@@ -558,7 +546,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
           </div>
 
           {/* Main Success Announcement */}
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/30 text-[#16A34A] text-xs font-bold shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Service Booked Successfully!</span>
@@ -566,6 +554,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
             <h3 className="text-2xl sm:text-4xl font-extrabold text-black tracking-tight">
               Your Appointment is Locked!
             </h3>
+            {toast?.message && (
+              <div className="max-w-md mx-auto p-3.5 rounded-2xl bg-[#22C55E]/15 border-2 border-[#22C55E] text-[#06223A] text-xs sm:text-sm font-semibold flex items-start gap-2.5 shadow-sm text-left">
+                <CheckCircle2 className="w-4 h-4 text-[#16A34A] flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <div className="text-[10px] uppercase tracking-wider text-[#16A34A] font-extrabold">
+                    Response from Server
+                  </div>
+                  <div className="text-slate-900 mt-0.5 font-medium">{toast.message}</div>
+                </div>
+              </div>
+            )}
             <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
               Our service engineer has received your scheduled ticket. A coordinator will verify your slot via {formData.contactMethod === 'whatsapp' ? 'WhatsApp' : 'Phone Call'} shortly.
             </p>
@@ -587,7 +586,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   Payment Status
                 </span>
                 <span className="text-xs font-semibold text-[#16A34A] bg-[#22C55E]/15 px-2.5 py-1 rounded-full border border-[#22C55E]/30 inline-block">
-                  Pay After Service
+                  Cash on Delivery
                 </span>
               </div>
             </div>
@@ -615,24 +614,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
             {/* Savings & Final Due */}
             <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-2">
               <div className="flex items-center justify-between text-xs text-slate-700">
-                <span className="flex items-center gap-1">
-                  <Gift className="w-3.5 h-3.5 text-[#16A34A]" />
-                  <span>Promo Applied: <strong className="text-black">{formData.selectedOffer || 'FIRST150'}</strong></span>
-                </span>
-                <span className="text-[#16A34A] font-bold">-₹{discountAmount} OFF</span>
-              </div>
-              <div className="flex items-center justify-between text-xs text-slate-700">
                 <span>Doorstep Convenience Visit:</span>
                 <span className="text-[#16A34A] font-bold">FREE (Saved ₹199)</span>
               </div>
               <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold text-black block">Estimated Doorstep Payable:</span>
-                  <span className="text-[10px] text-slate-500">Pay by Cash, UPI or Card on completion</span>
+                  <span className="text-[10px] text-slate-500">Pay by Cash on completion (COD Only)</span>
                 </div>
                 <div className="text-right">
                   <span className="text-xl font-mono font-extrabold text-[#16A34A]">
-                    {netDiagnosticDue === 0 ? '₹0 FREE' : `₹${netDiagnosticDue}`}
+                    ₹{netDiagnosticDue}
                   </span>
                 </div>
               </div>
@@ -689,8 +681,6 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   slotDate: getTodayDateString(),
                   slotTime: 'Morning (9:00 AM – 12:00 PM)',
                   address: '',
-                  selectedOffer: 'FIRST150',
-                  customOfferCode: '',
                   paymentMethod: 'doorstep_cod',
                   description: '',
                   honeypot: '',
@@ -1121,106 +1111,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   </button>
                 </div>
 
-                {/* 1. EXCLUSIVE OFFERS & DISCOUNTS */}
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
-                      <Tag className="w-3.5 h-3.5 text-[#16A34A]" />
-                      <span>Select Exclusive Offer or Coupon</span>
-                    </span>
-                    <span className="text-[10px] text-[#16A34A] font-bold bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
-                      Discounts Apply Instantly
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {AVAILABLE_OFFERS.map((offer) => {
-                      const isSelected = formData.selectedOffer === offer.code;
-                      return (
-                        <div
-                          key={offer.code}
-                          onClick={() => {
-                            setFormData({
-                              ...formData,
-                              selectedOffer: isSelected ? '' : offer.code,
-                            });
-                            setShowCustomOfferInput(false);
-                          }}
-                          className={`p-3 rounded-2xl cursor-pointer border transition-all flex items-start justify-between gap-2.5 ${isSelected
-                            ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] shadow-sm'
-                            : 'bg-white border-slate-200 hover:border-slate-300'
-                            }`}
-                        >
-                          <div className="space-y-0.5">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-bold text-black">{offer.title}</span>
-                              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#22C55E]/20 text-[#16A34A] font-bold">
-                                {offer.code}
-                              </span>
-                            </div>
-                            <p className="text-[10px] text-slate-500 leading-tight font-medium">{offer.desc}</p>
-                          </div>
-
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isSelected ? 'bg-[#22C55E] text-white' : 'border border-slate-300 text-transparent'
-                            }`}>
-                            <Check className="w-3 h-3 stroke-[3]" />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Custom coupon write-in toggle */}
-                  <div className="pt-1 flex items-center justify-between text-xs">
-                    <button
-                      type="button"
-                      onClick={() => setShowCustomOfferInput(!showCustomOfferInput)}
-                      className="text-[11px] text-[#16A34A] hover:underline font-semibold flex items-center gap-1"
-                    >
-                      <span>{showCustomOfferInput ? 'Hide promo code entry' : 'Have a different promo coupon code?'}</span>
-                    </button>
-
-                    {formData.selectedOffer && (
-                      <span className="text-[11px] text-[#16A34A] font-bold flex items-center gap-1.5 bg-[#22C55E]/15 px-2 py-0.5 rounded-full border border-[#22C55E]/30">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>Coupon: {formData.selectedOffer}</span>
-                        <button
-                          type="button"
-                          onClick={() => setFormData({ ...formData, selectedOffer: '', customOfferCode: '' })}
-                          className="ml-1 text-slate-500 hover:text-rose-500 p-0.5 transition-colors cursor-pointer"
-                          title="Remove coupon"
-                        >
-                          <X className="w-3 h-3" />
-                        </button>
-                      </span>
-                    )}
-                  </div>
-
-                  {showCustomOfferInput && (
-                    <div className="flex gap-2 pt-1 animate-in fade-in duration-150">
-                      <input
-                        type="text"
-                        value={formData.customOfferCode}
-                        onChange={(e) => setFormData({ ...formData, customOfferCode: e.target.value.toUpperCase() })}
-                        placeholder="ENTER COUPON CODE (e.g. SPECIAL50)"
-                        className="flex-1 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs text-black uppercase font-mono placeholder-slate-400 focus:outline-none focus:border-[#22C55E]"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (formData.customOfferCode.trim()) {
-                            setFormData({ ...formData, selectedOffer: formData.customOfferCode.trim() });
-                          }
-                        }}
-                        className="px-4 py-2 rounded-xl bg-[#06223A] hover:bg-[#0A3356] text-white font-bold text-xs"
-                      >
-                        Apply
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* 2. CHECKOUT & SERVICE SUMMARY */}
+                {/* CHECKOUT & SERVICE SUMMARY */}
                 <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 shadow-sm">
                   <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
                     <span className="text-xs font-bold text-black uppercase tracking-wider flex items-center gap-1.5">
@@ -1228,7 +1119,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                       <span>Checkout & Final Price Summary</span>
                     </span>
                     <span className="text-[10px] bg-[#22C55E]/20 text-[#16A34A] font-bold px-2 py-0.5 rounded-full border border-[#22C55E]/30">
-                      🎉 Total Saved: ₹{totalSavings}
+                      🎉 Free Doorstep Visit (Saved ₹199)
                     </span>
                   </div>
 
@@ -1245,73 +1136,32 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                         <span className="text-[#16A34A] font-bold">FREE</span>
                       </div>
                     </div>
-                    {formData.selectedOffer && (
-                      <div className="flex items-center justify-between text-[#16A34A] font-medium">
-                        <span className="flex items-center gap-1">
-                          <Gift className="w-3 h-3" />
-                          <span>Offer Discount ({formData.selectedOffer}):</span>
-                        </span>
-                        <span className="font-mono font-bold">-₹{discountAmount}</span>
-                      </div>
-                    )}
                     <div className="pt-2 border-t border-slate-200 flex items-center justify-between font-bold text-sm text-black">
                       <span>Total Payable at Doorstep:</span>
                       <span className="text-base font-mono text-[#16A34A] font-extrabold">
-                        {netDiagnosticDue === 0 ? '₹0 FREE' : `₹${netDiagnosticDue}`}
+                        ₹{netDiagnosticDue}
                       </span>
                     </div>
                   </div>
 
-                  {/* Payment Method Selector */}
+                  {/* Payment Method - Cash on Delivery Only */}
                   <div className="pt-2 border-t border-slate-200 space-y-2">
                     <label className="block text-[11px] font-bold text-black uppercase tracking-wider">
                       Payment Method
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <label
-                        onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_cod' })}
-                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_cod'
-                          ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] text-black'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                          }`}
-                      >
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="doorstep_cod"
-                          checked={formData.paymentMethod === 'doorstep_cod'}
-                          onChange={() => { }}
-                          className="accent-[#22C55E]"
-                        />
-                        <div className="text-left">
-                          <div className="text-xs font-bold text-black">Pay After Service (Cash / UPI)</div>
-                          <div className="text-[10px] text-slate-500 font-medium">Zero advance fee required</div>
+                    <div className="p-3.5 rounded-xl border-2 border-[#22C55E] bg-[#22C55E]/10 flex items-center justify-between gap-3 shadow-xs">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#22C55E] text-white flex items-center justify-center font-black text-xs shadow-sm">
+                          COD
                         </div>
-                      </label>
-
-                      <label
-                        onClick={() => setFormData({ ...formData, paymentMethod: 'doorstep_upi' })}
-                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 cursor-pointer transition-all ${formData.paymentMethod === 'doorstep_upi'
-                          ? 'bg-[#22C55E]/10 border-2 border-[#22C55E] text-black'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                          }`}
-                      >
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="doorstep_upi"
-                          checked={formData.paymentMethod === 'doorstep_upi'}
-                          onChange={() => { }}
-                          className="accent-[#22C55E]"
-                        />
-                        <div className="text-left">
-                          <div className="text-xs font-bold text-black flex items-center gap-1">
-                            <CreditCard className="w-3 h-3 text-[#16A34A]" />
-                            <span>UPI / Card on Doorstep</span>
-                          </div>
-                          <div className="text-[10px] text-slate-500 font-medium">Pay via QR code or card machine</div>
+                        <div>
+                          <div className="text-xs font-bold text-black">Cash on Delivery (Pay After Service)</div>
+                          <div className="text-[11px] text-slate-600 font-medium">100% Cash on Delivery Only • Zero Online Payment Required</div>
                         </div>
-                      </label>
+                      </div>
+                      <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-[#16A34A] text-white tracking-wider flex-shrink-0">
+                        COD ONLY
+                      </span>
                     </div>
                   </div>
                 </div>
