@@ -375,6 +375,32 @@ const baseCitiesData: Record<string, CityInfo> = {
       "Verified local Hyderabad certified engineers",
       "Computer, Laptop, Networking, and CCTV surveillance repair"
     ]
+  },
+  "vijayawada": {
+    id: "vijayawada",
+    slug: "vijayawada",
+    name: "Vijayawada",
+    state: "Andhra Pradesh",
+    popularName: "Vijayawada",
+    address: "Vijayawada, Andhra Pradesh",
+    coverageRadius: "25 km",
+    description: "Doorstep computer, laptop repair, chip-level diagnostics, office networking, CCTV installation, and quick technician dispatch across Vijayawada.",
+    leadTime: "Doorstep Dispatch in Vijayawada within 90 minutes",
+    serviceHub: "Vijayawada Central Hub",
+    localities: [
+      "Benz Circle (Central Hub)", "MG Road (2 km)", "Governorpet (3 km)", "Bhavanipuram (5 km)",
+      "Patamata (3 km)", "Auto Nagar (4 km)", "Gunadala (5 km)", "Gollapudi (7 km)",
+      "Kanuru (6 km)", "Poranki (8 km)", "Tadigadapa (9 km)", "Enikepadu (8 km)",
+      "Ramavarappadu (6 km)", "Gannavaram (18 km)"
+    ],
+    helpline: "+91 98450 12345",
+    email: "vijayawada@techfixservices.in",
+    serviceHighlights: [
+      "Doorstep technician dispatch in Vijayawada within 90 minutes",
+      "No booking fee — Free registration & inspection",
+      "Verified local Vijayawada certified engineers",
+      "Computer, Laptop, Networking, and CCTV surveillance repair"
+    ]
   }
 };
 

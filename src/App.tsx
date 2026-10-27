@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
@@ -37,6 +37,15 @@ export const App: React.FC = () => {
             {/* Services Routes */}
             <Route path="/services" element={<AllServicesPage />} />
             <Route path="/services/:serviceSlug" element={<ServiceDetailPage />} />
+            <Route path="/services/:serviceSlug/:subCategorySlug" element={<ServiceDetailPage />} />
+            <Route path="/services/:serviceSlug/:subCategorySlug/book" element={<BookServicePage />} />
+            <Route path="/services/:serviceSlug/book" element={<BookServicePage />} />
+            <Route path="/laptop-repair" element={<Navigate to="/services/laptop-repair" replace />} />
+            <Route path="/computer-repair" element={<Navigate to="/services/computer-repair" replace />} />
+            <Route path="/networking" element={<Navigate to="/services/networking" replace />} />
+            <Route path="/cctv-repair-installation" element={<Navigate to="/services/cctv-repair-installation" replace />} />
+            <Route path="/cctv-services" element={<Navigate to="/services/cctv-repair-installation" replace />} />
+            <Route path="/mac-repair" element={<Navigate to="/services/laptop-repair" replace />} />
 
             {/* Locations / Service Center Routes */}
             <Route path="/service-center" element={<AllLocationsPage />} />

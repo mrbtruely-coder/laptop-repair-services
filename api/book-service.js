@@ -47,6 +47,9 @@ export default async function handler(req, res) {
       subcategory = '',
       address = '',
       city = 'Hyderabad',
+      subArea = '',
+      otherLocation = '',
+      isOtherArea = false,
       ticketId = 'TF-' + Math.floor(100000 + Math.random() * 900000),
       discountAmount = 150,
       payableAmount = 0,
@@ -56,6 +59,11 @@ export default async function handler(req, res) {
       description = '',
       paymentMethod = '',
     } = req.body || {};
+
+    const resolvedSubArea = req.body.subArea || req.body.area || req.body.locality || req.body.otherLocation || subArea || '';
+    const resolvedOtherLocation = req.body.otherLocation || otherLocation || '';
+    const isCustomLocation = Boolean(req.body.isOtherArea || isOtherArea || resolvedOtherLocation);
+    const displayLocation = resolvedOtherLocation || resolvedSubArea;
 
     if (!fullName || !phone) {
       return res.status(400).json({
@@ -176,9 +184,16 @@ export default async function handler(req, res) {
                         <td style="color: rgba(255, 255, 255, 0.6);">City:</td>
                         <td style="color: #FFFFFF; font-weight: 600;">${city}</td>
                       </tr>
+                      ${displayLocation ? `
+                      <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                        <td style="color: rgba(255, 255, 255, 0.6);">Area / Locality:</td>
+                        <td style="color: #22C55E; font-weight: 700;">
+                          ${displayLocation} ${isCustomLocation ? '<span style="color: #86EFAC; font-size: 11px; font-weight: normal; margin-left: 6px;">(Other Location)</span>' : ''}
+                        </td>
+                      </tr>` : ''}
                       <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
                         <td style="color: rgba(255, 255, 255, 0.6);">Service Address / Locality:</td>
-                        <td style="color: #FFFFFF; font-weight: 600;">${address ? address + ', ' : ''}${city}</td>
+                        <td style="color: #FFFFFF; font-weight: 600;">${address ? (displayLocation && address.toLowerCase().includes(displayLocation.toLowerCase()) ? `${address}, ${city}` : `${address}, ${displayLocation ? displayLocation + ', ' : ''}${city}`) : `${displayLocation ? displayLocation + ', ' : ''}${city}`}</td>
                       </tr>
                       ${slotDate || slotTime ? `
                       <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
@@ -258,7 +273,7 @@ export default async function handler(req, res) {
                 <img src="https://laptoprepairsservices.com/logo.png" alt="Laptop Repairs & Services" style="max-height: 40px; width: auto; background-color: #ffffff; padding: 4px 10px; border-radius: 6px; display: inline-block;" />
               </div>
               <div style="font-size: 11px; font-weight: bold; color: #22C55E; text-transform: uppercase;">NEW CUSTOMER BOOKING RECEIVED</div>
-              <h2 style="margin: 4px 0 0; color: #ffffff; font-size: 19px;">Ticket #${ticketId} — ${city}</h2>
+              <h2 style="margin: 4px 0 0; color: #ffffff; font-size: 19px;">Ticket #${ticketId} — ${displayLocation ? `${displayLocation}, ` : ''}${city}</h2>
               <div style="font-size: 11px; color: #cbd5e1; margin-top: 4px;">Time: ${submittedTime}</div>
             </td>
           </tr>
@@ -286,9 +301,20 @@ export default async function handler(req, res) {
                   <td style="padding: 6px 0; font-weight: bold;">City:</td>
                   <td style="padding: 6px 0; font-weight: bold; color: #16a34a;">${city}</td>
                 </tr>
+                ${displayLocation ? `
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold;">Area / Locality:</td>
+                  <td style="padding: 6px 0;">
+                    <span style="font-weight: bold; color: ${isCustomLocation ? '#92400e' : '#0369a1'}; background: ${isCustomLocation ? '#fef3c7' : '#e0f2fe'}; border: 1px solid ${isCustomLocation ? '#fde68a' : '#bae6fd'}; padding: 4px 10px; border-radius: 6px; display: inline-block; font-size: 13px;">
+                      📍 ${displayLocation} ${isCustomLocation ? '<strong style="color: #b45309; margin-left: 6px;">[OTHER LOCATION SPECIFIED BY CUSTOMER]</strong>' : ''}
+                    </span>
+                  </td>
+                </tr>` : ''}
                 <tr>
                   <td style="padding: 6px 0; font-weight: bold;">Full Address / Locality:</td>
-                  <td style="padding: 6px 0; background: #f8fafc; padding: 6px 10px; border-radius: 4px;">${address || 'Address pending verification'}</td>
+                  <td style="padding: 6px 0; background: #f8fafc; padding: 6px 10px; border-radius: 4px; font-weight: 500;">
+                    ${address ? (displayLocation && address.toLowerCase().includes(displayLocation.toLowerCase()) ? `${address}, ${city}` : `${address}, ${displayLocation ? displayLocation + ', ' : ''}${city}`) : `${displayLocation ? displayLocation + ', ' : ''}${city}`}
+                  </td>
                 </tr>
               </table>
 
@@ -347,12 +373,14 @@ export default async function handler(req, res) {
       );
     }
 
+    const locationForSubject = displayLocation ? `${displayLocation}, ${city}` : city;
+
     // Dispatch 2: Team alert email
     sendPromises.push(
       transporter.sendMail({
         from: `"Laptop Repairs & Services Bookings" <${smtpUser}>`,
         to: teamNotificationEmail,
-        subject: `🚨 NEW BOOKING: ${fullName} - ${serviceName} (${city}) [#${ticketId}]`,
+        subject: `🚨 NEW BOOKING: ${fullName} - ${serviceName} (${locationForSubject}) [#${ticketId}]`,
         html: teamHtml,
       }).catch((err) => {
         console.warn('Team email sending error:', err.message);

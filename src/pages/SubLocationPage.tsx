@@ -338,6 +338,7 @@ export const SubLocationPage: React.FC = () => {
             <div id="booking-section" className="lg:col-span-7 scroll-mt-28">
               <EnquiryForm
                 initialCity={city.id}
+                initialSubArea={localityName}
                 title={`Book an IT Repair in ${localityName}`}
                 subtitle={`Instant doorstep technician dispatch for ${localityName}, ${city.name}. Select your service below.`}
               />

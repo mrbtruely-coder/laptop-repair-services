@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useParams } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
-import { EnquiryForm } from '../components/forms/EnquiryForm';
-import { siteConfig } from '../config/site';
+import { EnquiryForm, SERVICE_SUBCATEGORIES } from '../components/forms/EnquiryForm';
+import { siteConfig, servicesData } from '../config/site';
 import {
   ShieldCheck,
   CheckCircle2,
@@ -15,6 +15,52 @@ import {
 } from 'lucide-react';
 
 export const BookServicePage: React.FC = () => {
+  const { serviceSlug, subCategorySlug } = useParams<{
+    serviceSlug?: string;
+    subCategorySlug?: string;
+  }>();
+  const [searchParams] = useSearchParams();
+
+  const cityParam = searchParams.get('city') || '';
+  const serviceParam = serviceSlug || searchParams.get('service') || '';
+
+  // Match subcategory from route param or query param
+  const matchedSubcategory =
+    serviceParam && subCategorySlug
+      ? (SERVICE_SUBCATEGORIES[serviceParam] || []).find(
+          (s) =>
+            s.id === subCategorySlug ||
+            s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') ===
+              subCategorySlug
+        )
+      : null;
+
+  const subServiceParam =
+    matchedSubcategory?.name ||
+    searchParams.get('subService') ||
+    searchParams.get('subcategory') ||
+    '';
+  const subAreaParam = searchParams.get('subArea') || '';
+  const otherSubAreaParam = searchParams.get('otherSubArea') || '';
+
+  const serviceInfo = serviceParam ? servicesData[serviceParam] : null;
+
+  const breadcrumbItems = serviceInfo
+    ? [
+        { label: 'Services', path: '/services' },
+        { label: serviceInfo.shortTitle, path: `/services/${serviceInfo.slug}` },
+        ...(matchedSubcategory
+          ? [
+              {
+                label: matchedSubcategory.name,
+                path: `/services/${serviceInfo.slug}/${subCategorySlug}`,
+              },
+            ]
+          : []),
+        { label: 'Book Service' },
+      ]
+    : [{ label: 'Book Service' }];
+
   return (
     <>
       <SEO
@@ -31,7 +77,7 @@ export const BookServicePage: React.FC = () => {
         breadcrumbs={[{ name: 'Book Service', url: '/book-service' }]}
       />
 
-      <Breadcrumbs items={[{ label: 'Book Service' }]} />
+      <Breadcrumbs items={breadcrumbItems} />
 
       {/* Main 2-Step Repair Dispatch Section (Matching Reference Structure) */}
       <section className="py-10 sm:py-16 bg-white relative">
@@ -104,10 +150,14 @@ export const BookServicePage: React.FC = () => {
             {/* Right Column: Request Service Form Card */}
             <div className="lg:col-span-7">
               <EnquiryForm
+                key={`${cityParam}-${serviceParam}-${subServiceParam}-${subAreaParam}`}
                 title="Request Service"
                 subtitle="Tap your device, select service type, enter details, and book your technician."
-                initialCity="hyderabad"
-                initialService="laptop-repair"
+                initialCity={cityParam}
+                initialService={serviceParam}
+                initialSubcategory={subServiceParam}
+                initialSubArea={subAreaParam}
+                initialOtherSubArea={otherSubAreaParam}
               />
             </div>
 
