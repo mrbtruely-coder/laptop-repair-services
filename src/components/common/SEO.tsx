@@ -176,38 +176,80 @@ export const SEO: React.FC<SEOProps> = ({
     postalCode: '560102',
   };
 
-  // Industry-level base keywords (strictly concise phrases under 5 words)
-  const baseIndustryKeywords = city
-    ? [
-        `laptop repair ${city}`,
-        `computer repair ${city}`,
-        `doorstep laptop service ${city}`,
-        `CCTV installation ${city}`,
-        `desktop PC service ${city}`,
-        `motherboard chip repair ${city}`,
-        `MacBook repair ${city}`,
-      ]
-    : [
-        'doorstep laptop repair',
-        'computer repair service',
-        'laptop motherboard fix',
-        'CCTV camera installation',
-        'office IT networking',
-        'desktop PC repair',
-        'MacBook repair service',
-        'chip level repair',
-      ];
+  // Dynamic Keyword Generator based on title, description, url, city, and serviceName (up to 10 keywords)
+  const generateDynamicKeywords = (): string[] => {
+    const list: string[] = [];
 
-  // Prioritize page-specific keywords first, then fill with industry-level keywords up to max 8 items (< 10 words)
-  const combinedKeywordsList = [
-    ...(keywords && keywords.length > 0 ? keywords : baseIndustryKeywords),
-    ...baseIndustryKeywords,
-  ];
+    // 1. Add explicitly passed keywords first
+    if (keywords && keywords.length > 0) {
+      list.push(...keywords);
+    }
 
-  // Filter: deduplicate, ensure each keyword has < 10 words, and cap list at 8 keywords (< 10 keywords total)
-  const uniqueKeywords = Array.from(new Set(combinedKeywordsList))
-    .filter((kw) => kw.trim().split(/\s+/).length < 10)
-    .slice(0, 8);
+    // 2. Add location and service specific keywords if present
+    if (serviceName && city) {
+      list.push(`${serviceName} in ${city}`.toLowerCase());
+      list.push(`${serviceName} service ${city}`.toLowerCase());
+      list.push(`doorstep ${serviceName} ${city}`.toLowerCase());
+    } else if (serviceName) {
+      list.push(`${serviceName} service`.toLowerCase());
+      list.push(`doorstep ${serviceName}`.toLowerCase());
+    } else if (city) {
+      list.push(`laptop repair in ${city}`.toLowerCase());
+      list.push(`computer repair ${city}`.toLowerCase());
+      list.push(`doorstep laptop service ${city}`.toLowerCase());
+      list.push(`laptop service center ${city}`.toLowerCase());
+    }
+
+    // 3. Extract meaningful phrases from URL path
+    const urlSegments = cleanPath
+      .split('/')
+      .filter(Boolean)
+      .map((s) => s.replace(/-/g, ' ').trim().toLowerCase())
+      .filter((s) => s.length > 2);
+    urlSegments.forEach((segment) => {
+      list.push(segment);
+      if (city && !segment.includes(city.toLowerCase())) {
+        list.push(`${segment} in ${city.toLowerCase()}`);
+      }
+    });
+
+    // 4. Extract key keywords/phrases from Title
+    const titleClean = title.replace(/[|–—\-,:.]/g, ' ').toLowerCase();
+    const titleTokens = titleClean
+      .split(/\s+/)
+      .filter((t) => t.length > 3 && !['repair', 'services', 'service', 'with', 'from', 'your', 'same', 'best'].includes(t));
+    if (titleTokens.length >= 2) {
+      list.push(`${titleTokens[0]} ${titleTokens[1]} repair`);
+    }
+
+    // 5. Add domain and industry standard keywords
+    list.push(
+      city ? `best laptop repair ${city}`.toLowerCase() : 'laptop repair services',
+      city ? `cctv camera service ${city}`.toLowerCase() : 'computer repair doorstep',
+      city ? `chip level motherboard repair ${city}`.toLowerCase() : 'chip level motherboard repair',
+      'laptop repair doorstep service',
+      'desktop pc technician service'
+    );
+
+    // Deduplicate, filter so each keyword phrase has < 10 words, and cap strictly to 10 keywords
+    const seen = new Set<string>();
+    const finalKeywords: string[] = [];
+
+    for (const kw of list) {
+      const cleanKw = kw.trim().toLowerCase();
+      if (!cleanKw || seen.has(cleanKw)) continue;
+      const wordCount = cleanKw.split(/\s+/).length;
+      if (wordCount < 10 && cleanKw.length >= 3) {
+        seen.add(cleanKw);
+        finalKeywords.push(cleanKw);
+        if (finalKeywords.length >= 10) break;
+      }
+    }
+
+    return finalKeywords;
+  };
+
+  const dynamicKeywords = generateDynamicKeywords();
 
   // Breadcrumb schema
   const breadcrumbSchema = breadcrumbs.length > 0 ? {
@@ -372,7 +414,7 @@ export const SEO: React.FC<SEOProps> = ({
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
       )}
-      <meta name="keywords" content={uniqueKeywords.join(', ')} />
+      <meta name="keywords" content={dynamicKeywords.join(', ')} />
       <meta name="author" content={siteConfig.brandName} />
       <meta name="publisher" content={siteConfig.legalName} />
       <meta name="google-site-verification" content="clH9FvGCsCEslpFBXVt09eUvkF9m-B9wmIFRSyyRceM" />
@@ -385,6 +427,9 @@ export const SEO: React.FC<SEOProps> = ({
 
       {/* Open Graph / Facebook Meta Tags */}
       <meta property="og:type" content={ogType} />
+      <meta property="business:contact_data:locality" content={activeGeo.locality} />
+      <meta property="business:contact_data:region" content={activeGeo.regionName} />
+      <meta property="business:contact_data:country_name" content="India" />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={formattedDescription} />
       <meta property="og:url" content={canonicalUrl} />
