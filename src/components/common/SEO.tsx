@@ -122,7 +122,28 @@ export const SEO: React.FC<SEOProps> = ({
 }) => {
   const cleanPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
   const canonicalUrl = `${siteConfig.domain}${cleanPath === '/' ? '' : cleanPath}`;
-  const fullTitle = title.includes(siteConfig.brandName) ? title : `${title} | ${siteConfig.brandName}`;
+  // Strictly enforce Title <= 90 characters, Description <= 250 characters, Keywords < 10 items
+  const formatSeoTitle = (rawTitle: string): string => {
+    let combined = rawTitle.includes(siteConfig.brandName)
+      ? rawTitle
+      : `${rawTitle} | ${siteConfig.brandName}`;
+    if (combined.length <= 90) return combined;
+    if (rawTitle.length <= 90) return rawTitle;
+    return rawTitle.slice(0, 87).trim() + '...';
+  };
+
+  const formatSeoDescription = (rawDesc: string): string => {
+    if (!rawDesc) return '';
+    const trimmed = rawDesc.trim();
+    if (trimmed.length <= 250) return trimmed;
+    // Truncate at word boundary within 247 chars + '...'
+    const cut = trimmed.slice(0, 247);
+    const lastSpace = cut.lastIndexOf(' ');
+    return (lastSpace > 180 ? cut.slice(0, lastSpace) : cut) + '...';
+  };
+
+  const fullTitle = formatSeoTitle(title);
+  const formattedDescription = formatSeoDescription(description);
   const ogImageUrl = `${siteConfig.domain}/og-image.png`;
 
   // Normalize city key for geo lookup
@@ -155,20 +176,38 @@ export const SEO: React.FC<SEOProps> = ({
     postalCode: '560102',
   };
 
-  // Default industry-level keywords if not specified
-  const effectiveKeywords = [
-    ...keywords,
-    'laptop repair doorstep',
-    'computer repair near me',
-    'chip-level motherboard servicing',
-    'CCTV camera installation',
-    'office networking CAT6 cabling',
-    'fast doorstep technician dispatch',
-    '90 days service warranty',
-    ...(city ? [`${city} computer repair`, `${city} laptop service`, `${city} CCTV installation`] : ['Bengaluru laptop repair', 'Vizag computer service', 'Chennai networking', 'Hyderabad doorstep repair']),
+  // Industry-level base keywords (strictly concise phrases under 5 words)
+  const baseIndustryKeywords = city
+    ? [
+        `laptop repair ${city}`,
+        `computer repair ${city}`,
+        `doorstep laptop service ${city}`,
+        `CCTV installation ${city}`,
+        `desktop PC service ${city}`,
+        `motherboard chip repair ${city}`,
+        `MacBook repair ${city}`,
+      ]
+    : [
+        'doorstep laptop repair',
+        'computer repair service',
+        'laptop motherboard fix',
+        'CCTV camera installation',
+        'office IT networking',
+        'desktop PC repair',
+        'MacBook repair service',
+        'chip level repair',
+      ];
+
+  // Prioritize page-specific keywords first, then fill with industry-level keywords up to max 8 items (< 10 words)
+  const combinedKeywordsList = [
+    ...(keywords && keywords.length > 0 ? keywords : baseIndustryKeywords),
+    ...baseIndustryKeywords,
   ];
-  // Deduplicate keywords
-  const uniqueKeywords = Array.from(new Set(effectiveKeywords));
+
+  // Filter: deduplicate, ensure each keyword has < 10 words, and cap list at 8 keywords (< 10 keywords total)
+  const uniqueKeywords = Array.from(new Set(combinedKeywordsList))
+    .filter((kw) => kw.trim().split(/\s+/).length < 10)
+    .slice(0, 8);
 
   // Breadcrumb schema
   const breadcrumbSchema = breadcrumbs.length > 0 ? {
@@ -298,7 +337,7 @@ export const SEO: React.FC<SEOProps> = ({
       url: siteConfig.domain,
     },
     areaServed: city || 'Bengaluru, Visakhapatnam, Chennai, Hyderabad',
-    description: description,
+    description: formattedDescription,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'INR',
@@ -324,7 +363,7 @@ export const SEO: React.FC<SEOProps> = ({
     <Helmet>
       {/* Primary HTML Meta Tags */}
       <title>{fullTitle}</title>
-      <meta name="description" content={description} />
+      <meta name="description" content={formattedDescription} />
       <link rel="canonical" href={canonicalUrl} />
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
       {!noIndex && (
@@ -347,7 +386,7 @@ export const SEO: React.FC<SEOProps> = ({
       {/* Open Graph / Facebook Meta Tags */}
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={formattedDescription} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content={siteConfig.brandName} />
       <meta property="og:image" content={ogImageUrl} />
@@ -359,7 +398,7 @@ export const SEO: React.FC<SEOProps> = ({
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:description" content={formattedDescription} />
       <meta name="twitter:image" content={ogImageUrl} />
 
       {/* JSON-LD Schemas */}

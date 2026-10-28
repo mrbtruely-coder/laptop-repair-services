@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 
-Sitemap: https://techfixservices.in/sitemap.xml
+Sitemap: https://laptoprepairsservices.com/sitemap.xml

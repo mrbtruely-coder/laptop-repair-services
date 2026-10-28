@@ -230,7 +230,7 @@ export const Navbar: React.FC = () => {
                     {primaryCities.map((city) => (
                       <Link
                         key={city.id}
-                        to={`/service-center/${city.slug}`}
+                        to={`/${city.slug}`}
                         onClick={() => setActiveDropdown(null)}
                         className="flex items-center gap-3 px-3.5 py-2.5 hover:bg-slate-50 transition-colors rounded-xl mx-1.5 group"
                       >
@@ -411,7 +411,7 @@ export const Navbar: React.FC = () => {
                     {primaryCities.map((city) => (
                       <Link
                         key={city.id}
-                        to={`/service-center/${city.slug}`}
+                        to={`/${city.slug}`}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="flex items-center gap-2.5 py-1.5 text-sm font-semibold text-slate-700 hover:text-black hover:text-[#16A34A] transition-colors"
                       >
@@ -420,7 +420,7 @@ export const Navbar: React.FC = () => {
                       </Link>
                     ))}
                     <Link
-                      to="/locations"
+                      to="/service-center"
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="block pt-1 text-xs font-bold text-[#16A34A] hover:underline"
                     >

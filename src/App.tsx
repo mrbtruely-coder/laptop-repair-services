@@ -47,13 +47,18 @@ export const App: React.FC = () => {
             <Route path="/cctv-services" element={<Navigate to="/services/cctv-repair-installation" replace />} />
             <Route path="/mac-repair" element={<Navigate to="/services/laptop-repair" replace />} />
 
-            {/* Locations / Service Center Routes */}
+            {/* All City Locations Directory */}
             <Route path="/service-center" element={<AllLocationsPage />} />
+            <Route path="/locations" element={<Navigate to="/service-center" replace />} />
+
+            {/* Direct City & Locality Pages (e.g. /bengaluru, /hyderabad, /chennai, /vizag) */}
             <Route path="/service-center/:citySlug" element={<LocationDetailPage />} />
             <Route path="/service-center/:citySlug/:localitySlug" element={<SubLocationPage />} />
-            <Route path="/locations" element={<AllLocationsPage />} />
             <Route path="/locations/:citySlug" element={<LocationDetailPage />} />
             <Route path="/locations/:citySlug/:localitySlug" element={<SubLocationPage />} />
+            <Route path="/:citySlug" element={<LocationDetailPage />} />
+            <Route path="/:citySlug/service-center" element={<LocationDetailPage />} />
+            <Route path="/:citySlug/:localitySlug" element={<SubLocationPage />} />
 
             {/* Genuine Localized City + Service Landing Pages */}
             <Route path="/:citySlug/:serviceSlug" element={<CityServicePage />} />

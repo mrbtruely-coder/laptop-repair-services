@@ -75,20 +75,17 @@ export const SubLocationPage: React.FC = () => {
   return (
     <>
       <SEO
-        title={`Laptop & Computer Repair in ${localityName}, ${city.name} | Doorstep Service & CCTV Setup`}
-        description={`Need fast doorstep computer or laptop repair in ${localityName}, ${city.name}? Our certified technicians reach within 45–90 mins with genuine parts, chip-level motherboard repair, screen replacement, Wi-Fi networking, and CCTV camera setup with 90-day warranty.`}
-        canonicalPath={`/service-center/${city.slug}/${localitySlug}`}
+        title={`Laptop & Computer Repair in ${localityName}, ${city.name} | Doorstep Service`}
+        description={`Fast doorstep computer and laptop repair in ${localityName}, ${city.name}. Certified technician visit within 45–90 mins with genuine parts, chip-level motherboard repair, screen replacement, and CCTV setup with a 90-day warranty.`}
+        canonicalPath={`/${city.slug}/${localitySlug}`}
         keywords={[
-          `laptop repair ${localityName} ${city.name}`,
-          `computer repair ${localityName} ${city.name}`,
-          `desktop repair ${localityName} ${city.name}`,
-          `CCTV camera installation ${localityName} ${city.name}`,
-          `networking service ${localityName} ${city.name}`,
-          `doorstep laptop service ${localityName} ${city.name}`,
-          `motherboard chip repair ${localityName} ${city.name}`,
-          `laptop screen replacement ${localityName} ${city.name}`,
-          `MacBook repair ${localityName} ${city.name}`,
-          `computer technician ${localityName} ${city.name}`
+          `laptop repair ${localityName}`,
+          `computer repair ${localityName}`,
+          `doorstep laptop service ${city.name}`,
+          `CCTV installation ${localityName}`,
+          `motherboard repair ${localityName}`,
+          `laptop screen replacement ${city.name}`,
+          `desktop PC repair ${localityName}`
         ]}
         breadcrumbs={[
           { name: 'Service Centers', url: '/service-center' },

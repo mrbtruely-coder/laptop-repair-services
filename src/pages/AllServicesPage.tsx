@@ -145,9 +145,17 @@ export const AllServicesPage: React.FC = () => {
   return (
     <>
       <SEO
-        title="Computer, Laptop, CCTV & Networking Repair Categories | Doorstep IT Services"
-        description="Explore all IT repair categories including laptop screen/motherboard fixes, desktop PC maintenance, enterprise networking, and CCTV camera setup across Bengaluru, Hyderabad, Vizag, and Chennai."
+        title="Laptop, Computer, CCTV & Networking Repair Services | Doorstep IT Fix"
+        description="Explore IT repair categories including laptop screen & motherboard fixes, desktop PC maintenance, enterprise networking, and CCTV camera setup across Bengaluru, Hyderabad, Vizag, and Chennai."
         canonicalPath="/services"
+        keywords={[
+          'laptop repair services',
+          'computer repair services',
+          'CCTV camera installation',
+          'office IT networking',
+          'desktop PC servicing',
+          'motherboard repair'
+        ]}
         breadcrumbs={[{ name: 'Services', url: '/services' }]}
       />
 

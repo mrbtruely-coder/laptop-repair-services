@@ -86,7 +86,7 @@ export const LocationsCoverage: React.FC = () => {
 
               <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between">
                 <Link
-                  to={`/service-center/${city.slug}`}
+                  to={`/${city.slug}`}
                   className="text-xs font-bold text-[#06223A] hover:text-[#16A34A] inline-flex items-center gap-1.5 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>Explore {city.popularName || city.name} Services</span>

@@ -129,15 +129,16 @@ export const AllLocationsPage: React.FC = () => {
   return (
     <>
       <SEO
-        title="Service Hubs & Doorstep IT Repair Locations | Hyderabad, Bengaluru, Chennai, Vizag"
-        description="Find verified doorstep laptop, computer, networking, and CCTV service centers across Hyderabad, Bengaluru, Chennai, and Visakhapatnam (Vizag). 60–90 min arrival."
+        title="Service Hubs & Doorstep IT Repair Locations | Bengaluru & Hyderabad"
+        description="Find verified doorstep laptop, computer, networking, and CCTV service centers across Hyderabad, Bengaluru, Chennai, and Visakhapatnam (Vizag). 60–90 min arrival with warranty."
         canonicalPath="/service-center"
         keywords={[
-          'service centers',
-          'laptop repair hubs Hyderabad',
+          'laptop repair centers',
           'computer service Bengaluru',
-          'laptop repair Chennai',
-          'doorstep service Vizag',
+          'laptop repair Hyderabad',
+          'doorstep IT repair Chennai',
+          'computer service Vizag',
+          'CCTV service hubs'
         ]}
         breadcrumbs={[{ name: 'Service Centers', url: '/service-center' }]}
       />
@@ -407,7 +408,7 @@ export const AllLocationsPage: React.FC = () => {
                   {/* Dual CTA Buttons (Primary Navy Blue + Outlined Book) */}
                   <div className="pt-6 mt-6 border-t border-slate-100 space-y-2">
                     <Link
-                      to={`/service-center/${city.slug}`}
+                      to={`/${city.slug}`}
                       className="w-full py-2.5 px-4 rounded-xl bg-[#06223A] hover:bg-[#0A3356] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 text-center"
                     >
                       <span>Explore {city.name} Hub Details</span>

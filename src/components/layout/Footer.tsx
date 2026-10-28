@@ -135,37 +135,37 @@ export const Footer: React.FC = () => {
             </div>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <Link to="/service-center/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   HSR Layout &amp; Koramangala (Bengaluru)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/bengaluru" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   Indiranagar &amp; Whitefield (Bengaluru)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   Madhapur &amp; Hitec City (Hyderabad)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/hyderabad" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   Chanda Nagar &amp; Gachibowli (Hyderabad)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/vizag" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/vizag" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   Dwaraka Nagar &amp; MVP Colony (Vizag)
                 </Link>
               </li>
               <li>
-                <Link to="/service-center/chennai" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
+                <Link to="/chennai" className="hover:text-[#16A34A] transition-colors text-slate-700 font-medium block">
                   Adyar &amp; T. Nagar (Chennai)
                 </Link>
               </li>
               <li className="pt-1">
-                <Link to="/locations" className="text-[#16A34A] hover:underline font-bold block">
+                <Link to="/service-center" className="text-[#16A34A] hover:underline font-bold block">
                   All Locations Directory →
                 </Link>
               </li>

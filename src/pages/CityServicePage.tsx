@@ -30,7 +30,7 @@ export const CityServicePage: React.FC = () => {
   const service = serviceSlug ? servicesData[serviceSlug] : null;
 
   if (!city || !service) {
-    return <Navigate to="/locations" replace />;
+    return <Navigate to="/service-center" replace />;
   }
 
   const iconConfig: Record<string, { icon: React.ReactNode }> = {
@@ -58,73 +58,73 @@ export const CityServicePage: React.FC = () => {
     switch (key) {
       case 'bengaluru-laptop-repair':
         return {
-          title: 'Laptop Repair in Bengaluru (HSR Layout, Koramangala) | Fast Doorstep Chip-Level Service',
-          desc: 'Expert doorstep laptop repair in Bengaluru. Chip-level motherboard diagnostics, OEM screen replacement, and battery fixes across Koramangala, Indiranagar, Whitefield, and HSR Layout with 90-day warranty.',
+          title: 'Laptop Repair in Bengaluru | Doorstep Chip-Level Motherboard Service',
+          desc: 'Doorstep laptop repair in Bengaluru. Chip-level motherboard diagnostics, OEM screen replacement, and battery fixes across Koramangala, Indiranagar, Whitefield, and HSR Layout with 90-day warranty.',
           keywords: ['laptop repair Bengaluru', 'laptop service HSR Layout', 'motherboard chip repair Bengaluru', 'laptop screen replacement Koramangala', 'MacBook repair Bengaluru']
         };
       case 'bengaluru-computer-repair':
         return {
-          title: 'Computer Repair in Bengaluru | Desktop & PC Services | SMPS & Motherboard Fixes',
+          title: 'Computer Repair in Bengaluru | Desktop PC & SMPS Motherboard Fixes',
           desc: 'Professional desktop and computer repair services in Bengaluru. Expert SMPS replacement, motherboard fixes, and workstation troubleshooting for tech workers and businesses across tech corridors.',
           keywords: ['computer repair Bengaluru', 'desktop service Bengaluru', 'PC troubleshooting HSR Layout', 'SMPS replacement Bengaluru', 'custom PC repair Bengaluru']
         };
       case 'bengaluru-networking':
         return {
-          title: 'Office Networking & Cabling in Bengaluru | Enterprise Wi-Fi 6 & CAT6 Solutions',
+          title: 'Office Networking & Cabling in Bengaluru | Enterprise Wi-Fi 6 Setup',
           desc: 'Structured CAT6 cabling, enterprise Wi-Fi 6 mesh setups, server rack assembly, and firewall router configuration for startups and commercial offices across Bengaluru.',
           keywords: ['office networking Bengaluru', 'structured cabling Bengaluru', 'CAT6 network cabling HSR Layout', 'Wi-Fi installation Bengaluru', 'server rack setup Bengaluru']
         };
       case 'bengaluru-cctv-repair-installation':
         return {
-          title: 'CCTV Installation & Repair in Bengaluru | HD & IP Security Camera Systems',
+          title: 'CCTV Installation & Repair in Bengaluru | HD & IP Security Cameras',
           desc: 'Commercial and residential CCTV camera installation, DVR/NVR hard drive repair, and remote mobile viewing setup across Bengaluru homes, tech parks, and commercial spaces.',
           keywords: ['CCTV installation Bengaluru', 'security camera repair Bengaluru', 'DVR NVR repair HSR Layout', 'IP camera setup Bengaluru', 'CCTV AMC Bengaluru']
         };
       case 'vizag-laptop-repair':
         return {
-          title: 'Laptop Repair in Vizag (Dwaraka Nagar, MVP Colony) | Chip-Level Motherboard Servicing',
+          title: 'Laptop Repair in Vizag | Chip-Level Motherboard & Screen Servicing',
           desc: 'Reliable laptop repair in Visakhapatnam (Vizag). Chip-level motherboard diagnostics, anti-corrosion chemical servicing, and OEM screen replacements in Dwaraka Nagar, MVP Colony & Gajuwaka.',
           keywords: ['laptop repair Vizag', 'laptop service Dwaraka Nagar Visakhapatnam', 'motherboard repair Vizag', 'laptop screen replacement MVP Colony', 'anti-corrosion laptop cleaning Vizag']
         };
       case 'vizag-computer-repair':
         return {
-          title: 'Computer Repair in Vizag (Visakhapatnam) | Desktop Troubleshooting & IT Support',
+          title: 'Computer Repair in Vizag | Desktop Troubleshooting & Hardware Support',
           desc: 'Need computer repair in Visakhapatnam? Contact us for computer troubleshooting, SMPS power unit fixes, hardware upgrades, and enterprise desktop maintenance in Greater Vizag.',
           keywords: ['computer repair Vizag', 'desktop service Visakhapatnam', 'PC repair Dwaraka Nagar', 'computer motherboard repair Vizag', 'SMPS power supply Vizag']
         };
       case 'vizag-networking':
         return {
-          title: 'Networking Services in Vizag | Structured IT Cabling & Commercial Wi-Fi',
+          title: 'Networking Services in Vizag | Structured IT Cabling & Office Wi-Fi',
           desc: 'Commercial and residential Wi-Fi networking, server rack cabling, patch panel punch-down, and internet troubleshooting in Visakhapatnam and industrial zones.',
           keywords: ['networking services Vizag', 'structured cabling Visakhapatnam', 'office Wi-Fi setup Vizag', 'CAT6 LAN cabling Dwaraka Nagar', 'router firewall setup Vizag']
         };
       case 'vizag-cctv-repair-installation':
         return {
-          title: 'CCTV Camera Installation in Visakhapatnam (Vizag) | CCTV Repair & DVR Recovery',
+          title: 'CCTV Camera Installation in Vizag | CCTV Repair & DVR Data Recovery',
           desc: 'Reliable HD & IP CCTV surveillance solutions, DVR hard drive recovery, and camera maintenance across Visakhapatnam homes, stores, and coastal warehouses.',
           keywords: ['CCTV installation Vizag', 'security camera repair Visakhapatnam', 'DVR repair Dwaraka Nagar', 'CCTV technician Vizag', 'outdoor CCTV camera setup Vizag']
         };
       case 'chennai-laptop-repair':
         return {
-          title: 'Doorstep Laptop Repair in Chennai (OMR, Velachery, T Nagar) | Hardware Servicing',
+          title: 'Doorstep Laptop Repair in Chennai | Motherboard & Screen Servicing',
           desc: 'Fast doorstep laptop repair in Chennai. Screen replacement, battery fixes, anti-humidity cleaning, and chip-level motherboard restoration across OMR, Velachery, T Nagar, and Guindy.',
           keywords: ['laptop repair Chennai', 'doorstep laptop service OMR Chennai', 'laptop screen replacement Velachery', 'motherboard repair T Nagar', 'MacBook service Chennai']
         };
       case 'chennai-computer-repair':
         return {
-          title: 'Computer Repair in Chennai | Desktop Troubleshooting & Hardware Diagnostics',
+          title: 'Computer Repair in Chennai | Desktop PC Hardware & SMPS Diagnostics',
           desc: 'Expert desktop PC repair and hardware diagnostics in Chennai. SMPS replacements, BSOD resolutions, GPU servicing, and custom PC repairs along the IT expressway.',
           keywords: ['computer repair Chennai', 'desktop service OMR Chennai', 'PC repair Velachery', 'SMPS power supply replacement Chennai', 'BSOD error fix Chennai']
         };
       case 'chennai-networking':
         return {
-          title: 'Networking Services in Chennai | Office Cabling & Enterprise Wi-Fi Support',
+          title: 'Networking Services in Chennai | Office Cabling & Enterprise Wi-Fi',
           desc: 'High-speed structured CAT6 cabling, patch panel organization, network rack setup, and office network troubleshooting throughout Chennai tech parks.',
           keywords: ['networking services Chennai', 'structured cabling OMR Chennai', 'office Wi-Fi setup Chennai', 'CAT6 cabling Guindy', 'managed switch configuration Chennai']
         };
       case 'chennai-cctv-repair-installation':
         return {
-          title: 'CCTV Installation & Repair in Chennai | Commercial & Home Security Systems',
+          title: 'CCTV Installation & Repair in Chennai | Commercial Security Cameras',
           desc: 'Professional CCTV installation, camera troubleshooting, DVR recording recovery, and mobile streaming setup across Chennai apartments, villas, and corporate offices.',
           keywords: ['CCTV installation Chennai', 'security camera service OMR Chennai', 'DVR repair Velachery', 'IP camera setup Chennai', 'CCTV maintenance AMC Chennai']
         };
@@ -134,7 +134,7 @@ export const CityServicePage: React.FC = () => {
       case 'chanda-nagar-laptop-repair':
       case 'nellore-laptop-repair':
         return {
-          title: 'Laptop Repair in Hyderabad (Hitec City, Madhapur, Chanda Nagar) | 90-Min Doorstep Dispatch',
+          title: 'Laptop Repair in Hyderabad | 90-Min Doorstep Chip-Level Service',
           desc: 'Doorstep laptop repair in Hyderabad. Chip-level motherboard diagnostics, screen replacement, and battery servicing across Madhapur, Hitec City, Gachibowli, Chanda Nagar, and Kukatpally. 90-min dispatch.',
           keywords: ['laptop repair Hyderabad', 'laptop screen replacement Hyderabad', 'doorstep laptop service Hitec City Hyderabad', 'chip level motherboard repair Hyderabad', 'laptop repair Chanda Nagar Hyderabad']
         };
@@ -154,7 +154,7 @@ export const CityServicePage: React.FC = () => {
       case 'chanda-nagar-networking':
       case 'nellore-networking':
         return {
-          title: 'Networking & Wi-Fi Setup in Hyderabad | Home & Commercial IT Solutions',
+          title: 'Networking & Wi-Fi Setup in Hyderabad | Commercial IT Cabling Solutions',
           desc: 'Structured CAT6 network cabling, high-speed Wi-Fi router setup, and LAN troubleshooting for businesses, retail stores, and residences across Hyderabad.',
           keywords: ['networking setup Hyderabad', 'office Wi-Fi installation Hyderabad', 'CAT6 cabling Hyderabad', 'router configuration Hyderabad']
         };
@@ -164,7 +164,7 @@ export const CityServicePage: React.FC = () => {
       case 'chanda-nagar-cctv-repair-installation':
       case 'nellore-cctv-repair-installation':
         return {
-          title: 'CCTV Installation & Repair in Hyderabad | Security Camera Setup & DVR Fix',
+          title: 'CCTV Installation & Repair in Hyderabad | Security Camera Setup & DVR',
           desc: 'Professional CCTV camera installation, DVR/NVR hard drive repair, and mobile live viewing setup across Hyderabad homes, shops, and warehouses.',
           keywords: ['CCTV installation Hyderabad', 'security camera repair Hyderabad', 'DVR repair Hyderabad', 'IP camera setup Hyderabad']
         };
@@ -211,8 +211,8 @@ export const CityServicePage: React.FC = () => {
         canonicalPath={`/${city.slug}/${service.slug}`}
         keywords={meta.keywords}
         breadcrumbs={[
-          { name: 'Locations', url: '/locations' },
-          { name: city.name, url: `/locations/${city.slug}` },
+          { name: 'Service Centers', url: '/service-center' },
+          { name: city.name, url: `/service-center/${city.slug}` },
           { name: `${service.shortTitle} in ${city.name}`, url: `/${city.slug}/${service.slug}` },
         ]}
         city={city.name}
@@ -223,8 +223,8 @@ export const CityServicePage: React.FC = () => {
 
       <Breadcrumbs
         items={[
-          { label: 'Locations', path: '/locations' },
-          { label: city.name, path: `/locations/${city.slug}` },
+          { label: 'Service Centers', path: '/service-center' },
+          { label: city.name, path: `/service-center/${city.slug}` },
           { label: `${service.shortTitle} in ${city.name}` },
         ]}
       />

@@ -24,6 +24,7 @@ import {
   Search,
   Crosshair,
   FileText,
+  Home,
 } from 'lucide-react';
 import { siteConfig, citiesData, primaryCities, parseLocality } from '../../config/site';
 
@@ -706,6 +707,17 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
     }
 
     if (!validateStep1()) {
+      setToast({
+        type: 'error',
+        message: 'Please complete all required fields (Name, Phone, Email, Service, Locality, Date & Time).',
+      });
+      // Scroll to the first error input
+      setTimeout(() => {
+        const firstErr = document.querySelector('.border-rose-500, .border-rose-400, [class*="text-rose-500"]');
+        if (firstErr) {
+          firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
       return;
     }
 
@@ -730,7 +742,11 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
       }
     }
 
-    const backendEndpoint = 'https://serviceapis.laptoprepairsservices.com/api/book-service';
+    const backendEndpoint = import.meta.env.VITE_API_URL
+      ? `${import.meta.env.VITE_API_URL}/api/book-service`
+      : import.meta.env.DEV
+      ? '/api/book-service'
+      : 'https://serviceapis.laptoprepairsservices.com/api/book-service';
     const serviceDisplayNames: Record<string, string> = {
       'laptop-repair': 'Laptop Hardware Diagnostics & Motherboard Servicing',
       'computer-repair': 'Desktop & PC Repair & Troubleshooting',
@@ -1835,58 +1851,88 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   />
                 </div>
 
-                {/* 8. Preferred Reply Mode */}
-                <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs text-slate-600 font-medium">Preferred reply:</span>
-                  <div className="flex items-center gap-4">
-                    <label className="flex items-center gap-2 cursor-pointer text-xs text-black font-semibold">
-                      <input
-                        type="radio"
-                        name="contactMethod"
-                        value="phone"
-                        checked={formData.contactMethod === 'phone'}
-                        onChange={() => setFormData({ ...formData, contactMethod: 'phone' })}
-                        className="accent-[#22C55E]"
-                      />
-                      <span>Phone Call</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer text-xs text-black font-semibold">
-                      <input
-                        type="radio"
-                        name="contactMethod"
-                        value="whatsapp"
-                        checked={formData.contactMethod === 'whatsapp'}
-                        onChange={() => setFormData({ ...formData, contactMethod: 'whatsapp' })}
-                        className="accent-[#22C55E]"
-                      />
-                      <span>WhatsApp</span>
-                    </label>
-                  </div>
-                </div>
 
-                {/* 9. Transparent Pricing Summary & COD Assurance */}
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5 shadow-2xs">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-600 font-medium">Standard Diagnostic & Inspection Visit:</span>
-                    <span className="font-mono font-bold text-black">₹{BASE_DIAGNOSTIC_FEE}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-600 font-medium">Doorstep Technician Travel Fee:</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="line-through text-slate-400 font-mono text-[11px]">₹{DOORSTEP_FEE_ORIGINAL}</span>
-                      <span className="text-[#16A34A] font-bold">FREE (Saved ₹199)</span>
+                {/* Dynamic Service Address & Booking Summary Card */}
+                {(formData.fullName || formData.phone || formData.city || formData.subArea || formData.address) && (
+                  <div className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs">
+                          4
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#06223A]">
+                            <MapPin className="w-4 h-4 text-[#008080]" />
+                            <span>Service Address</span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 font-medium">Technician will visit this location</p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const el = document.getElementById('fullName');
+                          if (el) el.focus();
+                        }}
+                        className="text-xs font-bold text-[#008080] hover:text-[#006666] cursor-pointer"
+                      >
+                        Change Address
+                      </button>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 space-y-2 text-xs">
+                      <div className="flex items-center gap-2 font-bold text-slate-900">
+                        <Home className="w-4 h-4 text-[#008080]" />
+                        <span className="text-sm font-extrabold">{formData.fullName || 'Customer Name'}</span>
+                        <span className="text-[10px] uppercase tracking-wider font-extrabold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                          HOME
+                        </span>
+                      </div>
+
+                      {formData.phone && (
+                        <div className="text-slate-700">
+                          <span className="font-bold text-slate-900">Phone:</span> {formData.phone}
+                        </div>
+                      )}
+
+                      {formData.email && (
+                        <div className="text-slate-700">
+                          <span className="font-bold text-slate-900">Email:</span> {formData.email}
+                        </div>
+                      )}
+
+                      {(formData.address || formData.subArea || formData.city) && (
+                        <div className="text-slate-700 font-medium">
+                          {[
+                            formData.address,
+                            formData.subArea === 'Other' ? formData.otherSubArea : formData.subArea,
+                            currentCityData?.name || formData.city,
+                          ]
+                            .filter(Boolean)
+                            .join(', ')}
+                        </div>
+                      )}
+
+                      {(formData.slotDate || formData.slotTime) && (
+                        <div className="pt-2.5 mt-2 border-t border-slate-200/80 flex items-center flex-wrap gap-2 text-[#008080] font-bold text-xs">
+                          <div className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5" />
+                            <span>{selectedDayObj?.fullFormatted || formData.slotDate}</span>
+                          </div>
+                          {formData.slotTime && (
+                            <>
+                              <span className="text-slate-400">•</span>
+                              <div className="flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5" />
+                                <span>{formData.slotTime}</span>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-black block">Estimated Doorstep Payable:</span>
-                      <span className="text-[11px] text-slate-500 font-medium">Pay after service completion (Cash on Delivery Only)</span>
-                    </div>
-                    <span className="text-xl font-mono font-extrabold text-[#16A34A]">
-                      ₹{netDiagnosticDue}
-                    </span>
-                  </div>
-                </div>
+                )}
 
                 {/* DIRECT SUBMIT ACTION BUTTON */}
                 <button
@@ -1902,7 +1948,7 @@ export const EnquiryForm: React.FC<EnquiryFormProps> = ({
                   ) : (
                     <>
                       <PartyPopper className="w-4 h-4 text-white" />
-                      <span>Confirm Request & Book Service</span>
+                      <span>Continue to Book</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}

@@ -238,59 +238,53 @@ export const LocationDetailPage: React.FC = () => {
   };
 
   const cityTitles: Record<string, string> = {
-    bengaluru: 'Doorstep Laptop, Computer, Networking & CCTV Repair Services in Bengaluru | 90-Min Dispatch',
-    vizag: 'Laptop & Computer Repair in Vizag (Visakhapatnam) | CCTV Installation & Networking Services',
-    chennai: 'Doorstep Laptop & Computer Repair in Chennai | CCTV Camera & Networking Support',
-    hyderabad: 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
-    'chanda-nagar': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
-    'Chanda Nagar': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
-    'nellore': 'Doorstep Laptop & Computer Repair in Hyderabad | CCTV & Networking Services | 90-Min Arrival',
+    bengaluru: 'Laptop & Computer Repair in Bengaluru | Doorstep IT & CCTV Service',
+    vizag: 'Laptop & Computer Repair in Vizag | Doorstep CCTV & IT Servicing',
+    chennai: 'Laptop & Computer Repair in Chennai | Doorstep CCTV & IT Support',
+    hyderabad: 'Laptop & Computer Repair in Hyderabad | Doorstep CCTV & IT Service',
+    'chanda-nagar': 'Laptop & Computer Repair in Hyderabad | Doorstep CCTV & IT Service',
+    'Chanda Nagar': 'Laptop & Computer Repair in Hyderabad | Doorstep CCTV & IT Service',
+    'nellore': 'Laptop & Computer Repair in Hyderabad | Doorstep CCTV & IT Service',
   };
 
   const cityDescriptions: Record<string, string> = {
-    bengaluru: 'Need quick computer or laptop repair in Bengaluru? Our certified technicians visit your doorstep across HSR Layout, Koramangala, Whitefield, and all Bengaluru areas. We fix laptop screens, motherboard issues, desktop problems, Wi-Fi networking, and CCTV cameras with genuine parts and a 90-day warranty.',
-    vizag: 'Get fast, reliable doorstep computer and laptop repair in Visakhapatnam (Vizag). Serving Dwaraka Nagar, MVP Colony, Gajuwaka, and all Vizag localities. Chip-level motherboard fixes, broken screen replacement, desktop repairs, CCTV camera setup, and home Wi-Fi networking with a 90-day warranty.',
-    chennai: 'Looking for professional computer or laptop repair in Chennai? Our expert technicians provide fast doorstep service across Adyar, OMR, Velachery, T Nagar, Anna Nagar, and all Chennai areas. We repair laptops, desktop PCs, CCTV surveillance systems, and office Wi-Fi networks with upfront pricing and a 90-day warranty.',
-    hyderabad: 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, Kondapur, Chanda Nagar, Kukatpally, and all Hyderabad localities. Expert chip-level motherboard repair, screen replacement, desktop troubleshooting, CCTV setup, and Wi-Fi cabling with a 90-day warranty.',
-    'chanda-nagar': 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, Kondapur, Chanda Nagar, Kukatpally, and all Hyderabad localities. Expert chip-level motherboard repair, screen replacement, desktop troubleshooting, CCTV setup, and Wi-Fi cabling with a 90-day warranty.',
+    bengaluru: 'Certified doorstep laptop and computer repair in Bengaluru. We fix screens, motherboard issues, desktop problems, Wi-Fi networking, and CCTV cameras with genuine parts and a 90-day warranty across all layouts.',
+    vizag: 'Doorstep computer and laptop repair in Visakhapatnam (Vizag). Serving Dwaraka Nagar, MVP Colony & Gajuwaka. Chip-level motherboard fixes, broken screens, CCTV camera setup, and Wi-Fi networking with a 90-day warranty.',
+    chennai: 'Professional doorstep computer and laptop repair in Chennai across Adyar, OMR, Velachery, and T Nagar. We repair laptops, desktop PCs, CCTV cameras, and Wi-Fi networks with upfront pricing and a 90-day warranty.',
+    hyderabad: 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, and Chanda Nagar. Expert chip-level motherboard repair, screen replacement, CCTV setup, and 90-day warranty.',
+    'chanda-nagar': 'Fast same-day computer and laptop repair at your doorstep in Hyderabad. Serving Hitec City, Madhapur, Gachibowli, and Chanda Nagar. Expert chip-level motherboard repair, screen replacement, CCTV setup, and 90-day warranty.',
   };
 
   const pageTitle = isSubLocality
-    ? `Laptop & Computer Repair in ${locationDisplayName}, ${city.name} | Doorstep Service & CCTV Setup`
-    : cityTitles[city.id] || `Computer, Laptop, Networking & CCTV Repair Services in ${city.name}`;
+    ? `Laptop & Computer Repair in ${locationDisplayName}, ${city.name} | Doorstep Service`
+    : cityTitles[city.id] || `Computer & Laptop Repair in ${city.name} | Doorstep Service`;
 
   const pageDescription = isSubLocality
-    ? `Need fast doorstep computer or laptop repair in ${locationDisplayName}, ${city.name}? Our certified technicians reach within 45–90 mins with genuine parts, chip-level motherboard repair, screen replacement, Wi-Fi networking, and CCTV camera setup with 90-day warranty.`
+    ? `Fast doorstep computer and laptop repair in ${locationDisplayName}, ${city.name}. Certified technician visit within 45–90 mins with genuine parts, chip-level motherboard repair, screen replacement, and CCTV setup with a 90-day warranty.`
     : cityDescriptions[city.id] || city.description;
 
   const canonicalPath = isSubLocality
-    ? `/service-center/${city.slug}/${currentLocality?.slug}`
-    : `/service-center/${city.slug}`;
+    ? `/${city.slug}/${currentLocality?.slug}`
+    : `/${city.slug}`;
 
   const pageKeywords = isSubLocality
     ? [
-        `laptop repair ${locationDisplayName} ${city.name}`,
-        `computer repair ${locationDisplayName} ${city.name}`,
-        `desktop repair ${locationDisplayName} ${city.name}`,
-        `CCTV camera installation ${locationDisplayName} ${city.name}`,
-        `networking service ${locationDisplayName} ${city.name}`,
-        `doorstep laptop repair ${locationDisplayName}`,
-        `motherboard chip repair ${locationDisplayName} ${city.name}`,
-        `laptop screen replacement ${locationDisplayName}`,
-        `MacBook repair ${locationDisplayName} ${city.name}`,
-        `computer technician in ${locationDisplayName}`
+        `laptop repair ${locationDisplayName}`,
+        `computer repair ${locationDisplayName}`,
+        `doorstep laptop repair ${city.name}`,
+        `CCTV camera installation ${locationDisplayName}`,
+        `motherboard repair ${locationDisplayName}`,
+        `laptop screen replacement ${city.name}`,
+        `desktop PC repair ${locationDisplayName}`,
       ]
     : [
         `laptop repair ${city.name}`,
         `computer repair ${city.name}`,
         `doorstep laptop service ${city.name}`,
         `desktop PC repair ${city.name}`,
-        `CCTV camera installation ${city.name}`,
-        `office networking CAT6 cabling ${city.name}`,
-        `laptop motherboard chip repair ${city.name}`,
+        `CCTV installation ${city.name}`,
+        `motherboard chip repair ${city.name}`,
         `laptop screen replacement ${city.name}`,
-        `MacBook repair ${city.name}`,
-        `computer technician near me ${city.name}`
       ];
 
   const breadcrumbsList = isSubLocality
@@ -410,7 +404,7 @@ export const LocationDetailPage: React.FC = () => {
               return (
                 <Link
                   key={hub.id}
-                  to={`/service-center/${hub.id}`}
+                  to={`/${hub.id}`}
                   className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold transition-all ${
                     isActive
                       ? 'bg-[#06223A] text-white shadow-xs'

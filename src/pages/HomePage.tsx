@@ -13,18 +13,17 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <SEO
-        title="Doorstep Computer, Laptop & CCTV Repair in Bengaluru, Vizag, Chennai & Hyderabad"
-        description="Certified doorstep laptop motherboard repair, desktop servicing, office IT networking & CCTV camera installation across Bengaluru, Vizag, Chennai & Hyderabad. Rapid 90-min dispatch & 90-day warranty."
+        title="Doorstep Computer, Laptop & CCTV Repair in Bengaluru, Chennai & Hyderabad"
+        description="Certified doorstep laptop motherboard repair, desktop servicing, office IT networking and CCTV camera setup across Bengaluru, Vizag, Chennai, and Hyderabad. 90-min dispatch & 90-day warranty."
         canonicalPath="/"
         keywords={[
-          'doorstep laptop repair Bengaluru',
-          'laptop motherboard repair Vizag',
-          'computer desktop repair Chennai',
-          'computer and laptop repair Hyderabad',
-          'CCTV installation and DVR repair',
-          'office networking CAT6 cabling',
-          'chip-level laptop servicing',
-          'screen and battery replacement doorstep'
+          'doorstep laptop repair',
+          'computer repair Bengaluru',
+          'laptop service Hyderabad',
+          'CCTV installation Chennai',
+          'computer repair Vizag',
+          'chip level motherboard fix',
+          'office networking CAT6'
         ]}
         faqs={generalFaqs}
       />

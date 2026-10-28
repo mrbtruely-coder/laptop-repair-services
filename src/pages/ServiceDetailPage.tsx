@@ -364,9 +364,17 @@ export const ServiceDetailPage: React.FC = () => {
   return (
     <>
       <SEO
-        title={`${activeSubFromParam ? `${activeSubFromParam.title} - ` : ''}${service.title} Subcategories & Pricing | Doorstep Repairs`}
-        description={`Explore all available subcategories and upfront repair pricing for ${service.title}. 90-min technician arrival across Hyderabad, Bengaluru, Chennai, and Vizag.`}
+        title={`${activeSubFromParam ? `${activeSubFromParam.title} | ` : ''}${service.title} | Doorstep Service`}
+        description={`Explore all available repair subcategories and upfront pricing for ${service.title}. 90-min technician arrival across Hyderabad, Bengaluru, Chennai, and Vizag with 90-day warranty.`}
         canonicalPath={`/services/${service.slug}${activeSubFromParam ? `/${activeSubFromParam.id}` : ''}`}
+        keywords={[
+          `${service.shortTitle.toLowerCase()} doorstep`,
+          `${service.shortTitle.toLowerCase()} near me`,
+          'motherboard chip repair',
+          'laptop hardware servicing',
+          'genuine replacement parts',
+          'doorstep IT repair'
+        ]}
       />
 
       {/* ========================================================
